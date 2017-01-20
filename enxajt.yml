@@ -1,7 +1,8 @@
 - name: ubuntu
 #remote_user: vagrant
-  su: True
-  su_user: root
+#  su: True
+#  su_user: root
+  become: true
   hosts: localhost
   connection: local
   vars:
@@ -24,8 +25,13 @@
     #      apt: update_cache=yes
     #      when: apt_mirror|changed
  
+    - name: updates a server
+      apt: update_cache=yes
+    - name: upgrade a server
+      apt: upgrade=full
+
     - name: install apt packages
-      become: yes
+#      become: yes
       apt: name={{item}}
       with_items:
         #- language-pack-ja
