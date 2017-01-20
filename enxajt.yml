@@ -1,9 +1,9 @@
 - name: ubuntu
-#remote_user: vagrant
-#  su: True
-#  su_user: root
+  remote_user: vagrant
+  su: True
+  su_user: root
   become: true
-  hosts: localhost
+  hosts: 127.0.0.1
   connection: local
   vars:
     USER: enxajt
@@ -11,7 +11,7 @@
     - name: Hello.txt
       shell: echo Hello world! > hello.txt
 
-    #    # パッケージの一覧を取得するサーバを、日本のサーバに変更
+    #    refer list in Japan
     #    - name: change mirror
     #      become: yes
     #      replace: |
@@ -25,31 +25,38 @@
     #      apt: update_cache=yes
     #      when: apt_mirror|changed
  
-    - name: updates a server
-      apt: update_cache=yes
-    - name: upgrade a server
-      apt: upgrade=full
-
-    - name: install apt packages
-#      become: yes
-      apt: name={{item}}
-      with_items:
-        #- language-pack-ja
-        - ubuntu-desktop
-        - nkf
-        - zsh
-
-    - name: user
-      shell: useradd -m USER \
-        && gpasswd -a enxajt sudo \
-        && chsh -s /usr/bin/zsh enxajt
-
-    - name: Dockerfile
-      shell: su enxajt \
-        && curl https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc > ~/.zshrc \
-        && mkdir ~/kohei-dev \
-        && curl "https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile" > ~/kohei-dev/Dockerfile \
-        && nkf -w -Lu --overwrite Dockerfile \
-
-    - name: reboot
-      shell: sudo reboot
+    #    - name: updates a server
+    #      apt: update_cache=yes
+    #    - name: upgrade a server
+    #      apt: upgrade=full
+    #
+    #    - name: install apt packages
+    #      become: yes
+    #      apt: name={{item}}
+    #      with_items:
+    #        #- language-pack-ja
+    #        - ubuntu-desktop
+    #        - nkf
+    #        - zsh
+    #
+    #    - name: user
+    #      shell: useradd -m USER \
+    #        && gpasswd -a enxajt sudo \
+    #        && chsh -s /usr/bin/zsh enxajt
+    #
+    #    - name: Dockerfile
+    #      shell: su enxajt \
+    #        && curl https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc > ~/.zshrc \
+    #        && mkdir ~/kohei-dev \
+    #        && curl "https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile" > ~/kohei-dev/Dockerfile \
+    #        && nkf -w -Lu --overwrite Dockerfile \
+    #
+    #    - name: git config
+    #      shell: git config --global user.email "enxajt@gmail.com" \
+    #        && git config --global user.name "enxajt" \
+    #        
+    #    - name: zshrc
+    #      shell: curl https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc > ~/.zshrc \
+    #
+    #    - name: reboot
+    #      shell: sudo reboot
