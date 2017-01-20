@@ -20,6 +20,10 @@
     #      apt: update_cache=yes
     #      when: apt_mirror|changed
  
+    - name: install aptitude
+      become: yes
+      apt: name=aptitude
+
     - name: updates a server
       apt: update_cache=yes
     - name: upgrade a server
