@@ -60,6 +60,13 @@
         url: https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc
         dest: ~/.zshrc
     
+    - name: xterm
+      become: yes
+      become_user: "{{ ubuntu_user }}"
+      get_url:
+        url: https://raw.githubusercontent.com/enxajt/xterm/master/.Xresources
+        dest: ~/.Xresources
+    
     - name: mkdir kohei-dev
       become: yes
       become_user: "{{ ubuntu_user }}"
@@ -71,9 +78,16 @@
       get_url:
         url: https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile
         dest: ~/kohei-dev/Dockerfile 
+
+    - name: nkf Dockerfile
+      become: yes
+      become_user: "{{ ubuntu_user }}"
+      shell: nkf -w -Lu --overwrite ~/kohei-dev/Dockerfile
     
     - name: add enxajt to Docker group
-      shell: sudo usermod -aG docker {{ubuntu_user}}
+      become: yes
+      become_user: root
+      shell: usermod -aG docker {{ubuntu_user}}
     
     - git_config:
         name: user.name
