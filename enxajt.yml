@@ -1,0 +1,112 @@
+- name: ubuntu desktop
+  hosts: 127.0.0.1
+  connection: local
+  user: vagrant
+  become: true
+  vars:
+    user: enxajt
+    pass: enxajt
+  tasks:
+    #    refer list in Japan
+    #    - name: change mirror
+    #      become: yes
+    #      replace: |
+    #        dest=/etc/apt/sources.list
+    #        regexp=http://(archive|security)\.ubuntu\.com/ubuntu(.+)
+    #        replace=http://ftp.riken.go.jp/Linux/ubuntu\2
+    #      register: apt_mirror
+    # 
+    #    - name: apt update
+    #      become: yes
+    #      apt: update_cache=yes
+    #      when: apt_mirror|changed
+ 
+    # - name: install aptitude
+    #   apt: name=aptitude
+    #   become: yes
+
+    # - name: updates a server
+    #   apt: update_cache=yes
+    # - name: upgrade a server
+    #   apt: upgrade=full
+    # 
+    # - name: install apt packages
+    #   apt: name={{item}}
+    #   become: yes
+    #   with_items:
+    #     #- language-pack-ja
+    #     - ubuntu-desktop
+    #     - nkf
+    #     - zsh
+    
+    - name: user
+      user: name="{{ user }}" password="{{ pass }}" shell=/bin/zsh state=present append=yes groups=sudo
+    
+    - name: zshrc
+      become: yes
+      become-user: "{{ user }}"
+      get_url:
+        url: https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc
+        dest: ~/.zshrc
+    
+    - name: mkdir kohei-dev
+      file: path=~/kohei-dev state=directory owner="{{ user }}" group="{{ user }}" mode=0777
+    
+    - name: Dockerfile
+      become: yes
+      become-user: "{{ user }}"
+      get_url:
+        url: https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile"
+        dest: ~/kohei-dev/Dockerfile \
+    
+    - git_config:
+        name: user.name
+        scope: global
+        value: 'enxajt' 
+    
+    - git_config:
+        name: user.email
+        scope: global
+        value: 'enxajt@gmail.com' 
+    
+    - name: reboot
+      command: shutdown -r now
+=======
+- name: ubuntu
+  user: vagrant
+  become: true
+  hosts: 127.0.0.1
+  connection: local
+  tasks:
+    - name: user
+      user: name=enxajt password=enxajt shell=/bin/zsh state=present append=yes groups=sudo
+
+    - name: zshrc
+      become: yes
+      become-user: enxajt
+      get_url:
+        url: https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc
+        dest: ~/.zshrc
+
+    - name: mkdir kohei-dev
+      file: path=~/kohei-dev state=directory owner=enxajt group=enxajt mode=0777
+
+    - name: Dockerfile
+      become: yes
+      become-user: enxajt
+      get_url:
+        url: https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile"
+        dest: ~/kohei-dev/Dockerfile \
+    
+    - git_config:
+        name: user.name
+        scope: global
+        value: 'enxajt' 
+
+    - git_config:
+        name: user.email
+        scope: global
+        value: 'enxajt@gmail.com' 
+
+    - name: reboot
+      command: shutdown -r now
