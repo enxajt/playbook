@@ -73,7 +73,7 @@
         dest: ~/kohei-dev/Dockerfile 
     
     - name: add enxajt to Docker group
-      SHELL: sudo usermod -aG docker {{ubuntu_user}}
+      shell: sudo usermod -aG docker {{ubuntu_user}}
     
     - git_config:
         name: user.name
