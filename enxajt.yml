@@ -1,11 +1,10 @@
 - name: ubuntu desktop
-  hosts: 127.0.0.1
-  connection: local
+  hosts: localhost
   user: vagrant
   become: true
   vars:
-    user: enxajt
-    pass: enxajt
+    ubuntu_user: enxajt
+    ubuntu_pass: enxajt
   tasks:
     #    refer list in Japan
     #    - name: change mirror
@@ -40,21 +39,21 @@
     #     - zsh
     
     - name: user
-      user: name="{{ user }}" password="{{ pass }}" shell=/bin/zsh state=present append=yes groups=sudo
+      user: name="{{ ubuntu_user }}" password="{{ ubuntu_pass }}" shell=/bin/zsh state=present append=yes groups=sudo
     
     - name: zshrc
       become: yes
-      become-user: "{{ user }}"
+      become-user: "{{ ubuntu_user }}"
       get_url:
         url: https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc
         dest: ~/.zshrc
     
     - name: mkdir kohei-dev
-      file: path=~/kohei-dev state=directory owner="{{ user }}" group="{{ user }}" mode=0777
+      file: path=~/kohei-dev state=directory owner="{{ ubuntu_user }}" group="{{ ubuntu_user }}" mode=0777
     
     - name: Dockerfile
       become: yes
-      become-user: "{{ user }}"
+      become-user: "{{ ubuntu_user }}"
       get_url:
         url: https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile"
         dest: ~/kohei-dev/Dockerfile \
@@ -69,44 +68,5 @@
         scope: global
         value: 'enxajt@gmail.com' 
     
-    - name: reboot
-      command: shutdown -r now
-=======
-- name: ubuntu
-  user: vagrant
-  become: true
-  hosts: 127.0.0.1
-  connection: local
-  tasks:
-    - name: user
-      user: name=enxajt password=enxajt shell=/bin/zsh state=present append=yes groups=sudo
-
-    - name: zshrc
-      become: yes
-      become-user: enxajt
-      get_url:
-        url: https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc
-        dest: ~/.zshrc
-
-    - name: mkdir kohei-dev
-      file: path=~/kohei-dev state=directory owner=enxajt group=enxajt mode=0777
-
-    - name: Dockerfile
-      become: yes
-      become-user: enxajt
-      get_url:
-        url: https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile"
-        dest: ~/kohei-dev/Dockerfile \
-    
-    - git_config:
-        name: user.name
-        scope: global
-        value: 'enxajt' 
-
-    - git_config:
-        name: user.email
-        scope: global
-        value: 'enxajt@gmail.com' 
-
     - name: reboot
       command: shutdown -r now
