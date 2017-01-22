@@ -37,9 +37,21 @@
     #     - ubuntu-desktop
     #     - nkf
     #     - zsh
+
+    - name: make sure we have a 'wheel' group
+      group:
+        name: weheel
+        state: present
+
+    - name: Allow 'wheel' group to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
     
-    - name: user
-      user: name="{{ ubuntu_user }}" password="{{ 'enxajt'|password_hash('sha512') }}" shell=/bin/zsh state=present append=yes groups=sudo
+    - name: add user to wheel group
+      user: name="{{ ubuntu_user }}" password="{{ 'enxajt'|password_hash('sha512') }}" shell=/bin/zsh state=present append=yes groups=wheel
     
     - name: zshrc
       become: yes
@@ -59,6 +71,9 @@
       get_url:
         url: https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile
         dest: ~/kohei-dev/Dockerfile 
+    
+    - name: add enxajt to Docker group
+      SHELL: sudo usermod -aG docker {{ubuntu_user}}
     
     - git_config:
         name: user.name
