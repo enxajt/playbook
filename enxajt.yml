@@ -40,7 +40,7 @@
 
     - name: make sure we have a 'wheel' group
       group:
-        name: weheel
+        name: wheel
         state: present
 
     - name: Allow 'wheel' group to have passwordless sudo
