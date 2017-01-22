@@ -39,7 +39,7 @@
     #     - zsh
     
     - name: user
-      user: name="{{ ubuntu_user }}" password="{{ ubuntu_pass }}" shell=/bin/zsh state=present append=yes groups=sudo
+      user: name="{{ ubuntu_user }}" password="enxajt" shell=/bin/zsh state=present append=yes groups=sudo
     
     - name: zshrc
       become: yes
