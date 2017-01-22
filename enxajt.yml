@@ -49,14 +49,16 @@
         dest: ~/.zshrc
     
     - name: mkdir kohei-dev
+      become: yes
+      become_user: "{{ ubuntu_user }}"
       file: path=~/kohei-dev state=directory owner="{{ ubuntu_user }}" group="{{ ubuntu_user }}" mode=0777
     
     - name: Dockerfile
       become: yes
       become_user: "{{ ubuntu_user }}"
       get_url:
-        url: https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile"
-        dest: ~/kohei-dev/Dockerfile \
+        url: https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile
+        dest: ~/kohei-dev/Dockerfile 
     
     - git_config:
         name: user.name
