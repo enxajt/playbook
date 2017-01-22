@@ -3,24 +3,23 @@
   become: true
   hosts: 127.0.0.1
   connection: local
-  vars:
-    USER: enxajt
-    PASS: enxajt
   tasks:
     - name: user
-      user: name={{USER}} password{{PASS}} shell=/bin/zsh state=present append=yes groups=sudo
+      user: name=enxajt password=enxajt shell=/bin/zsh state=present append=yes groups=sudo
 
     - name: zshrc
-      user: {{USER}}
+      become: yes
+      become-user: enxajt
       get_url:
         url: https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc
         dest: ~/.zshrc
 
     - name: mkdir kohei-dev
-      file: path=~/kohei-dev state=directory owner={{USER}} group={{USER}} mode=0777
+      file: path=~/kohei-dev state=directory owner=enxajt group=enxajt mode=0777
 
     - name: Dockerfile
-      user: {{USER}}
+      become: yes
+      become-user: enxajt
       get_url:
         url: https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile"
         dest: ~/kohei-dev/Dockerfile \
