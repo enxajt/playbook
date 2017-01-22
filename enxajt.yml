@@ -43,7 +43,7 @@
     
     - name: zshrc
       become: yes
-      become-user: "{{ ubuntu_user }}"
+      become_user: "{{ ubuntu_user }}"
       get_url:
         url: https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc
         dest: ~/.zshrc
@@ -53,7 +53,7 @@
     
     - name: Dockerfile
       become: yes
-      become-user: "{{ ubuntu_user }}"
+      become_user: "{{ ubuntu_user }}"
       get_url:
         url: https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile"
         dest: ~/kohei-dev/Dockerfile \
