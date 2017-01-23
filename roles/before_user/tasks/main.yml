@@ -42,8 +42,9 @@
   apt: name={{item}}
   become: yes
   with_items: 
-    - language-pack-ja-base
-    - language-pack-ja
+    #- language-pack-ja-base
+    #- language-pack-ja
+    #- ibus-mozc
     - manpages-ja
     - fonts-ipafont-gothic
     - fonts-ipafont-mincho
@@ -53,7 +54,6 @@
   become: yes
   with_items:
     - ubuntu-defaults-ja # JapTeam package repository
-    #- ibus-mozc
     - fcitx-mozc
     - fcitx-libs-qt5
     - fcitx-frontend-qt5
@@ -66,12 +66,14 @@
     # 「辞書」タブをクリック、「ユーザ辞書の編集...」ボタンをクリック、辞書ツールが起動
     # 「管理」ボタンをクリックして新規辞書にインポート...などから辞書ファイルを読み込む
 
-- name: install nkf
+- name: install tools
   apt: name={{item}}
   become: yes
   with_items:
     #- language-pack-ja
     - nkf
+    - rsplib-legacy-wrappers # Terminal
+    - virtualbox-guest-dkms
 
 - name: install zsh
   apt: name={{item}}
