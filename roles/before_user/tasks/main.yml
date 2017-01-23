@@ -110,6 +110,3 @@
   become: yes
   with_items:
     - ubuntu-desktop
-
-- name: reboot
-  command: shutdown -r now
