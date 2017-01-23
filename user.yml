@@ -1,0 +1,62 @@
+- name: ubuntu desktop add user
+  hosts: localhost
+  user: vagrant
+  become: true
+  vars:
+    ubuntu_user: enxajt
+    ubuntu_pass: enxajt
+  tasks:
+    - name: make sure we have a 'wheel' group
+      group:
+        name: wheel
+        state: present
+    
+    - name: Allow 'wheel' group to have passwordless sudo
+      lineinfile:
+        dest: /etc/sudoers
+        state: present
+        regexp: '^%wheel'
+        line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    
+    - name: add user to wheel group
+      user: name="{{ ubuntu_user }}" password="{{ 'enxajt'|password_hash('sha512') }}" shell=/bin/zsh state=present append=yes groups=wheel
+    
+    - name: zshrc
+      become: yes
+      become_user: "{{ ubuntu_user }}"
+      get_url:
+        url: https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc
+        dest: ~/.zshrc
+    
+    - name: xterm
+      become: yes
+      become_user: "{{ ubuntu_user }}"
+      get_url:
+        url: https://raw.githubusercontent.com/enxajt/xterm/master/.Xresources
+        dest: ~/.Xresources
+    
+    - name: mkdir kohei-dev
+      become: yes
+      become_user: "{{ ubuntu_user }}"
+      file: path=~/kohei-dev state=directory owner="{{ ubuntu_user }}" group="{{ ubuntu_user }}" mode=0777
+    
+    
+    - name: Dockerfile
+      become: yes
+      become_user: "{{ ubuntu_user }}"
+      get_url:
+        url: https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile
+        dest: ~/kohei-dev/Dockerfile 
+    
+    - name: nkf Dockerfile
+      become: yes
+      become_user: "{{ ubuntu_user }}"
+      shell: nkf -w -Lu --overwrite ~/kohei-dev/Dockerfile
+    
+    - name: add enxajt to Docker group
+      become: yes
+      become_user: root
+      shell: usermod -aG docker {{ubuntu_user}}
+    
+    - name: reboot
+      command: shutdown -r now
