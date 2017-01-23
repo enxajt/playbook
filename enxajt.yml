@@ -1,0 +1,8 @@
+---
+- name: ubuntu desktop before user
+  hosts: localhost
+  user: vagrant
+  become: true
+  roles:
+    - before_user
+    - user

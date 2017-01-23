@@ -1,8 +1,4 @@
-- name: ubuntu desktop before user
-  hosts: localhost
-  user: vagrant
-  become: true
-  tasks:
+---
     #    refer list in Japan
     #    - name: change mirror
     #      become: yes
@@ -18,9 +14,6 @@
  
     - locale_gen:
         name: en_US.UTF-8
-
-    - name: locale
-      shell: dpkg-reconfigure locales
 
     - name: set timezone
       timezone:
@@ -46,9 +39,19 @@
     - name: install japanese
       apt: name={{item}}
       become: yes
-      with_items:
+      with_items: 
+        - language-pack-ja-base
         - language-pack-ja
+        - manpages-ja
+        - fonts-ipafont-gothic
+        - fonts-ipafont-mincho
+
+    - name: install japanese
+      apt: name={{item}}
+      become: yes
+      with_items:
         - ubuntu-defaults-ja # JapTeam package repository
+        #- ibus-mozc
         - fcitx-mozc
         - fcitx-libs-qt5
         - fcitx-frontend-qt5
@@ -60,7 +63,7 @@
         # mozcと入力、表示されたMozc の設定をクリックして起動
         # 「辞書」タブをクリック、「ユーザ辞書の編集...」ボタンをクリック、辞書ツールが起動
         # 「管理」ボタンをクリックして新規辞書にインポート...などから辞書ファイルを読み込む
-
+    
     - name: install nkf
       apt: name={{item}}
       become: yes
@@ -97,7 +100,9 @@
         name: user.email
         scope: global
         value: 'enxajt@gmail.com' 
-    
+
+################################################################################
+# heavy 
     - name: install ubuntu-desktop
       apt: name={{item}}
       become: yes
