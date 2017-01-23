@@ -1,9 +1,13 @@
 - name: make sure we have a 'wheel' group
+  become: yes
+  become_user: root
   group:
     name: wheel
     state: present
 
 - name: Allow 'wheel' group to have passwordless sudo
+  become: yes
+  become_user: root
   lineinfile:
     dest: /etc/sudoers
     state: present
@@ -11,6 +15,8 @@
     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
 
 - name: add user to wheel group
+  become: yes
+  become_user: root
   user: name="{{ ubuntu_user }}" password="{{ 'enxajt'|password_hash('sha512') }}" shell=/bin/zsh state=present append=yes groups=wheel
 
 - name: zshrc
@@ -51,4 +57,6 @@
   shell: usermod -aG docker {{ubuntu_user}}
 
 - name: reboot
+  become: yes
+  become_user: root
   command: shutdown -r now
