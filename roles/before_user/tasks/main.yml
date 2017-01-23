@@ -38,16 +38,16 @@
 - name: upgrade a server
   apt: upgrade=full
 
-- name: install japanese
-  apt: name={{item}}
-  become: yes
-  with_items: 
+#- name: install japanese
+#  apt: name={{item}}
+#  become: yes
+#  with_items: 
     #- language-pack-ja-base
     #- language-pack-ja
     #- ibus-mozc
-    - manpages-ja
-    - fonts-ipafont-gothic
-    - fonts-ipafont-mincho
+    #- manpages-ja
+    #- fonts-ipafont-gothic
+    #- fonts-ipafont-mincho
 
 - name: install japanese
   apt: name={{item}}
@@ -59,8 +59,6 @@
     - fcitx-frontend-qt5
     - im-setup-helper
     # fcitxと入力、表示されたFcitxセットアップヘルパーをクリックして起動する。
-    # ダイアログが表示され、Fcitxをデフォルトにする設定を行いますか？
-    #「はい」ボタンをクリック、「OK」ボタンをクリックして設定を終了
     # Ubuntuを再起動する。
     # mozcと入力、表示されたMozc の設定をクリックして起動
     # 「辞書」タブをクリック、「ユーザ辞書の編集...」ボタンをクリック、辞書ツールが起動
@@ -70,7 +68,6 @@
   apt: name={{item}}
   become: yes
   with_items:
-    #- language-pack-ja
     - nkf
     - rsplib-legacy-wrappers # Terminal
     - virtualbox-guest-dkms
@@ -80,21 +77,6 @@
   become: yes
   with_items:
     - zsh
-- name: get zshrc
-  get_url:
-    url: https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc
-    dest: ~/.zshrc
-- name: chsh to zsh
-  shell: chsh -s /bin/zsh
-
-- name: mkdir kohei-dev
-  file: path=~/kohei-dev state=directory owner=root group=root mode=0777
-- name: get Dockerfile
-  get_url:
-    url: https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile
-    dest: ~/kohei-dev/Dockerfile 
-- name: nkf Dockerfile
-  shell: nkf -w -Lu --overwrite ~/kohei-dev/Dockerfile
 
 - git_config:
     name: user.name
@@ -104,11 +86,3 @@
     name: user.email
     scope: global
     value: 'enxajt@gmail.com' 
-
-############################################################################
-### heavy 
-- name: install ubuntu-desktop
-  apt: name={{item}}
-  become: yes
-  with_items:
-    - ubuntu-desktop
