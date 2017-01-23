@@ -1,8 +1,11 @@
 ---
-- name: ubuntu desktop before user
+- name: ubuntu desktop
   hosts: localhost
   user: vagrant
   become: true
+  vars:
+    ubuntu_user: enxajt
+    ubuntu_pass: enxajt
   roles:
     - before_user
     - user
