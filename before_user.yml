@@ -16,6 +16,17 @@
     #      apt: update_cache=yes
     #      when: apt_mirror|changed
  
+    - locale_gen:
+        name: en_US.UTF-8
+
+    - name: locale
+      shell: dpkg-reconfigure locales
+
+    - name: set timezone
+      timezone:
+        #name: Asia/Tokyo
+        name: Europe/Paris
+
     - name: install aptitude
       apt: name=aptitude
       become: yes
@@ -32,16 +43,16 @@
     - name: upgrade a server
       apt: upgrade=full
 
-    #- name: install japanese
-    #  apt: name={{item}}
-    #  become: yes
-    #  with_items:
-        #- language-pack-ja
-        #- ubuntu-defaults-ja # JapTeam package repository
-        #- fcitx-mozc
-        #- fcitx-libs-qt5
-        #- fcitx-frontend-qt5
-        #- im-setup-helper
+    - name: install japanese
+      apt: name={{item}}
+      become: yes
+      with_items:
+        - language-pack-ja
+        - ubuntu-defaults-ja # JapTeam package repository
+        - fcitx-mozc
+        - fcitx-libs-qt5
+        - fcitx-frontend-qt5
+        - im-setup-helper
         # fcitxと入力、表示されたFcitxセットアップヘルパーをクリックして起動する。
         # ダイアログが表示され、Fcitxをデフォルトにする設定を行いますか？
         #「はい」ボタンをクリック、「OK」ボタンをクリックして設定を終了
