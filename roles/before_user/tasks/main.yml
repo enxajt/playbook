@@ -20,7 +20,6 @@
 
   - name: set timezone
     timezone:
-      #name: Asia/Tokyo
       name: Europe/Paris
 
   - name: install aptitude
@@ -105,7 +104,7 @@
       value: 'enxajt@gmail.com' 
 
 ##############################################################################
-heavy 
+##### heavy 
   - name: install ubuntu-desktop
     apt: name={{item}}
     become: yes
