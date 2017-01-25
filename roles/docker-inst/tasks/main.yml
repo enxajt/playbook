@@ -32,3 +32,5 @@
   become_user: root
   shell: usermod -aG docker {{ubuntu_user}}
 
+- name: git clone dockerfiles
+  shell: git clone https://github.com/enxajt/dockerfiles.git
