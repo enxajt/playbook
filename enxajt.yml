@@ -7,5 +7,7 @@
     ubuntu_user: enxajt
     ubuntu_pass: enxajt
   roles:
-    - before_user
+    - basic
     - user
+    #- jap
+    #- docker

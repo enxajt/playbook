@@ -1,13 +1,42 @@
+- name: updates a server
+  apt: update_cache=yes
+- name: upgrade a server
+  apt: upgrade=full
+
+- name: install japanese
+  apt: name={{item}}
+  become: yes
+  with_items:
+    - linux-image-extra-$(uname -r)
+    - linux-image-extra-virtual
+    - apt-transport-https 
+    - ca-certificates
+
+- name: add-apt-repository ppa:japanese-testers/mozc
+  shell: curl -fsSL https://yum.dockerproject.org/gpg | sudo apt-key add -
+- name: add-apt-repository
+  shell: add-apt-repository "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
+
+- name: updates a server
+  apt: update_cache=yes
+- name: install docker-engine
+  apt: name={{item}}
+  become: yes
+  with_items:
+    - docker-engine
+
 - name: mkdir kohei-dev
   become: yes
   become_user: "{{ ubuntu_user }}"
   file: path=~/kohei-dev state=directory owner="{{ ubuntu_user }}" group="{{ ubuntu_user }}" mode=0777
+
 - name: Dockerfile
   become: yes
   become_user: "{{ ubuntu_user }}"
   get_url:
     url: https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile
     dest: ~/kohei-dev/Dockerfile 
+
 - name: nkf Dockerfile
   become: yes
   become_user: "{{ ubuntu_user }}"
