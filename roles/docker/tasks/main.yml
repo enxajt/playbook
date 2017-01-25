@@ -1,32 +1,3 @@
-- name: updates a server
-  apt: update_cache=yes
-- name: upgrade a server
-  apt: upgrade=full
-
-- name: prepare installing docker 
-  shell: apt-get -y install linux-image-extra-$(uname -r)
-
-- name: prepare installing docker 
-  apt: name={{item}}
-  become: yes
-  with_items:
-    - linux-image-extra-virtual
-    - apt-transport-https 
-    - ca-certificates
-
-- name: add-apt-repository ppa:japanese-testers/mozc
-  shell: curl -fsSL https://yum.dockerproject.org/gpg | sudo apt-key add -
-- name: add-apt-repository
-  shell: add-apt-repository "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
-
-- name: updates a server
-  apt: update_cache=yes
-- name: install docker-engine
-  apt: name={{item}}
-  become: yes
-  with_items:
-    - docker-engine
-
 - name: mkdir kohei-dev
   become: yes
   become_user: "{{ ubuntu_user }}"
@@ -43,9 +14,3 @@
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: nkf -w -Lu --overwrite ~/kohei-dev/Dockerfile
-
-- name: add enxajt to Docker group
-  become: yes
-  become_user: root
-  shell: usermod -aG docker {{ubuntu_user}}
-
