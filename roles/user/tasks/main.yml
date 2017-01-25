@@ -4,7 +4,6 @@
   group:
     name: wheel
     state: present
-
 - name: Allow 'wheel' group to have passwordless sudo
   become: yes
   become_user: root
@@ -13,7 +12,6 @@
     state: present
     regexp: '^%wheel'
     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
-
 - name: add user to wheel group
   become: yes
   become_user: root
@@ -32,26 +30,6 @@
   get_url:
     url: https://raw.githubusercontent.com/enxajt/xterm/master/.Xresources
     dest: ~/.Xresources
-
-- name: mkdir kohei-dev
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  file: path=~/kohei-dev state=directory owner="{{ ubuntu_user }}" group="{{ ubuntu_user }}" mode=0777
-- name: Dockerfile
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  get_url:
-    url: https://raw.githubusercontent.com/enxajt/dockerfiles/master/vim-ubuntu/Dockerfile
-    dest: ~/kohei-dev/Dockerfile 
-- name: nkf Dockerfile
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  shell: nkf -w -Lu --overwrite ~/kohei-dev/Dockerfile
-
-- name: add enxajt to Docker group
-  become: yes
-  become_user: root
-  shell: usermod -aG docker {{ubuntu_user}}
 
 ### heavy 
 - name: install ubuntu-desktop
