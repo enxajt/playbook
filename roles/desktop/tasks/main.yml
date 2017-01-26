@@ -3,8 +3,3 @@
   become: yes
   with_items:
     - ubuntu-desktop
-
-- name: reboot
-  become: yes
-  become_user: root
-  command: shutdown -r now

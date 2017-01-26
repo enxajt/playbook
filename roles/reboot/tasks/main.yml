@@ -1,0 +1,4 @@
+- name: reboot
+  become: yes
+  become_user: root
+  command: shutdown -r now
