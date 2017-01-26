@@ -33,4 +33,6 @@
   shell: usermod -aG docker {{ubuntu_user}}
 
 - name: git clone dockerfiles
+  become: yes
+  become_user: user 
   shell: git clone https://github.com/enxajt/dockerfiles.git
