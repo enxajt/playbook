@@ -30,15 +30,3 @@
   get_url:
     url: https://raw.githubusercontent.com/enxajt/xterm/master/.Xresources
     dest: ~/.Xresources
-
-### heavy 
-- name: install ubuntu-desktop
-  apt: name={{item}}
-  become: yes
-  with_items:
-    - ubuntu-desktop
-
-- name: reboot
-  become: yes
-  become_user: root
-  command: shutdown -r now
