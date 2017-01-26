@@ -30,3 +30,6 @@
   get_url:
     url: https://raw.githubusercontent.com/enxajt/xterm/master/.Xresources
     dest: ~/.Xresources
+
+- name: install Dropbox
+  shell: cd ~/ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
