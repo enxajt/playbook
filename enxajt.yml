@@ -13,3 +13,5 @@
     - docker-inst
     - desktop
     - reboot
+    #- autostart
+    #- test

@@ -1,0 +1,37 @@
+- name: set autostart terminal after login
+  become: yes
+  become_user: root
+  shell: mkdir /etc/lightdm/lightdm.conf.d
+- name: autologin
+  become: yes
+  become_user: root
+  shell: sh -c "echo [SeatDefaults] >> /etc/lightdm/lightdm.conf.d/50-myconfig.conf"
+- name: autologin
+  become: yes
+  become_user: root
+  shell: sh -c "echo autologin-user=enxajt >> /etc/lightdm/lightdm.conf.d/50-myconfig.conf"
+
+- name: set autostart terminal after login
+  become: yes
+  become_user: root
+  shell: mkdir ~/.config/autostart
+- name: set autostart terminal after login
+  become: yes
+  become_user: root
+  shell: echo '[Desktop Entry]' >> ~/.config/autostart/gnome-terminal.desktop
+- name: set autostart terminal after login
+  become: yes
+  become_user: root
+  shell: echo 'Exec=gnome-terminal' >> ~/.config/autostart/gnome-terminal.desktop
+- name: set autostart terminal after login
+  become: yes
+  become_user: root
+  shell: echo 'wmctrl -r "gnome-terminal" -e 0,0,0,800,1200' >> ~/.config/autostart/gnome-terminal.desktop
+- name: set autostart terminal after login
+  become: yes
+  become_user: root
+  shell: echo 'wmctrl -r "Mozilla Firefox" -e 0,1100,0,720,920' >> ~/.config/autostart/gnome-terminal.desktop
+- name: set autostart terminal after login
+  become: yes
+  become_user: root
+  shell: echo 'Type=Application' >> ~/.config/autostart/gnome-terminal.desktop

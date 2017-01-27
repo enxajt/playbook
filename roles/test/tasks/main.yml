@@ -1,0 +1,8 @@
+# 初期設定ではキーボードの設定が一部リセットされる場合があるので設定を変更
+- name: keyboard setting
+  shell: gsettings set org.gnome.settings-daemon.plugins.keyboard active false
+
+- name: git clone dockerfiles
+  become: yes
+  become_user: user 
+  shell: git clone https://github.com/enxajt/dockerfiles.git

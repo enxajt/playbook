@@ -59,7 +59,3 @@
    # mozcと入力、表示されたMozc の設定をクリックして起動
    # 「辞書」タブをクリック、「ユーザ辞書の編集...」ボタンをクリック、辞書ツールが起動
    # 「管理」ボタンをクリックして新規辞書にインポート...などから辞書ファイルを読み込む
-
-# 初期設定ではキーボードの設定が一部リセットされる場合があるので設定を変更
-- name: keyboard setting
-  shell: gsettings set org.gnome.settings-daemon.plugins.keyboard active false

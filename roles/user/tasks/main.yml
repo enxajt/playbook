@@ -1,3 +1,4 @@
+# wheelはcentos devianはsudo らしいが、nopasswdをwheelとする。
 - name: make sure we have a 'wheel' group
   become: yes
   become_user: root
@@ -12,6 +13,11 @@
     state: present
     regexp: '^%wheel'
     line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+- name: add user to wheel group
+  become: yes
+  become_user: root
+  user: name="{{ ubuntu_user }}" password="{{ 'enxajt'|password_hash('sha512') }}" shell=/bin/zsh state=present append=yes groups=wheel
+
 - name: add user to wheel group
   become: yes
   become_user: root
@@ -33,3 +39,5 @@
 
 - name: install Dropbox
   shell: cd ~/ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+- name: install Dropbox tool
+  shell: mkdir ~/bin && wget -O ~/bin/dropbox "http://www.dropbox.com/download?dl=packages/dropbox.py" && chmod a+x ~/bin/dropbox

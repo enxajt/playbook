@@ -3,3 +3,4 @@
   become: yes
   with_items:
     - ubuntu-desktop
+    - wmctrl
