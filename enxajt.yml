@@ -9,9 +9,10 @@
   roles:
     - basic
     - user
-    - jap
-    - docker-inst
-    - desktop
+    # - git
+    #- jap
+    #- docker-inst
+    #- desktop
     - reboot
     #- autostart
     #- test
