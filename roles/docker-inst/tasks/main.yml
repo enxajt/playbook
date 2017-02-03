@@ -9,6 +9,7 @@
 - name: prepare installing docker 
   apt: name={{item}}
   become: yes
+  become_user: root
   with_items:
     - linux-image-extra-virtual
     - apt-transport-https 
@@ -24,6 +25,7 @@
 - name: install docker-engine
   apt: name={{item}}
   become: yes
+  become_user: root
   with_items:
     - docker-engine
 

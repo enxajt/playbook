@@ -10,13 +10,18 @@
   apt: name=aptitude
   become: yes
 
+- name: updates a server
+  apt: update_cache=yes
+- name: upgrade a server
+  apt: upgrade=full
+
 - name: install tools
   apt: name={{item}}
   become: yes
   with_items:
     - zsh
     - nkf
-    - virtualbox-guest-dkms
+    #- virtualbox-guest-dkms
     #- fonts-ricty-diminished 
     #- fonts-ipafont-gothic
     #- fonts-ipafont-mincho

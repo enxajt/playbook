@@ -38,6 +38,11 @@
     dest: ~/.Xresources
 
 - name: install Dropbox
+  become: yes
+  become_user: "{{ ubuntu_user }}"
   shell: cd ~/ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 - name: install Dropbox tool
-  shell: mkdir ~/bin && wget -O ~/bin/dropbox "http://www.dropbox.com/download?dl=packages/dropbox.py" && chmod a+x ~/bin/dropbox
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  #shell: mkdir ~/bin && wget -O ~/bin/dropbox "http://www.dropbox.com/download?dl=packages/dropbox.py" && chmod a+x ~/bin/dropbox
+  shell: sudo wget -O /usr/bin/dropbox "http://www.dropbox.com/download?dl=packages/dropbox.py" && sudo chmod a+x /usr/bin/dropbox && dropbox lansync n && sudo chmod 777 -R ~/Dropbox

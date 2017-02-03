@@ -21,8 +21,6 @@
   shell: wget https://www.ubuntulinux.jp/sources.list.d/trusty.list -O /etc/apt/sources.list.d/ubuntu-ja.list
 - name: updates a server
   apt: update_cache=yes
-- name: upgrade a server
-  apt: upgrade=full
 - name: install japanese
   apt: name={{item}}
   become: yes
@@ -39,8 +37,6 @@
   shell: add-apt-repository ppa:japanese-testers/mozc
 - name: updates a server
   apt: update_cache=yes
-- name: upgrade a server
-  apt: upgrade=full
 - name: install japanese
   apt: name={{item}}
   become: yes
