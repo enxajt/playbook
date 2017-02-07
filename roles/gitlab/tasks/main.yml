@@ -1,0 +1,4 @@
+- name: GitLab install
+  become: yes
+  become_user: root
+  shell: curl -f https://raw.githubusercontent.com/sameersbn/docker-gitlab/master/docker-compose.yml > /home/{{ubuntu_user}}/docker-compose.yml

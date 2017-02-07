@@ -10,9 +10,10 @@
     # - basic
     # - user
     # - desktop
-    - autostart
+    # - autostart
     #- git
     #- docker-inst
+    - gitlab
     #- jap
     #
     #virtualbox共有ディレクトリがある場合、vagrant reload だけでいいのでは

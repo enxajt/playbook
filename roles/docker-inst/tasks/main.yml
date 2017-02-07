@@ -33,3 +33,13 @@
   become: yes
   become_user: root
   shell: usermod -aG docker {{ubuntu_user}}
+
+- name: docker-compose install
+  become: yes
+  become_user: root
+  shell: curl -L https://github.com/docker/compose/releases/download/1.11.0-rc1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+ 
+- name: docker-compose install
+  become: yes
+  become_user: root
+  shell: chmod +x /usr/local/bin/docker-compose
