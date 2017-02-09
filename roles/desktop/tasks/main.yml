@@ -1,9 +1,15 @@
-- name: install ubuntu-desktop
+- name: install desktop
   apt: name={{item}}
   become: yes
   with_items:
-    - ubuntu-desktop
+    #- ubuntu-desktop
+    - ubuntu-mate-desktop
     - wmctrl
+
+      # apt-add-repository ppa:ubuntu-mate-dev/ppa
+      # apt-add-repository ppa:ubuntu-mate-dev/trusty-mate
+      # apt-get update
+      # apt-get install ubuntu-mate-core ubuntu-mate-desktop
 
 # 初期設定ではキーボードの設定が一部リセットされる場合があるので設定を変更
 - name: keyboard setting

@@ -21,6 +21,7 @@
   with_items:
     - zsh
     - nkf
+    - tmux
     #- virtualbox-guest-dkms
     #- fonts-ricty-diminished 
     #- fonts-ipafont-gothic

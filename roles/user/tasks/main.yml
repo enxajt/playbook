@@ -23,12 +23,19 @@
   become_user: root
   user: name="{{ ubuntu_user }}" password="{{ 'enxajt'|password_hash('sha512') }}" shell=/bin/zsh state=present append=yes groups=wheel
 
-- name: zshrc
+- name: DL .zshrc
   become: yes
   become_user: "{{ ubuntu_user }}"
   get_url:
-    url: https://raw.githubusercontent.com/enxajt/zsh/master/.zshrc
+    url: https://raw.githubusercontent.com/enxajt/linux/master/.zshrc
     dest: ~/.zshrc
+
+- name: DL .tmux.conf
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  get_url:
+    url: https://raw.githubusercontent.com/enxajt/linux/master/.tmux.conf
+    dest: ~/.tmux.conf
 
 - name: xterm
   become: yes
@@ -41,8 +48,15 @@
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: cd ~/ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+
 - name: install Dropbox tool
   become: yes
-  become_user: "{{ ubuntu_user }}"
+  become_user: root
   #shell: mkdir ~/bin && wget -O ~/bin/dropbox "http://www.dropbox.com/download?dl=packages/dropbox.py" && chmod a+x ~/bin/dropbox
-  shell: sudo wget -O /usr/bin/dropbox "http://www.dropbox.com/download?dl=packages/dropbox.py" && sudo chmod a+x /usr/bin/dropbox && dropbox lansync n && sudo chmod 777 -R ~/Dropbox
+  shell: wget -O /usr/bin/dropbox "http://www.dropbox.com/download?dl=packages/dropbox.py" && chmod a+x /usr/bin/dropbox && dropbox lansync n
+    # && chmod 777 -R ~/Dropbox
+
+- name: mkln shared
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: ln -s /opt/shared ~/shared

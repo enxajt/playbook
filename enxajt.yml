@@ -7,14 +7,14 @@
     ubuntu_user: enxajt
     ubuntu_pass: enxajt
   roles:
-    # - basic
-    # - user
-    # - desktop
-    # - autostart
-    #- git
-    #- docker-inst
+    - basic
+    - user
+    - desktop
+    - autostart
+    - git
+    - docker-inst
     - gitlab
-    #- jap
+    - jap
     #
     #virtualbox共有ディレクトリがある場合、vagrant reload だけでいいのでは
     #- reboot
