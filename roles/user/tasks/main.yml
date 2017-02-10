@@ -60,3 +60,14 @@
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: ln -s /opt/shared ~/shared
+
+#- name: set background
+#  become: yes
+#  become_user: "{{ ubuntu_user }}"
+#  shell: export DISPLAY=:0.0
+- name: set background
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    convert -size 500x500 xc:black /home/enxajt/black.jpg
+    gsettings set org.mate.background picture-filename /home/enxajt/black.jpg

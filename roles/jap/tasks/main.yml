@@ -43,15 +43,13 @@
   with_items:
    - language-pack-ja-base
    - language-pack-ja
-   #- ibus-mozc
+   - fcitx
    - fcitx-mozc
-   - fcitx-libs-qt5
+   - fcitx-frontend-gtk2
+   - fcitx-frontend-gtk3
+   - fcitx-frontend-qt4
    - fcitx-frontend-qt5
-   - im-setup-helper
-   # sudo apt-get install -y language-pack-ja-base language-pack-ja
-   # sudo apt-get install -y fcitx-libs-qt5 fcitx-frontend-qt5 im-setup-helper
-   # fcitxと入力、表示されたFcitxセットアップヘルパーをクリックして起動する。
-   # Ubuntuを再起動する。
-   # mozcと入力、表示されたMozc の設定をクリックして起動
-   # 「辞書」タブをクリック、「ユーザ辞書の編集...」ボタンをクリック、辞書ツールが起動
-   # 「管理」ボタンをクリックして新規辞書にインポート...などから辞書ファイルを読み込む
+   - fcitx-ui-classic
+   - fcitx-config-gtk
+   - mozc-utils-gui
+   - fcitx-libs-qt5
