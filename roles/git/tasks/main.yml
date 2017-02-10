@@ -1,7 +1,7 @@
 - name: install Git 
   apt: name={{item}}
   become: yes
-  become_user: "{ubuntu_user}"
+  become_user: "{{ ubuntu_user }}"
   with_items:
     - git
 - git_config:

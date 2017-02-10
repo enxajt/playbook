@@ -43,3 +43,13 @@
   become: yes
   become_user: root
   shell: chmod +x /usr/local/bin/docker-compose
+
+- name: mv docker directory
+  become: yes
+  become_user: root
+  shell: |
+    systemctl stop docker
+    mv /var/lib/docker /home/enxajt/shared/virtualbox/
+    sed -ie "s/^\(ExecStart=\/usr\/bin\/dockerd -H fd:\/\/\)/\1 -g \/home\/enxajt\/shared\/virtualbox\/docker/g" /lib/systemd/system/docker.service
+    systemctl daemon-reload
+    systemctl start docker 

@@ -22,6 +22,7 @@
     - zsh
     - nkf
     - tmux
+    - gnome-terminal
     #- virtualbox-guest-dkms
     #- fonts-ricty-diminished 
     #- fonts-ipafont-gothic

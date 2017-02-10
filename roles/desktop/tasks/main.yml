@@ -14,3 +14,16 @@
 # 初期設定ではキーボードの設定が一部リセットされる場合があるので設定を変更
 - name: keyboard setting
   shell: gsettings set org.gnome.settings-daemon.plugins.keyboard active false
+
+- name: set background
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    export DISPLAY=:0.0
+    convert -size 500x500 xc:black /home/enxajt/black.jpg
+    sudo gsettings set org.mate.background picture-filename /home/enxajt/black.jpg
+
+- name: set vimfx for firefox
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: git clone https://github.com/enxajt/vimfx.git ~/.config/vimfx
