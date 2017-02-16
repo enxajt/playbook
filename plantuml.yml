@@ -1,0 +1,18 @@
+---
+- name: plantuml 
+  hosts: localhost
+  user: vagrant
+  become: true
+  vars:
+    ubuntu_user: enxajt
+    ubuntu_pass: enxajt
+    mail: enxajt@gmail.com
+    docker_root: \/home\/enxajt\/docker
+  roles:
+    - for-all-users
+    - make-user
+    - git
+    - dotfiles
+    - docker-inst
+    - japanese
+    - plantuml

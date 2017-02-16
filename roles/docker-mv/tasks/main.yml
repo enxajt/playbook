@@ -1,0 +1,13 @@
+- name: mv docker directory
+  become: yes
+  become_user: root
+  shell: |
+    systemctl stop docker
+    #service docker stop
+    [ -d {{ docker_root }} ] && rm -rf /var/lib/docker
+    [ -d /var/lib/docker ] && mv /var/lib/docker "{{ docker_root }}"
+    #ln -s "{{ docker_root }}" /var/lib/docker
+    sed -ie "s/^\(ExecStart=\/usr\/bin\/dockerd -H fd:\/\/\)/\1 -g {{ docker_root }}/g" /lib/systemd/system/docker.service
+    systemctl daemon-reload
+    systemctl start docker 
+    #sudo service docker start

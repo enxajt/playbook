@@ -5,11 +5,7 @@
     #- ubuntu-desktop
     - ubuntu-mate-desktop
     - wmctrl
-
-      # apt-add-repository ppa:ubuntu-mate-dev/ppa
-      # apt-add-repository ppa:ubuntu-mate-dev/trusty-mate
-      # apt-get update
-      # apt-get install ubuntu-mate-core ubuntu-mate-desktop
+    - gnome-terminal
 
 # 初期設定ではキーボードの設定が一部リセットされる場合があるので設定を変更
 - name: keyboard setting
@@ -19,11 +15,24 @@
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: |
-    export DISPLAY=:0.0
     convert -size 500x500 xc:black /home/enxajt/black.jpg
-    sudo gsettings set org.mate.background picture-filename /home/enxajt/black.jpg
+    export DISPLAY=:0.0
+    gsettings set org.mate.background picture-filename /home/enxajt/black.jpg
 
-- name: set vimfx for firefox
+- name: mkdir .config 
   become: yes
   become_user: "{{ ubuntu_user }}"
-  shell: git clone https://github.com/enxajt/vimfx.git ~/.config/vimfx
+  file: 
+    path: /home/{{ ubuntu_user }}/.config
+    state: directory
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    mode: 0777
+- git:
+    repo: https://github.com/enxajt/vimfx.git
+    dest: /home/{{ ubuntu_user }}/.config/vimfx
+#- name: set vimfx for firefox
+#  become: yes
+#  become_user: "{{ ubuntu_user }}"
+#  shell: |
+#    [ -d ~/.config/vimfx ] || git clone https://github.com/enxajt/vimfx.git ~/.config/vimfx

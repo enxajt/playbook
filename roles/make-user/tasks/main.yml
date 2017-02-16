@@ -1,0 +1,35 @@
+# centosはwheel devianはsudo らしいが、nopasswdをwheelとする。
+- name: make sure we have a 'wheel' group
+  become: yes
+  become_user: root
+  group:
+    name: wheel
+    state: present
+
+- name: Allow 'wheel' group to have passwordless sudo
+  become: yes
+  become_user: root
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+
+- name: add user to wheel group
+  become: yes
+  become_user: root
+  user:
+    name: "{{ ubuntu_user }}"
+    password: "{{ ubuntu_pass |password_hash('sha512') }}"
+    shell: /bin/zsh
+    state: present
+    append: yes
+    groups: wheel
+
+- name: chown /home/user
+  become: yes
+  become_user: root
+  file:
+    path: /home/{{ ubuntu_user }}
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"

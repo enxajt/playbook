@@ -1,0 +1,11 @@
+- name: install Dropbox
+  become: yes
+  become_user{{ ubuntu_user }}
+  shell: cd ~/ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+
+- name: install Dropbox tool
+  become: yes
+  become_user: root
+  #shell: mkdir ~/bin && wget -O ~/bin/dropbox "http://www.dropbox.com/download?dl=packages/dropbox.py" && chmod a+x ~/bin/dropbox
+  shell: wget -O /usr/bin/dropbox "http://www.dropbox.com/download?dl=packages/dropbox.py" && chmod a+x /usr/bin/dropbox && dropbox lansync n
+    # && chmod 777 -R ~/Dropbox

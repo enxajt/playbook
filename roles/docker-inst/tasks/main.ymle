@@ -6,7 +6,7 @@
 - name: prepare installing docker 
   shell: apt-get -y install linux-image-extra-$(uname -r)
 
-- name: install for docker 
+- name: prepare installing docker 
   apt: name={{item}}
   become: yes
   become_user: root
@@ -32,7 +32,7 @@
 - name: add {{ ubuntu_user }} to Docker group
   become: yes
   become_user: root
-  shell: usermod -aG docker "{{ ubuntu_user }}"
+  shell: usermod -aG docker {{ ubuntu_user }}
 
 - name: docker-compose install
   become: yes
