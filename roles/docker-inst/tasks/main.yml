@@ -16,9 +16,9 @@
     - ca-certificates
 
 - name: add-apt-repository ppa:japanese-testers/mozc
-  shell: curl -fsSL https://yum.dockerproject.org/gpg | sudo apt-key add -
-- name: add-apt-repository
-  shell: add-apt-repository "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
+  shell: |
+    curl -fsSL https://yum.dockerproject.org/gpg | sudo apt-key add -
+    add-apt-repository "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
 
 - name: updates a server
   apt: update_cache=yes
@@ -37,10 +37,6 @@
 - name: docker-compose install
   become: yes
   become_user: root
-  shell: curl -L https://github.com/docker/compose/releases/download/1.11.0-rc1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
- 
-- name: docker-compose install
-  become: yes
-  become_user: root
-  shell: chmod +x /usr/local/bin/docker-compose
-
+  shell: |
+    curl -L https://github.com/docker/compose/releases/download/1.11.0-rc1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+    chmod +x /usr/local/bin/docker-compose

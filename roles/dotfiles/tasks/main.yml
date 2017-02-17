@@ -6,16 +6,8 @@
     state: directory
     owner: root
     group: root
-    mode: 0777
-#- name: mkdir autostart 
-#  become: yes
-#  become_user: root
-#  file: 
-#    path: /home/{{ ubuntu_user }}/.config/autostart
-#    state: directory
-#    owner: root
-#    group: root
-#    mode: 0777
+    #mode: 0777
+
 - name: mkdir autostart 
   become: yes
   #become_user: root
@@ -25,30 +17,76 @@
     state: directory
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
+#    owner: root
+#    group: root
+#    mode: 0777
 
-- git:
+- name: clone dotfiles
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  git:
     repo: https://github.com/enxajt/dotfiles.git
     dest: /home/{{ ubuntu_user }}/dotfiles
-- file:
+- name: symln dotfiles
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  file:
     state: link
     src: /home/{{ ubuntu_user }}/dotfiles/.zshrc
     dest: /home/{{ ubuntu_user }}/.zshrc
-- file:
+- name: symln dotfiles
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  file:
     state: link
     src: /home/{{ ubuntu_user }}/dotfiles/.tmux.conf
     dest: /home/{{ ubuntu_user }}/.tmux.conf
-- file:
+- name: symln dotfiles
+  become: yes
+  become_user: root
+  file:
     state: link
     src: /home/{{ ubuntu_user }}/dotfiles/.Xresources
     dest: /etc/lightdm/lightdm.conf.d/.Xresources
-- file:
+- name: symln dotfiles
+  become: yes
+  become_user: root
+  file:
     state: link
     src: /home/{{ ubuntu_user }}/dotfiles/50-myconfig.conf
     dest: /etc/lightdm/lightdm.conf.d/50-myconfig.conf
-- file:
+- name: symln dotfiles
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  file:
     state: link
     src: /home/{{ ubuntu_user }}/dotfiles/gnome-terminal.desktop
     dest: /home/{{ ubuntu_user }}/.config/autostart/gnome-terminal.desktop
+
+#- git:
+#    repo: https://github.com/enxajt/dotfiles.git
+#    dest: /home/{{ ubuntu_user }}/dotfiles
+#- file:
+#    state: link
+#    src: /home/{{ ubuntu_user }}/dotfiles/.zshrc
+#    dest: /home/{{ ubuntu_user }}/.zshrc
+#- file:
+#    state: link
+#    src: /home/{{ ubuntu_user }}/dotfiles/.tmux.conf
+#    dest: /home/{{ ubuntu_user }}/.tmux.conf
+#- file:
+#    state: link
+#    src: /home/{{ ubuntu_user }}/dotfiles/.Xresources
+#    dest: /etc/lightdm/lightdm.conf.d/.Xresources
+#- file:
+#    state: link
+#    src: /home/{{ ubuntu_user }}/dotfiles/50-myconfig.conf
+#    dest: /etc/lightdm/lightdm.conf.d/50-myconfig.conf
+#- file:
+#    state: link
+#    src: /home/{{ ubuntu_user }}/dotfiles/gnome-terminal.desktop
+#    dest: /home/{{ ubuntu_user }}/.config/autostart/gnome-terminal.desktop
+
 #- name: .zshrc, .tmux.conf, xterm, autologin, autostart
 #  become: yes
 #  become_user: "{{ ubuntu_user }}"

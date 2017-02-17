@@ -1,23 +1,12 @@
 - name: install desktop
   apt: name={{item}}
   become: yes
+  become_user: root
   with_items:
     #- ubuntu-desktop
     - ubuntu-mate-desktop
     - wmctrl
     - gnome-terminal
-
-# 初期設定ではキーボードの設定が一部リセットされる場合があるので設定を変更
-- name: keyboard setting
-  shell: gsettings set org.gnome.settings-daemon.plugins.keyboard active false
-
-- name: set background
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  shell: |
-    convert -size 500x500 xc:black /home/enxajt/black.jpg
-    export DISPLAY=:0.0
-    gsettings set org.mate.background picture-filename /home/enxajt/black.jpg
 
 - name: mkdir .config 
   become: yes
@@ -27,12 +16,10 @@
     state: directory
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
-    mode: 0777
 - git:
     repo: https://github.com/enxajt/vimfx.git
     dest: /home/{{ ubuntu_user }}/.config/vimfx
-#- name: set vimfx for firefox
-#  become: yes
-#  become_user: "{{ ubuntu_user }}"
-#  shell: |
-#    [ -d ~/.config/vimfx ] || git clone https://github.com/enxajt/vimfx.git ~/.config/vimfx
+
+- name: run init-ubuntu.sh
+  shell: /home/"{{ ubuntu_user }}"/dotfiles/init-ubuntu.sh
+

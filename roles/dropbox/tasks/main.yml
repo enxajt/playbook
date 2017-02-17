@@ -1,6 +1,7 @@
 - name: install Dropbox
   become: yes
-  become_user: root
+  #become_user: root
+  become_user: "{{ ubuntu-user }}"
   shell: cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 
 - name: install Dropbox tool
