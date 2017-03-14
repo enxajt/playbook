@@ -37,6 +37,11 @@
   shell: add-apt-repository ppa:japanese-testers/mozc
 - name: updates a server
   apt: update_cache=yes
+
+- name: delete ibus
+  become: true
+  become-user: root
+  shell: apt-get remove ibus
 - name: install japanese
   apt: name={{item}}
   become: yes
@@ -45,14 +50,17 @@
    - language-pack-ja
    - fcitx
    - fcitx-mozc
-   - fcitx-frontend-gtk2
-   - fcitx-frontend-gtk3
-   - fcitx-frontend-qt4
-   - fcitx-frontend-qt5
-   - fcitx-ui-classic
-   - fcitx-config-gtk
-   - mozc-utils-gui
    - fcitx-libs-qt5
+   #- fcitx-frontend-gtk2
+   #- fcitx-frontend-gtk3
+   #- fcitx-frontend-qt4
+   - fcitx-frontend-qt5
+   #- fcitx-ui-classic
+   #- fcitx-config-gtk
+   - mozc-utils-gui
 
 - name: export LC_ALL=C.UTF-8
   shell: export LC_ALL=C.UTF-8
+
+- name: im-config -n fcitx
+  shell: im-config -n fcitx
