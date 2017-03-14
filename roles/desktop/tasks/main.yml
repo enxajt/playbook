@@ -16,10 +16,10 @@
     state: directory
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
-- git:
+
+- name: vimfx
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  git:
     repo: https://github.com/enxajt/vimfx.git
     dest: /home/{{ ubuntu_user }}/.config/vimfx
-
-- name: run init-ubuntu.sh
-  shell: /home/"{{ ubuntu_user }}"/dotfiles/init-ubuntu.sh
-

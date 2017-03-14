@@ -1,0 +1,12 @@
+# apt refer in Japan
+- name: change mirror
+  become: yes
+  replace: |
+    dest=/etc/apt/sources.list
+    regexp=http://(archive|security)\.ubuntu\.com/ubuntu(.+)
+    replace=http://ftp.riken.go.jp/Linux/ubuntu\2
+  register: apt_mirror
+- name: apt update
+  become: yes
+  apt: update_cache=yes
+  when: apt_mirror|changed

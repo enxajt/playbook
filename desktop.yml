@@ -7,15 +7,15 @@
     ubuntu_user: enxajt
     ubuntu_pass: enxajt
   roles:
-    - for-all-users
-    - make-user
+    #- for-all-users
+    #- make-user
+    #- dropbox
+    #- docker-inst
 
-    - dropbox
-    - docker-inst
-
-    - git
-    - desktop
+    #- git
+    #- desktop
+    
+    - japanese
     - dotfiles
     - vim 
 
-    - japanese

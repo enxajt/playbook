@@ -66,7 +66,7 @@
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: |
-    sh /home/{{ ubuntu_user }}/dotfiles/init-ubuntu.sh
+    sh /home/"{{ ubuntu_user }}"/dotfiles/init-ubuntu.sh
 
 #- git:
 #    repo: https://github.com/enxajt/dotfiles.git
