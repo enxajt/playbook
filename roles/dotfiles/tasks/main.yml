@@ -62,6 +62,11 @@
     state: link
     src: /home/{{ ubuntu_user }}/dotfiles/gnome-terminal.desktop
     dest: /home/{{ ubuntu_user }}/.config/autostart/gnome-terminal.desktop
+- name: sh /home/{{ ubuntu_user }}/dotfiles/init-ubuntu.sh
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    sh /home/{{ ubuntu_user }}/dotfiles/init-ubuntu.sh
 
 #- git:
 #    repo: https://github.com/enxajt/dotfiles.git
