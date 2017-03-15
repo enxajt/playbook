@@ -4,13 +4,38 @@
   shell: |
     apt-get -y remove --purge vim vim-runtime vim-gnome vim-tiny vim-gui-common
     rm -rf /usr/local/share/vim /usr/bin/vim
-    apt-get install checkinstall
+    #apt-get install checkinstall
 
 - name: install languages for vim
   become: yes
   become_user: root
   shell: |
-    apt-get -y install lua5.2 liblua5.2-dev luajit libluajit-5.1 python-dev python3-dev python-pip python3-pip ruby-dev libperl-dev libncurses5-dev libatk1.0-dev libx11-dev libxpm-dev libxt-dev
+    apt-get upgrade
+    apt-get update
+    apt-get -y install build-dep vim
+    apt-get -y lua5.2 liblua5.2-dev luajit libluajit-5.1 python-dev python3-dev python-pip python3-pip ruby-dev libperl-dev libncurses5-dev libatk1.0-dev libx11-dev libxpm-dev libxt-dev
+
+- name: install vim
+  become: yes
+  become_user: root
+  shell: |
+    cd ~/.cache && git clone --depth 1 https://github.com/vim/vim.git && cd ./vim/src
+    /configure --prefix=/usr/local \
+    --with-features=huge \
+    --enable-multibyte \
+    --enable-perlinterp \
+    --enable-pythoninterp \
+    --enable-python3interp \
+    --enable-rubyinterp \
+    --enable-luainterp \
+    --disable-gui \
+    --with-luajit \
+    --without-x \
+    --enable-fail-if-missing
+    make && sudo make install
+    ln -s /vagrant/shared/vim/swp /home/enxajt/.vim/
+    ln -s /vagrant/shared/vim/backup /home/enxajt/.vim/
+    ln -s /vagrant/shared/vim/undo /home/enxajt/.vim/
 
 - name: install dein.vim
   become: yes
@@ -22,32 +47,3 @@
     cd /home/enxajt/.cache/dein
     curl -f https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
     sh ./installer.sh /home/enxajt/.cache/dein
-    ln -s /vagrant/shared/vim/swp /home/enxajt/.vim/
-    ln -s /vagrant/shared/vim/backup /home/enxajt/.vim/
-    ln -s /vagrant/shared/vim/undo /home/enxajt/.vim/
-    cd ~ && git clone --depth 1 https://github.com/vim/vim
-    cd vim && git pull && git fetch
-    cd src && make distclean
-    cd ..
-    ./configure \
-    --enable-multibyte \
-    --enable-perlinterp=dynamic \
-    --enable-rubyinterp=dynamic \
-    --with-ruby-command=/usr/bin/ruby \
-    --enable-pythoninterp=dynamic \
-    --with-python-config-dir=/usr/lib/python2.7/config-x86_64-linux-gnu \
-    --enable-python3interp \
-    --with-python3-config-dir=/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu \
-    --enable-luainterp \
-    --with-luajit \
-    --enable-cscope \
-    --enable-gui=auto \
-    --with-features=huge \
-    --with-x \
-    --enable-fontset \
-    --enable-largefile \
-    --disable-netbeans \
-    --with-compiledby="opaulochaves" \
-    --enable-fail-if-missing \
-    --enable-xim
-    make && sudo make install
