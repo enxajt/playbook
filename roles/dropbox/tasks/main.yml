@@ -11,4 +11,6 @@
     wget -O /usr/bin/dropbox "http://www.dropbox.com/download?dl=packages/dropbox.py"
     chmod a+x /usr/bin/dropbox
     dropbox lansync n
+    dropbox autostart y
+    dropbox start
     # && chmod 777 -R ~/Dropbox
