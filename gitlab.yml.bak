@@ -10,7 +10,7 @@
   roles:
     - user-common
     - user
-    -.dotfiles
+    - dotfiles
     - docker-inst
     - docker-mv
     - gitlab

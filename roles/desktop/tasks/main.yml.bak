@@ -6,7 +6,7 @@
     #- ubuntu-desktop
     - ubuntu-mate-desktop
     - wmctrl
-    - after-login
+    - gnome-terminal
 
 - name: mkdir .config 
   become: yes

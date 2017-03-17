@@ -12,7 +12,7 @@
     - for-all-users
     - make-user
     - git
-    -.dotfiles
+    - dotfiles
     - docker-inst
     - japanese
     - plantuml

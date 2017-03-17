@@ -16,4 +16,6 @@
     #- desktop
     
     - japanese
-    -.dotfiles
+    - dotfiles
+    - vim 
+
