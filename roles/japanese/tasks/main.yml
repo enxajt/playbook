@@ -50,3 +50,9 @@
 
 - name: im-config -n fcitx
   shell: im-config -n fcitx
+
+- name: sh init-jap-env.sh
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    sh ~/.dotfiles/init-jap-env.sh

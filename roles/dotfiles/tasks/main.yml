@@ -1,80 +1,11 @@
-- name: clone .dotfiles
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  git:
-    repo: https://github.com/enxajt/.dotfiles.git
-    dest: /home/{{ ubuntu_user }}/.dotfiles
-
-- name: dir for autologin 
-  become: yes
-  become_user: root
-  file: 
-    path: /etc/lightdm/lightdm.conf.d
-    state: directory
-    owner: root
-    group: root
-    #mode: 0777
-- name: autologin symln
-  become: yes
-  become_user: root
-  file:
-    state: link
-    src: /home/{{ ubuntu_user }}/.dotfiles/50-myconfig.conf
-    dest: /etc/lightdm/lightdm.conf.d/50-myconfig.conf
-
-- name: mkdir autostart 
-  become: yes
-  #become_user: root
-  become_user: "{{ ubuntu_user }}"
-  file: 
-    path: /home/{{ ubuntu_user }}/.config/autostart
-    state: directory
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-- name: symln/.dotfiles
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  file:
-    state: link
-    src: /home/{{ ubuntu_user }}/.dotfiles/after-login.desktop
-    dest: /home/{{ ubuntu_user }}/.config/autostart/after-login.desktop
-
-- name: symln .dotfiles
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  file:
-    state: link
-    src: /home/{{ ubuntu_user }}/.dotfiles/.zshrc
-    dest: /home/{{ ubuntu_user }}/.zshrc
-
-- name: symln .dotfiles
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  file:
-    state: link
-    src: /home/{{ ubuntu_user }}/.dotfiles/.tmux.conf
-    dest: /home/{{ ubuntu_user }}/.tmux.conf
-
-- name: symln .dotfiles
-  become: yes
-  become_user: root
-  file:
-    state: link
-    src: /home/{{ ubuntu_user }}/.dotfiles/.Xresources
-    dest: /etc/lightdm/lightdm.conf.d/.Xresources
-
-- name: git clone zsh-git-prompt 
+- name:
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: |
-    [ ! -e ~/zsh-git-prompt ] && git clone https://github.com/olivierverdier/zsh-git-prompt.git ~/zsh-git-prompt
-- name: sh /home/{{ ubuntu_user }}/.dotfiles/init-ubuntu.sh
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  shell: |
-    sh /home/{{ ubuntu_user }}/.dotfiles/init-ubuntu.sh
-- name: sh install-vim.sh
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  shell: |
-    sh /home/{{ ubuntu_user }}/.dotfiles/install-vim.sh
+    [ ! -e ~/.dotfiles ] && git clone https://github.com/enxajt/.dotfiles.git ~/.dotfiles
+    sh ~/.dotfiles/init-ssh.sh
+    sh ~/.dotfiles/install-vim.sh
+    ln -sf ~/.dotfiles/.zshrc ~/.zshrc
+    [ ! -e ~/.zsh-git-prompt ] && git clone https://github.com/olivierverdier/zsh-git-prompt.git ~/.zsh-git-prompt
+    ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
+    sudo ln -sf ~/.dotfiles/.Xresources /etc/lightdm/lightdm.conf.d/.Xresources

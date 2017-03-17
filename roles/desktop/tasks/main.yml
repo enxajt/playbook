@@ -8,11 +8,22 @@
     - wmctrl
     - gnome-terminal
 
-- name: mkdir .config 
+- name: sh init-desktop.sh
   become: yes
   become_user: "{{ ubuntu_user }}"
-  file: 
-    path: /home/{{ ubuntu_user }}/.config
-    state: directory
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
+  shell: |
+    sh ~/.dotfiles/init-desktop.sh
+
+- name: autologin
+  become: yes
+  become_user: root
+  shell: |
+    mkdir -p /etc/lightdm/lightdm.conf.d
+    ln -s ~/.dotfiles/50-myconfig.conf /etc/lightdm/lightdm.conf.d/50-myconfig.conf
+
+- name: autostart
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    mkdir -p ~/.config/autostart
+    ln -s ~/.dotfiles/after-login.desktop ~/.config/autostart/after-login.desktop
