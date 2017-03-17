@@ -1,9 +1,9 @@
-- name: clone.dotfiles
+- name: clone .dotfiles
   become: yes
   become_user: "{{ ubuntu_user }}"
   git:
-    repo: https://github.com/enxajt.dotfiles.git
-    dest: /home/{{ ubuntu_user }}.dotfiles
+    repo: https://github.com/enxajt/.dotfiles.git
+    dest: /home/{{ ubuntu_user }}/.dotfiles
 
 - name: dir for autologin 
   become: yes
@@ -19,7 +19,7 @@
   become_user: root
   file:
     state: link
-    src: /home/{{ ubuntu_user }}.dotfiles/50-myconfig.conf
+    src: /home/{{ ubuntu_user }}/.dotfiles/50-myconfig.conf
     dest: /etc/lightdm/lightdm.conf.d/50-myconfig.conf
 
 - name: mkdir autostart 
@@ -31,41 +31,50 @@
     state: directory
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
-- name: symln.dotfiles
+- name: symln/.dotfiles
   become: yes
   become_user: "{{ ubuntu_user }}"
   file:
     state: link
-    src: /home/{{ ubuntu_user }}.dotfiles/after-login.desktop
+    src: /home/{{ ubuntu_user }}/.dotfiles/after-login.desktop
     dest: /home/{{ ubuntu_user }}/.config/autostart/after-login.desktop
 
-- name: symln.dotfiles
+- name: symln .dotfiles
   become: yes
   become_user: "{{ ubuntu_user }}"
   file:
     state: link
-    src: /home/{{ ubuntu_user }}.dotfiles/.zshrc
+    src: /home/{{ ubuntu_user }}/.dotfiles/.zshrc
     dest: /home/{{ ubuntu_user }}/.zshrc
 
-- name: symln.dotfiles
+- name: symln .dotfiles
   become: yes
   become_user: "{{ ubuntu_user }}"
   file:
     state: link
-    src: /home/{{ ubuntu_user }}.dotfiles/.tmux.conf
+    src: /home/{{ ubuntu_user }}/.dotfiles/.tmux.conf
     dest: /home/{{ ubuntu_user }}/.tmux.conf
 
-- name: symln.dotfiles
+- name: symln .dotfiles
   become: yes
   become_user: root
   file:
     state: link
-    src: /home/{{ ubuntu_user }}.dotfiles/.Xresources
+    src: /home/{{ ubuntu_user }}/.dotfiles/.Xresources
     dest: /etc/lightdm/lightdm.conf.d/.Xresources
 
-- name: sh /home/{{ ubuntu_user }}.dotfiles/init-ubuntu.sh
+- name: git clone zsh-git-prompt 
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: |
-    sh /home/"{{ ubuntu_user }}"/.dotfiles/init-ubuntu.sh
-    sh /home/"{{ ubuntu_user }}"/.dotfiles/install-vim.sh
+    [ ! -e ~/zsh-git-prompt ] && git clone https://github.com/olivierverdier/zsh-git-prompt.git ~/zsh-git-prompt
+- name: sh /home/{{ ubuntu_user }}/.dotfiles/init-ubuntu.sh
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    sh /home/{{ ubuntu_user }}/.dotfiles/init-ubuntu.sh
+- name: sh install-vim.sh
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    sh /home/{{ ubuntu_user }}/.dotfiles/install-vim.sh
