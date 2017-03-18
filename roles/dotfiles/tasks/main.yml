@@ -2,10 +2,25 @@
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: |
-    [ ! -e ~/.dotfiles ] && git clone https://github.com/enxajt/.dotfiles.git ~/.dotfiles
+    [ ! -e ~/.dotfiles ] && git clone git@github.com:enxajt/.dotfiles.git ~/.dotfiles || echo already existing
+    #[ ! -e ~/.dotfiles ] && git clone https://github.com/enxajt/.dotfiles.git ~/.dotfiles || echo already existing
+    #cd ~/.dotfiles && git remote set-url origin git@github.com:enxajt/.dotfiles.git
+- name:
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
     sh ~/.dotfiles/init-ssh.sh
-    sh ~/.dotfiles/install-vim.sh
+    sh ~/.dotfiles/install-neovim.sh
     ln -sf ~/.dotfiles/.zshrc ~/.zshrc
-    [ ! -e ~/.zsh-git-prompt ] && git clone https://github.com/olivierverdier/zsh-git-prompt.git ~/.zsh-git-prompt
+    [ ! -e ~/.zsh-git-prompt ] && git clone https://github.com/olivierverdier/zsh-git-prompt.git ~/.zsh-git-prompt || echo already existing
     ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
-    sudo ln -sf ~/.dotfiles/.Xresources /etc/lightdm/lightdm.conf.d/.Xresources
+- name:
+  become: yes
+  become_user: root
+  shell: |
+    mkdir -p /etc/lightdm/lightdm.conf.d
+- name:
+  become: yes
+  become_user: root
+  shell: |
+    ln -sf ~/.dotfiles/.Xresources /etc/lightdm/lightdm.conf.d/.Xresources

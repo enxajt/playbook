@@ -7,10 +7,10 @@
     ubuntu_user: enxajt
     ubuntu_pass: enxajt
   roles:
-    - for-all-users
+    #- for-all-users
 
-    - make-user
-    - for-each-user
+    #- make-user
+    #- for-each-user
     - dotfiles
     - docker-inst
 
