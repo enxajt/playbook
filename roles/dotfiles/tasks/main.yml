@@ -6,9 +6,18 @@
     cd ~/.dotfiles && git remote set-url origin git@github.com:enxajt/.dotfiles.git
     sh ~/.dotfiles/init-ssh.sh
     sh ~/.dotfiles/install-neovim.sh
+    ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
+- name: zsh
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
     ln -sf ~/.dotfiles/.zshrc ~/.zshrc
     [ ! -e ~/.zsh-git-prompt ] && git clone https://github.com/olivierverdier/zsh-git-prompt.git ~/.zsh-git-prompt || echo already existing
-    ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
+- name: zsh sudo
+  become: yes
+  become_user: root
+  shell: |
+    apt-get install -y xsel
 - name: new
   become: yes
   become_user: "{{ ubuntu_user }}"
@@ -16,9 +25,17 @@
     mkdir -p ~/bin
     ln -s ~/.dotfiles/git-diff-normal-format ~/bin/
     chmod 777 bin/git-diff-normal-format
-- name: root
+- name: sudo
   become: yes
   become_user: root
   shell: |
     mkdir -p /etc/lightdm/lightdm.conf.d
     ln -sf ~/.dotfiles/.Xresources /etc/lightdm/lightdm.conf.d/.Xresources
+
+#sudo apt-get install golang
+#sudo mkdir -p ~/go
+#echo "export GOPATH=$HOME/go" >> ~/.zshrc
+#echo "export PATH=$PATH:$HOME/go/bin:/usr/local/go/bin" >> ~/.zshrc
+#go get github.com/peco/peco/cmd/peco
+#go get github.com/motemen/ghq
+#ghq get Shougo/dein.vim
