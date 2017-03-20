@@ -2,8 +2,9 @@
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: |
-    [ ! -e ~/.dotfiles ] && git clone https://github.com/enxajt/.dotfiles.git ~/.dotfiles || echo already existing
-    cd ~/.dotfiles && git remote set-url origin git@github.com:enxajt/.dotfiles.git
+    #[ ! -e ~/.dotfiles ] && git clone https://github.com/enxajt/.dotfiles.git ~/.dotfiles || echo already existing
+    #cd ~/.dotfiles && git remote set-url origin git@github.com:enxajt/.dotfiles.git
+    ln -s /vagrant/shared/.dotfiles ~/
     sh ~/.dotfiles/init-ssh.sh
     sh ~/.dotfiles/install-neovim.sh
     ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
