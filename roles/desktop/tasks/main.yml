@@ -19,11 +19,11 @@
   become_user: root
   shell: |
     mkdir -p /etc/lightdm/lightdm.conf.d
-    ln -s ~/.dotfiles/desktop/50-myconfig.conf /etc/lightdm/lightdm.conf.d/50-myconfig.conf
+    ln -sf ~/.dotfiles/desktop/50-myconfig.conf /etc/lightdm/lightdm.conf.d/50-myconfig.conf
 
 - name: autostart
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: |
     mkdir -p ~/.config/autostart
-    ln -s ~/.dotfiles/desktop/after-login.desktop ~/.config/autostart/after-login.desktop
+    ln -sf ~/.dotfiles/desktop/after-login.desktop ~/.config/autostart/after-login.desktop
