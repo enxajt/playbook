@@ -1,0 +1,26 @@
+- name: cp
+  become: yes
+  become_user: root
+  shell: |
+    apt-get autoremove -y \
+      gnome-games \
+      gnomine aisleriot mahjongg gnome-sudoku \
+      gnome-user-guide \
+      thunderbird thunderbird-globalmenu \
+      usb-creator-gtk \
+      empathy \
+      ibus-pinyin \
+      onboard \
+      gnome-orca \
+      unity-scope-musicstores \
+      unity-lens-music \
+      unity-lens-video \
+      unity-scope-video-remote \
+      btrfs-tools
+    dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | xargs sudo apt-get -y purge
+    mkdir -p /vagrant/shared/apt
+    [ -e /vagrant/shared/apt/archives ] && mv /vagrant/shared/apt/archives /vagrant/shared/apt/archives.bak
+    cp -r /var/cache/apt/archives/ /vagrant/shared/apt/
+    mv /vagrant/shared/apt/pkgcache /vagrant/shared/apt/pkgcache.bak
+    cp -r /var/cache/apt/pkgcache.bin /vagrant/shared/apt/
+    apt-get clean

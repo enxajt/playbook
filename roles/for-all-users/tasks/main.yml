@@ -25,6 +25,8 @@
     - goldendict
     - colordiff
     - connect-proxy
+    - xsel
+    - pandoc
     #- fonts-ricty-diminished 
     #- fonts-ipafont-gothic
     #- fonts-ipafont-mincho

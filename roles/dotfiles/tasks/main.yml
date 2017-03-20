@@ -1,4 +1,4 @@
-- name: each user
+- name: user
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: |
@@ -8,30 +8,26 @@
     sh ~/.dotfiles/init-ssh.sh
     sh ~/.dotfiles/install-neovim.sh
     ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
-- name: zsh
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  shell: |
-    ln -sf ~/.dotfiles/.zshrc ~/.zshrc
-    [ ! -e ~/.zsh-git-prompt ] && git clone https://github.com/olivierverdier/zsh-git-prompt.git ~/.zsh-git-prompt || echo already existing
-- name: zsh sudo
-  become: yes
-  become_user: root
-  shell: |
-    apt-get install -y xsel
-- name: new
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  shell: |
-    mkdir -p ~/bin
-    ln -s ~/.dotfiles/git-diff-normal-format ~/bin/
-    chmod 777 bin/git-diff-normal-format
 - name: sudo
   become: yes
   become_user: root
   shell: |
     mkdir -p /etc/lightdm/lightdm.conf.d
     ln -sf ~/.dotfiles/.Xresources /etc/lightdm/lightdm.conf.d/.Xresources
+
+- name: zsh
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    ln -sf ~/.dotfiles/.zshrc ~/.zshrc
+- name: zsh-git-prompt
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    [ ! -e ~/.zsh-git-prompt ] && git clone https://github.com/olivierverdier/zsh-git-prompt.git ~/.zsh-git-prompt || echo already existing
+    mkdir -p ~/bin
+    ln -sf ~/.dotfiles/git-diff-normal-format ~/bin/
+    chmod 777 ~/bin/git-diff-normal-format
 
 #sudo apt-get install golang
 #sudo mkdir -p ~/go
