@@ -23,6 +23,7 @@
     - nkf
     - tmux
     - goldendict
+    - colordiff
     #- fonts-ricty-diminished 
     #- fonts-ipafont-gothic
     #- fonts-ipafont-mincho
