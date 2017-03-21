@@ -1,0 +1,46 @@
+- name: updates a server
+  apt: update_cache=yes
+- name: upgrade a server
+  apt: upgrade=full
+
+- name: prepare installing docker 
+  shell: apt-get -y install linux-image-extra-$(uname -r)
+
+- name: prepare installing docker 
+  apt: name={{item}}
+  become: yes
+  become_user: root
+  with_items:
+    - linux-image-extra-virtual
+    - apt-transport-https 
+    - ca-certificates
+
+- name: add-apt-repository ppa:japanese-testers/mozc
+  shell: curl -fsSL https://yum.dockerproject.org/gpg | sudo apt-key add -
+- name: add-apt-repository
+  shell: add-apt-repository "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
+
+- name: updates a server
+  apt: update_cache=yes
+- name: install docker-engine
+  apt: name={{item}}
+  become: yes
+  become_user: root
+  with_items:
+    - docker-engine
+
+- name: add {{ ubuntu_user }} to Docker group
+  become: yes
+  become_user: root
+  shell: usermod -aG docker {{ ubuntu_user }}
+
+- name: docker-compose install
+  become: yes
+  become_user: root
+  shell: curl -L https://github.com/docker/compose/releases/download/1.11.0-rc1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
+ 
+- name: docker-compose install
+  become: yes
+  become_user: root
+  shell: chmod +x /usr/local/bin/docker-compose
+
