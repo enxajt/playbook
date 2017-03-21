@@ -18,12 +18,10 @@
   become: yes
   become_user: root
   shell: |
-    mkdir -p /etc/lightdm/lightdm.conf.d
-    ln -sf /home/{{ ubuntu_user }}/.dotfiles/desktop/50-myconfig.conf /etc/lightdm/lightdm.conf.d/50-myconfig.conf
-    #mkdir -p /usr/share/lightdm/lightdm.conf.d
-    #ln -sf /home/{{ ubuntu_user }}/.dotfiles/desktop/60-lightdm-gtk-greeter.conf /usr/share/lightdm/lightdm.conf.d/60-lightdm-gtk-greeter.conf
+    mkdir -p /usr/share/lightdm/lightdm.conf.d
+    ln -sf /home/{{ ubuntu_user }}/.dotfiles/desktop/60-lightdm-gtk-greeter.conf /usr/share/lightdm/lightdm.conf.d/
     #mkdir -p /etc/lightdm/lightdm.conf.d
-    #ln -sf /home/{{ ubuntu_user }}/.dotfiles/desktop/50-myconfig.conf /etc/lightdm/lightdm.conf.d/50-myconfig.conf
+    #ln -sf /home/{{ ubuntu_user }}/.dotfiles/desktop/50-myconfig.conf /etc/lightdm/lightdm.conf.d/
 
 - name: autostart
   become: yes
@@ -31,3 +29,4 @@
   shell: |
     mkdir -p ~/.config/autostart
     ln -sf ~/.dotfiles/desktop/after-login.desktop ~/.config/autostart/after-login.desktop
+    #sh ~/.dotfiles/desktop/start-up.sh
