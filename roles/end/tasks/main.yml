@@ -3,7 +3,7 @@
   become_user: root
   shell: |
     apt-get autoremove -y \
-      gnome-games \
+      gnome-games gnome-mines \
       gnomine aisleriot mahjongg gnome-sudoku \
       gnome-user-guide \
       thunderbird thunderbird-globalmenu \
