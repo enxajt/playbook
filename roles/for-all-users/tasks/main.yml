@@ -27,6 +27,9 @@
     - connect-proxy
     - xsel
     - pandoc
+    - clamav
+    - chkrootkit
+    - xbindkeys
     #- fonts-ricty-diminished 
     #- fonts-ipafont-gothic
     #- fonts-ipafont-mincho

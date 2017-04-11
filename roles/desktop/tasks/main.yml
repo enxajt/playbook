@@ -4,7 +4,8 @@
   become_user: root
   with_items:
     #- ubuntu-desktop
-    - ubuntu-mate-desktop
+    #- ubuntu-mate-desktop
+    - ubuntu-mate-core
     - wmctrl
     - gnome-terminal
 
