@@ -3,4 +3,4 @@
   become_user: "{{ ubuntu_user }}"
   shell: |
     docker build -t impress https://github.com/enxajt/docker-impress.git
-    docker build -t impress https://github.com/enxajt/docker-plantuml.git
+    docker build -t plantuml https://github.com/enxajt/docker-plantuml.git

@@ -13,7 +13,7 @@
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: |
-    sh ~/.dotfiles/desktop/init-desktop.sh
+    #sh ~/.dotfiles/desktop/init-desktop.sh
 
 - name: autologin
   become: yes

@@ -4,7 +4,8 @@
 
 - name: set timezone
   timezone:
-    name: Europe/Paris
+    #name: Europe/Paris
+    name: Japan
 
 - name: updates a server
   apt: update_cache=yes

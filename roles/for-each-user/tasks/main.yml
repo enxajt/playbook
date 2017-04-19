@@ -5,15 +5,15 @@
   with_items:
     - git
 
-- name: install Dropbox
-  become: yes
-  #become_user: root
-  become_user: "{{ ubuntu_user }}"
-  shell: |
-    cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
-- name: install Dropbox tool
-  become: yes
-  become_user: root
-  shell: |
-    wget -O /usr/bin/dropbox "http://www.dropbox.com/download?dl=packages/dropbox.py"
-    chmod a+x /usr/bin/dropbox
+#- name: install Dropbox
+#  become: yes
+#  #become_user: root
+#  become_user: "{{ ubuntu_user }}"
+#  shell: |
+#    cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+#- name: install Dropbox tool
+#  become: yes
+#  become_user: root
+#  shell: |
+#    wget -O /usr/bin/dropbox "http://www.dropbox.com/download?dl=packages/dropbox.py"
+#    chmod a+x /usr/bin/dropbox
