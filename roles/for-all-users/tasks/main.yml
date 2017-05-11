@@ -31,6 +31,8 @@
     - clamav
     - chkrootkit
     - xbindkeys
+    - unar
+    - w3m
     #- fonts-ricty-diminished 
     #- fonts-ipafont-gothic
     #- fonts-ipafont-mincho
