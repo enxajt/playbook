@@ -8,9 +8,13 @@
     ubuntu_pass: enxajt
     mail: enxajt@gmail.com
   roles:
-    - user-common
-    - user
-    -.dotfiles
+    - for-all-users
+    - make-user
+    - for-each-user
+
+    - dotfiles
     - docker-inst
-    - docker-mv
+    #- docker-build
     - gitlab
+    #- japanese
+    - end

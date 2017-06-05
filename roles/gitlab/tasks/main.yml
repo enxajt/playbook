@@ -2,3 +2,10 @@
   become: yes
   become_user: root
   shell: curl -f https://raw.githubusercontent.com/sameersbn/docker-gitlab/master/docker-compose.yml > /home/{{ubuntu_user}}/docker-compose.yml
+
+- name: GitLab install
+  become: yes
+  become_user: root
+  shell: |
+    [ ! -e ~/docker-gitlab ] && git clone https://github.com/enxajt/docker-gitlab.git ~/docker-gitlab || echo already existing
+    cd ~/docker-gitlab && git remote set-url origin git@github.com:enxajt/docker-gitlab.git && git pull

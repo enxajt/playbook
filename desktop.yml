@@ -7,13 +7,18 @@
     ubuntu_user: enxajt
     ubuntu_pass: enxajt
   roles:
+<<<<<<< HEAD
     #- for-all-users
+=======
+    - apt-in-Japan
+    - for-all-users
+>>>>>>> 85a1e3ae5559364ff0ccae1504eee255b2a8ca81
 
     #- make-user
     #- for-each-user
     - dotfiles
     - docker-inst
-    - docker-build
+    #- docker-build
 
     - desktop
     - japanese
