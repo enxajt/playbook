@@ -2,16 +2,10 @@
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: |
-<<<<<<< HEAD
-    [ ! -e ~/.dotfiles ] && git clone https://github.com/enxajt/.dotfiles.git ~/.dotfiles || echo already existing
-    cd ~/.dotfiles && git remote set-url origin git@github.com:enxajt/.dotfiles.git
-    ln -s /vagrant/shared/.dotfiles ~/
-=======
-    # /vagrant/shared/ or git
     [ ! -e ~/.dotfiles ] && git clone https://github.com/enxajt/.dotfiles.git ~/.dotfiles || echo already existing
     cd ~/.dotfiles && git remote set-url origin git@github.com:enxajt/.dotfiles.git && git pull
+    # /vagrant/shared/ or git
     #ln -sf /vagrant/shared/.dotfiles ~/
->>>>>>> 85a1e3ae5559364ff0ccae1504eee255b2a8ca81
     sh ~/.dotfiles/init-ssh.sh
     sh ~/.dotfiles/install-neovim.sh
 - name: tmux
@@ -20,12 +14,8 @@
   shell: |
     ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
     mkdir -p ~/.tmux/plugins  
-<<<<<<< HEAD
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-=======
     [ ! -e  ~/.tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || echo already existing
     ln -sf ~/.dotfiles/.tmux-bin ~/.tmux/bin
->>>>>>> 85a1e3ae5559364ff0ccae1504eee255b2a8ca81
 - name: sudo
   become: yes
   become_user: root
