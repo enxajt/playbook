@@ -33,6 +33,8 @@
     - xbindkeys
     - unar
     - w3m
+    - exfat-fuse
+    - exfat-utils
     #- fonts-ricty-diminished 
     #- fonts-ipafont-gothic
     #- fonts-ipafont-mincho
