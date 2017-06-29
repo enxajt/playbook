@@ -23,19 +23,22 @@
     - zsh
     - nkf
     - tmux
-    - goldendict
     - colordiff
-    - connect-proxy
     - xsel
     - pandoc
     - clamav
     - chkrootkit
     - xbindkeys
     - unar
+    - tree
+
+    # for local machine
+    - connect-proxy
     - exfat-fuse
     - exfat-utils
 
     # for desktop
+    - goldendict
     - w3m
     - vlc
     - redshift
