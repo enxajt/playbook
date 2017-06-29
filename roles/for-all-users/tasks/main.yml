@@ -32,9 +32,18 @@
     - chkrootkit
     - xbindkeys
     - unar
-    - w3m
     - exfat-fuse
     - exfat-utils
+
+    # for desktop
+    - w3m
+    - vlc
+    - redshift
+
+    # not for virtualmachine
+    - vagrant
+    - virtualbox
+
     #- fonts-ricty-diminished 
     #- fonts-ipafont-gothic
     #- fonts-ipafont-mincho
