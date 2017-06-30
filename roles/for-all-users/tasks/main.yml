@@ -37,12 +37,6 @@
     - exfat-fuse
     - exfat-utils
 
-    # for desktop
-    - goldendict
-    - w3m
-    - vlc
-    - redshift
-
     # not for virtualmachine
     - vagrant
     - virtualbox
