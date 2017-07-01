@@ -1,0 +1,10 @@
+---
+- name: ubuntu desktop
+  hosts: localhost
+  user: vagrant
+  become: true
+  vars:
+    ubuntu_user: enxajt
+    ubuntu_pass: enxajt
+  roles:
+    - gui-app

@@ -9,13 +9,17 @@
   roles:
     - apt-in-Japan
 
-    - for-all-users
+    - locale-time
+    - cui-app      
     #- make-user
     - for-each-user
     - dotfiles
     - docker-inst
     #- docker-build
 
-    - desktop
+    #- mate
+    - desktop-config
+    - gui-app
     - japanese
     - end
+    - reboot

@@ -28,6 +28,7 @@
   become_user: "{{ ubuntu_user }}"
   shell: |
     ln -sf ~/.dotfiles/.zshrc ~/.zshrc
+    chsh -s /bin/zsh
 - name: zsh-git-prompt
   become: yes
   become_user: "{{ ubuntu_user }}"
