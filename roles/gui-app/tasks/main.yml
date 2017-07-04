@@ -28,12 +28,13 @@
   become: yes
   become_user: root
   with_items:
-    - goldendict
-    - w3m
-    - vlc
-    - redshift
-    - redshift-gtk
     - gimp
     - gimp-gmic
+    - goldendict
+    - redshift
+    - redshift-gtk
+    - vlc
+    - w3m
+    - wmctrl
 #    - simplescreenrecorder
 #    - simplescreenrecorder-lib
