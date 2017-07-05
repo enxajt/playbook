@@ -13,16 +13,19 @@
   become: yes
   with_items:
     - zsh
-    - nkf
     - tmux
+    - xbindkeys
     - colordiff
+    - tree
+    - nkf
     - xsel
     - pandoc
+    - unar
+    - p7zip-full #7z
+    - p7zip-rar
+
     - clamav
     - chkrootkit
-    - xbindkeys
-    - unar
-    - tree
 
     # for local machine
     - connect-proxy
