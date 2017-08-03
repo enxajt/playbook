@@ -39,3 +39,13 @@
     - i3
 #    - simplescreenrecorder
 #    - simplescreenrecorder-lib
+
+- git:
+    repo: https://github.com/Corwind/termite-install.git
+    dest: ~/
+
+- name: user
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    ~/termite-install/termite-install.sh

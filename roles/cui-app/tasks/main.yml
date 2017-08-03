@@ -23,6 +23,7 @@
     - unar
     - p7zip-full #7z
     - p7zip-rar
+    - sysstat
 
     - clamav
     - chkrootkit
