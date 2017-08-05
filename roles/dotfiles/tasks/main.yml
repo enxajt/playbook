@@ -1,21 +1,30 @@
-- name: user
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  shell: |
-    [ ! -e ~/.dotfiles ] && git clone https://github.com/enxajt/.dotfiles.git ~/.dotfiles || echo already existing
-    cd ~/.dotfiles && git remote set-url origin git@github.com:enxajt/.dotfiles.git && git pull
-    # /vagrant/shared/ or git
-    #ln -sf /vagrant/shared/.dotfiles ~/
-    sh ~/.dotfiles/init-ssh.sh
-    sh ~/.dotfiles/install-neovim.sh
-- name: tmux
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  shell: |
-    ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
-    mkdir -p ~/.tmux/plugins  
-    [ ! -e  ~/.tmux/plugins/tpm ] && git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm || echo already existing
-    ln -sf ~/.dotfiles/.tmux-bin ~/.tmux/bin
+- git:
+    repo: git://github.com/enxajt/.dotfiles.git
+    dest: ~/.dotfiles 
+    accept_hostkey: yes
+
+- file:
+    path: ~/.tmux/plugins  
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: directory
+- file:
+    src: ~/.dotfiles/.tmux.conf
+    dest: ~/.tmux.conf
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: link
+- file:
+    src: ~/.dotfiles/.tmux-bin
+    dest: ~/.tmux/bin
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: link
+- git:
+    repo: git://github.com/tmux-plugins/tpm.git
+    dest: ~/.tmux/plugins/tpm 
+    accept_hostkey: yes
+
 - name: sudo
   become: yes
   become_user: root
@@ -23,25 +32,38 @@
     mkdir -p /etc/lightdm/lightdm.conf.d
     ln -sf ~/.dotfiles/.Xresources /etc/lightdm/lightdm.conf.d/.Xresources
 
-- name: zsh
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  shell: |
-    ln -sf ~/.dotfiles/.zshrc ~/.zshrc
-    chsh -s /bin/zsh
-- name: zsh-git-prompt
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  shell: |
-    [ ! -e ~/.zsh-git-prompt ] && git clone https://github.com/olivierverdier/zsh-git-prompt.git ~/.zsh-git-prompt || echo already existing
-    mkdir -p ~/bin
-    ln -sf ~/.dotfiles/git-diff-normal-format ~/bin/
-    chmod 777 ~/bin/git-diff-normal-format
+- user:
+    name: "{{ ubuntu_user }}"
+    shell: /bin/zsh
+- file:
+    src: ~/.dotfiles/.zshrc
+    dest: ~/.zshrc
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: link
 
-#sudo apt-get install golang
-#sudo mkdir -p ~/go
-#echo "export GOPATH=$HOME/go" >> ~/.zshrc
-#echo "export PATH=$PATH:$HOME/go/bin:/usr/local/go/bin" >> ~/.zshrc
-#go get github.com/peco/peco/cmd/peco
-#go get github.com/motemen/ghq
-#ghq get Shougo/dein.vim
+- file:
+    path: ~/bin
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: directory
+- file:
+    src: ~/.dotfiles/git-diff-normal-format
+    dest: ~/bin/git-diff-normal-format
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: link
+    mode: 0777
+
+- git:
+    repo: git://github.com/olivierverdier/zsh-git-prompt.git
+    dest: ~/.zsh-git-prompt
+    accept_hostkey: yes
+
+- file:
+    src: ~/.dotfiles/termite
+    dest: ~/.config/termite
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: link
+

@@ -1,7 +1,6 @@
 ---
 - name: updates a server
   apt: update_cache=yes
-
 - name: install aptitude
   apt: name=aptitude
   become: yes
@@ -40,3 +39,15 @@
     #- fonts-ricty-diminished 
     #- fonts-ipafont-gothic
     #- fonts-ipafont-mincho
+
+- git:
+    repo: git://github.com/enxajt/init.git
+    dest: ~/init
+
+- name: init sh
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    sh ~/init/install-vagrant.sh
+    sh ~/init/install-tmux.sh
+    sh ~/init/install-neovim.sh

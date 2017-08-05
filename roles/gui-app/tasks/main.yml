@@ -42,8 +42,7 @@
 
 - git:
     repo: https://github.com/Corwind/termite-install.git
-    dest: ~/
-
+    dest: ~/termite-install
 - name: user
   become: yes
   become_user: "{{ ubuntu_user }}"

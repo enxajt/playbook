@@ -7,9 +7,9 @@
     ubuntu_user: enxajt
     ubuntu_pass: enxajt
   roles:
-    - apt-in-Japan
+    #- apt-in-Japan
 
-    - locale-time
+    #- locale-time
     - cui-app      
     #- make-user
     - for-each-user
@@ -18,7 +18,7 @@
     #- docker-build
 
     #- mate
-    - desktop-config
+    - mate-desktop-config
     - gui-app
     - japanese
     - end
