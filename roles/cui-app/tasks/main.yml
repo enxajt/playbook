@@ -12,7 +12,6 @@
   become: yes
   with_items:
     - zsh
-    - tmux
     - xbindkeys
     - colordiff
     - tree
