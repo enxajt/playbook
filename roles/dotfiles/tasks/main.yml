@@ -1,5 +1,6 @@
 - git:
-    repo: git://github.com/enxajt/.dotfiles.git
+    #repo: git://github.com/enxajt/.dotfiles.git
+    repo: ssh://git@github.com/enxajt/.dotfiles.git
     dest: ~/.dotfiles 
     accept_hostkey: yes
 
