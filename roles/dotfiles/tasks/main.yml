@@ -67,3 +67,20 @@
     group: "{{ ubuntu_user }}"
     state: link
 
+- git:
+    #repo: git://github.com/enxajt/.vim.git
+    repo: ssh://git@github.com/enxajt/.vim.git
+    dest: ~/.vim
+    accept_hostkey: yes
+- file:
+    src: ~/.vim/vimrc
+    dest: ~/.config/nvim/init.vim
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: link
+- file:
+    src: ~/.vim/dein.toml
+    dest: ~/.config/nvim/dein.toml
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: link

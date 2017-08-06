@@ -11,6 +11,11 @@
   apt: name={{item}}
   become: yes
   with_items:
+    # wifi
+    - linux-generic-hwe-16.04
+    #- linux-generic-hwe-16.04-edge
+    #-r8168-dkms
+    
     - zsh
     - xbindkeys
     - colordiff
