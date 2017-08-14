@@ -16,6 +16,8 @@
     #- linux-generic-hwe-16.04-edge
     #-r8168-dkms
     
+    - git
+
     - zsh
     - xbindkeys
     - colordiff

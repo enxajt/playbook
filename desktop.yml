@@ -12,7 +12,10 @@
     #- locale-time
     - cui-app      
     #- make-user
-    - for-each-user
+
+    # test move git to cui-app(root)
+    #- for-each-user
+
     - dotfiles
     - docker-inst
     #- docker-build
