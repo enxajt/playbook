@@ -18,6 +18,7 @@
     - libsane-extras-dev
     - simple-scan
     - gimp
+    - printer-driver-gutenprint
 
 - apt_repository:
     repo: 'ppa:otto-kesselgulasch/gimp'
