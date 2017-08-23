@@ -6,3 +6,12 @@
     #- ubuntu-desktop
     #- ubuntu-mate-desktop
     - ubuntu-mate-core
+
+# for mate. not working in minimal ubuntu install
+- name: autostart
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    mkdir -p ~/.config/autostart
+    ln -sf ~/.dotfiles/desktop/after-login.desktop ~/.config/autostart/after-login.desktop
+    #sh ~/.dotfiles/desktop/start-up.sh

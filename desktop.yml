@@ -13,9 +13,6 @@
     - cui-app      
     #- make-user
 
-    # test move git to cui-app(root)
-    #- for-each-user
-
     - dotfiles
     - docker-inst
     #- docker-build

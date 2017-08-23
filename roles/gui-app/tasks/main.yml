@@ -49,3 +49,6 @@
   become_user: "{{ ubuntu_user }}"
   shell: |
     ~/termite-install/termite-install.sh
+
+ln -s ~/.dotfiles/desktop/20-natural-scrolling.conf /usr/share/X11/xorg.conf.d/20-natural-scrolling.conf
+

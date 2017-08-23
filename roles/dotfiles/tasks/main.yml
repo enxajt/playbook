@@ -1,8 +1,13 @@
 - git:
-    #repo: git://github.com/enxajt/.dotfiles.git
-    repo: ssh://git@github.com/enxajt/.dotfiles.git
+    repo: git://github.com/enxajt/.dotfiles.git
+    #repo: ssh://git@github.com/enxajt/.dotfiles.git
     dest: ~/.dotfiles 
     accept_hostkey: yes
+- file:
+    path: ~/.dotfiles 
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    mode: 0777
 
 - file:
     path: ~/.tmux/plugins  
@@ -26,12 +31,17 @@
     dest: ~/.tmux/plugins/tpm 
     accept_hostkey: yes
 
-- name: sudo
-  become: yes
-  become_user: root
-  shell: |
-    mkdir -p /etc/lightdm/lightdm.conf.d
-    ln -sf ~/.dotfiles/.Xresources /etc/lightdm/lightdm.conf.d/.Xresources
+- file:
+    path: /etc/lightdm/lightdm.conf.d
+    owner: root
+    group: root
+    state: directory
+- file:
+    src: ~/.dotfiles/.Xresources
+    dest: /etc/lightdm/lightdm.conf.d/.Xresources
+    owner: root
+    group: root
+    state: link
 
 - user:
     name: "{{ ubuntu_user }}"
@@ -69,10 +79,20 @@
     state: link
 
 - git:
-    #repo: git://github.com/enxajt/.vim.git
-    repo: ssh://git@github.com/enxajt/.vim.git
+    repo: git://github.com/enxajt/.vim.git
+    #repo: ssh://git@github.com/enxajt/.vim.git
     dest: ~/.vim
     accept_hostkey: yes
+- file:
+    path: ~/.vim 
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    mode: 0777
+- file:
+    path: ~/.config/nvim
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: directory
 - file:
     src: ~/.vim/vimrc
     dest: ~/.config/nvim/init.vim
@@ -85,3 +105,27 @@
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: link
+
+- file:
+    src: ~/.dotfiles/i3-config
+    dest: ~/.config/i3/config
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: link
+
+- file:
+    path: /usr/share/lightdm/lightdm.conf.d
+    state: directory
+- file:
+    src: /home/{{ ubuntu_user }}/.dotfiles/desktop/60-lightdm-gtk-greeter.conf
+    dest: /usr/share/lightdm/lightdm.conf.d/
+    state: link
+
+- file:
+    src: /etc/systemd/logind.conf
+    dest: /etc/systemd/logind.conf.bak
+- become: yes
+  become_user: root
+  shell: |
+    echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
+    service systemd-logind restart
