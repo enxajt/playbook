@@ -11,7 +11,6 @@
     #- dotfiles
     #- docker-inst
 
-    - gui-app
-    #- japanese
-    #- end
+    #- gui-app
+    - japanese
     #- reboot
