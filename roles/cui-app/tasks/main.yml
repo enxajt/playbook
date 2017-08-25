@@ -1,7 +1,7 @@
 - name: updates a server
   apt: update_cache=yes
-#- name: install aptitude
-#  apt: name=aptitude
+- name: install aptitude
+  apt: name=aptitude
 - name: upgrade a server
   apt: upgrade=full
 
@@ -51,9 +51,15 @@
 
 - git:
     repo: git://github.com/enxajt/init.git
-    dest: ~/init
+    dest: /home/{{ ubuntu_user }}/init
 - shell: |
-    cd /home/{{ ubuntu_user }}/.init && git remote set-url origin git@github.com:enxajt/.init.git
+    cd /home/{{ ubuntu_user }}/init && git remote set-url origin git@github.com:enxajt/init.git
+- file:
+    path: /home/{{ ubuntu_user }}/init
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    mode: 0777
+    recurse: yes
 - name: init sh
   become: yes
   become_user: "{{ ubuntu_user }}"

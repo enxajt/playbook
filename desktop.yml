@@ -7,10 +7,10 @@
     ubuntu_user: enxajt
     ubuntu_pass: enxajt
   roles:
-    #- cui-app      
-    #- dotfiles
-    #- docker-inst
+    - cui-app      
+    - dotfiles
+    - docker-inst
 
-    #- gui-app
+    - gui-app
     - japanese
-    #- reboot
+    - reboot

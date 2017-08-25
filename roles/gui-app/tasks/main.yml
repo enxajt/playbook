@@ -79,8 +79,8 @@
   become_user: "{{ ubuntu_user }}"
   shell: |
     echo export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
-    cd vte-ng && ./autogen.sh && make && sudo make install
-    cd ../termite && make && sudo make install
+    cd /home/{{ ubuntu_user }}/.cache/vte-ng && ./autogen.sh && make && sudo make install
+    cd /home/{{ ubuntu_user }}/.cache/termite && make && sudo make install
 - name: user
   become: yes
   become_user: root

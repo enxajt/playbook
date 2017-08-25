@@ -81,6 +81,12 @@
     accept_hostkey: yes
 
 - file:
+    path: /home/{{ ubuntu_user }}/.config
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: directory
+- name: termite
+  file:
     src: /home/{{ ubuntu_user }}/.dotfiles/termite
     dest: /home/{{ ubuntu_user }}/.config/termite
     owner: "{{ ubuntu_user }}"
@@ -118,6 +124,11 @@
     group: "{{ ubuntu_user }}"
     state: link
 
+- file:
+    path: /home/{{ ubuntu_user }}/.config/i3
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: directory
 - file:
     src: /home/{{ ubuntu_user }}/.dotfiles/i3-config
     dest: /home/{{ ubuntu_user }}/.config/i3/config
