@@ -18,12 +18,8 @@
 - name: im-config -n fcitx
   shell: im-config -n fcitx
 
-- git:
-    repo: git://github.com/enxajt/init.git
-    dest: ~/init
-
-- name: sh init-jap-env.sh
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  shell: |
-    sh ~/init/init-jap-env.sh
+- name: purge ibus
+  apt:
+    name: ibus
+    state: absent
+    purge: yes

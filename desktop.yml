@@ -9,16 +9,10 @@
   roles:
     #- apt-in-Japan
 
-    #- locale-time
     - cui-app      
-    #- make-user
-
     - dotfiles
     - docker-inst
-    #- docker-build
 
-    #- mate
-    - mate-desktop-config
     - gui-app
     - japanese
     - end

@@ -1,66 +1,72 @@
 - git:
     repo: git://github.com/enxajt/.dotfiles.git
     #repo: ssh://git@github.com/enxajt/.dotfiles.git
-    dest: ~/.dotfiles 
+    dest: /home/{{ ubuntu_user }}/.dotfiles 
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
     accept_hostkey: yes
 - file:
-    path: ~/.dotfiles 
+    path: /home/{{ ubuntu_user }}/.dotfiles 
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     mode: 0777
 
 - file:
-    path: ~/.tmux/plugins  
+    path: /home/{{ ubuntu_user }}/.tmux/plugins  
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: directory
 - file:
-    src: ~/.dotfiles/.tmux.conf
-    dest: ~/.tmux.conf
+    src: /home/{{ ubuntu_user }}/.dotfiles/.tmux.conf
+    dest: /home/{{ ubuntu_user }}/.tmux.conf
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: link
 - file:
-    src: ~/.dotfiles/.tmux-bin
-    dest: ~/.tmux/bin
+    src: /home/{{ ubuntu_user }}/.dotfiles/.tmux-bin
+    dest: /home/{{ ubuntu_user }}/.tmux/bin
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: link
 - git:
     repo: git://github.com/tmux-plugins/tpm.git
-    dest: ~/.tmux/plugins/tpm 
+    dest: /home/{{ ubuntu_user }}/.tmux/plugins/tpm 
     accept_hostkey: yes
 
 - file:
-    path: /etc/lightdm/lightdm.conf.d
-    owner: root
-    group: root
+    path: /usr/share/lightdm/lightdm.conf.d
     state: directory
 - file:
-    src: ~/.dotfiles/.Xresources
+    src: /home/{{ ubuntu_user }}/.dotfiles/desktop/60-lightdm-gtk-greeter.conf
+    dest: /usr/share/lightdm/lightdm.conf.d/60-lightdm-gtk-greeter.conf
+    state: link
+    force: yes
+- file:
+    path: /etc/lightdm/lightdm.conf.d
+    state: directory
+- file:
+    src: /home/{{ ubuntu_user }}/.dotfiles/.Xresources
     dest: /etc/lightdm/lightdm.conf.d/.Xresources
-    owner: root
-    group: root
     state: link
 
 - user:
     name: "{{ ubuntu_user }}"
     shell: /bin/zsh
 - file:
-    src: ~/.dotfiles/.zshrc
-    dest: ~/.zshrc
+    src: /home/{{ ubuntu_user }}/.dotfiles/.zshrc
+    dest: /home/{{ ubuntu_user }}/.zshrc
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: link
 
 - file:
-    path: ~/bin
+    path: /home/{{ ubuntu_user }}/bin
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: directory
 - file:
-    src: ~/.dotfiles/git-diff-normal-format
-    dest: ~/bin/git-diff-normal-format
+    src: /home/{{ ubuntu_user }}/.dotfiles/git-diff-normal-format
+    dest: /home/{{ ubuntu_user }}/bin/git-diff-normal-format
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: link
@@ -68,12 +74,12 @@
 
 - git:
     repo: git://github.com/olivierverdier/zsh-git-prompt.git
-    dest: ~/.zsh-git-prompt
+    dest: /home/{{ ubuntu_user }}/.zsh-git-prompt
     accept_hostkey: yes
 
 - file:
-    src: ~/.dotfiles/termite
-    dest: ~/.config/termite
+    src: /home/{{ ubuntu_user }}/.dotfiles/termite
+    dest: /home/{{ ubuntu_user }}/.config/termite
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: link
@@ -81,51 +87,45 @@
 - git:
     repo: git://github.com/enxajt/.vim.git
     #repo: ssh://git@github.com/enxajt/.vim.git
-    dest: ~/.vim
+    dest: /home/{{ ubuntu_user }}/.vim
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
     accept_hostkey: yes
 - file:
-    path: ~/.vim 
+    path: /home/{{ ubuntu_user }}/.vim 
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     mode: 0777
 - file:
-    path: ~/.config/nvim
+    path: /home/{{ ubuntu_user }}/.config/nvim
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: directory
 - file:
-    src: ~/.vim/vimrc
-    dest: ~/.config/nvim/init.vim
+    src: /home/{{ ubuntu_user }}/.vim/vimrc
+    dest: /home/{{ ubuntu_user }}/.config/nvim/init.vim
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: link
 - file:
-    src: ~/.vim/dein.toml
-    dest: ~/.config/nvim/dein.toml
+    src: /home/{{ ubuntu_user }}/.vim/dein.toml
+    dest: /home/{{ ubuntu_user }}/.config/nvim/dein.toml
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: link
 
 - file:
-    src: ~/.dotfiles/i3-config
-    dest: ~/.config/i3/config
+    src: /home/{{ ubuntu_user }}/.dotfiles/i3-config
+    dest: /home/{{ ubuntu_user }}/.config/i3/config
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: link
-
-- file:
-    path: /usr/share/lightdm/lightdm.conf.d
-    state: directory
-- file:
-    src: /home/{{ ubuntu_user }}/.dotfiles/desktop/60-lightdm-gtk-greeter.conf
-    dest: /usr/share/lightdm/lightdm.conf.d/
-    state: link
+    force: yes
 
 - file:
     src: /etc/systemd/logind.conf
     dest: /etc/systemd/logind.conf.bak
-- become: yes
-  become_user: root
-  shell: |
+    force: yes
+- shell: |
     echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
     service systemd-logind restart

@@ -37,10 +37,23 @@
     - vlc
     - w3m
     - wmctrl
+
+    - lightdm
+    - lightdm-gtk-greeter
+    - lightdm-gtk-greeter-settings
     - i3
+    - ubuntu-drivers-common
+    - mesa-utils
+    - mesa-utils-extra
+    - compton
+    - xorg
+    - xserver-xorg
+    - thunar
+    - volumeicon-alsa
+
     - playonlinux
-#    - simplescreenrecorder
-#    - simplescreenrecorder-lib
+    #- simplescreenrecorder
+    #- simplescreenrecorder-lib
 
 - git:
     repo: https://github.com/Corwind/termite-install.git
@@ -51,5 +64,9 @@
   shell: |
     ~/termite-install/termite-install.sh
 
-ln -s ~/.dotfiles/desktop/20-natural-scrolling.conf /usr/share/X11/xorg.conf.d/20-natural-scrolling.conf
-
+- file:
+    src: ~/.dotfiles/desktop/20-natural-scrolling.conf
+    dest: /usr/share/X11/xorg.conf.d/20-natural-scrolling.conf
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: link

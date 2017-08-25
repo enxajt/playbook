@@ -32,10 +32,15 @@
     - clamav
     - chkrootkit
 
-    # for local machine
-    - connect-proxy
+    # for local machine : drive
     - exfat-fuse
     - exfat-utils
+
+    # for local machine : network
+    - connect-proxy
+    - lshw
+    - wicd
+    - intel-microcode
 
     # not for virtualmachine
     - vagrant
@@ -48,7 +53,6 @@
 - git:
     repo: git://github.com/enxajt/init.git
     dest: ~/init
-
 - name: init sh
   become: yes
   become_user: "{{ ubuntu_user }}"
