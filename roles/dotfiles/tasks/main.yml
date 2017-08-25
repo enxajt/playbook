@@ -2,14 +2,13 @@
     repo: git://github.com/enxajt/.dotfiles.git
     #repo: ssh://git@github.com/enxajt/.dotfiles.git
     dest: /home/{{ ubuntu_user }}/.dotfiles 
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
     accept_hostkey: yes
 - file:
     path: /home/{{ ubuntu_user }}/.dotfiles 
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     mode: 0777
+    recurse: yes
 
 - file:
     path: /home/{{ ubuntu_user }}/.tmux/plugins  
@@ -88,14 +87,13 @@
     repo: git://github.com/enxajt/.vim.git
     #repo: ssh://git@github.com/enxajt/.vim.git
     dest: /home/{{ ubuntu_user }}/.vim
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
     accept_hostkey: yes
 - file:
     path: /home/{{ ubuntu_user }}/.vim 
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     mode: 0777
+    recurse: yes
 - file:
     path: /home/{{ ubuntu_user }}/.config/nvim
     owner: "{{ ubuntu_user }}"
