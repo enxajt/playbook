@@ -1,8 +1,10 @@
-- git:
+- name: clone .dotfiles
+  git:
     repo: git://github.com/enxajt/.dotfiles.git
-    #repo: ssh://git@github.com/enxajt/.dotfiles.git
     dest: /home/{{ ubuntu_user }}/.dotfiles 
     accept_hostkey: yes
+- shell: |
+    cd /home/{{ ubuntu_user }}/.dotfiles && git remote set-url origin git@github.com:enxajt/.dotfiles.git
 - file:
     path: /home/{{ ubuntu_user }}/.dotfiles 
     owner: "{{ ubuntu_user }}"
@@ -27,7 +29,8 @@
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: link
-- git:
+- name: clone tmux-plubins
+  git:
     repo: git://github.com/tmux-plugins/tpm.git
     dest: /home/{{ ubuntu_user }}/.tmux/plugins/tpm 
     accept_hostkey: yes
@@ -71,7 +74,8 @@
     state: link
     mode: 0777
 
-- git:
+- name: clone zsh-git-prompt
+  git:
     repo: git://github.com/olivierverdier/zsh-git-prompt.git
     dest: /home/{{ ubuntu_user }}/.zsh-git-prompt
     accept_hostkey: yes
@@ -83,11 +87,13 @@
     group: "{{ ubuntu_user }}"
     state: link
 
-- git:
+- name: clone .vim
+  git:
     repo: git://github.com/enxajt/.vim.git
-    #repo: ssh://git@github.com/enxajt/.vim.git
     dest: /home/{{ ubuntu_user }}/.vim
     accept_hostkey: yes
+- shell: |
+    cd /home/{{ ubuntu_user }}/.vim && git remote set-url origin git@github.com:enxajt/.vim.git
 - file:
     path: /home/{{ ubuntu_user }}/.vim 
     owner: "{{ ubuntu_user }}"
@@ -120,10 +126,10 @@
     state: link
     force: yes
 
-- file:
-    src: /etc/systemd/logind.conf
-    dest: /etc/systemd/logind.conf.bak
-    force: yes
-- shell: |
-    echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
-    service systemd-logind restart
+#- file:
+#    src: /etc/systemd/logind.conf
+#    dest: /etc/systemd/logind.conf.bak
+#    force: yes
+#- shell: |
+#    echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
+#    service systemd-logind restart
