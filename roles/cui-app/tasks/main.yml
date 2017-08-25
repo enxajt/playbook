@@ -52,6 +52,8 @@
 - git:
     repo: git://github.com/enxajt/init.git
     dest: ~/init
+- shell: |
+    cd /home/{{ ubuntu_user }}/.init && git remote set-url origin git@github.com:enxajt/.init.git
 - name: init sh
   become: yes
   become_user: "{{ ubuntu_user }}"

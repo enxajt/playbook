@@ -1,68 +1,98 @@
-- name: prepare for installing Canon MG7100 series driver
-  apt: name={{item}}
-  become: yes
-  become_user: root
-  with_items:
-    # canon scanner
-    - sane
-    - xsane
-    - xsane-common
-    - sane-utils
-    - libsane
-    - libsane-common
-    - libsane-dbg
-    - libsane-dev
-    - libsane-extras
-    - libsane-extras-common
-    - libsane-extras-dbg
-    - libsane-extras-dev
-    - simple-scan
-    - gimp
-    - printer-driver-gutenprint
-
-- apt_repository:
-    repo: 'ppa:otto-kesselgulasch/gimp'
-#- apt_repository:
-#    repo: 'maarten-baert/simplescreenrecorder'
+#  - name: prepare for installing Canon MG7101 series driver
+#    apt: name={{item}}
+#    become: yes
+#    become_user: root
+#    with_items:
+#      # canon scanner
+#      - sane
+#      - xsane
+#      - xsane-common
+#      - sane-utils
+#      - libsane
+#      - libsane-common
+#      - libsane-dbg
+#      - libsane-dev
+#      - libsane-extras
+#      - libsane-extras-common
+#      - libsane-extras-dbg
+#      - libsane-extras-dev
+#      - simple-scan
+#      - gimp
+#      - printer-driver-gutenprint
+#  
+#  - apt_repository:
+#      repo: 'ppa:otto-kesselgulasch/gimp'
+#  #- apt_repository:
+#  #    repo: 'maarten-baert/simplescreenrecorder'
 - name: install gui app
   apt: name={{item}}
-  become: yes
-  become_user: root
   with_items:
-    - gimp
-    - gimp-gmic
-    - goldendict
+    - firefox
+#    - gimp
+#    - gimp-gmic
+#    - goldendict
     - redshift
-    - redshift-gtk
-    - vlc
-    - w3m
-    - wmctrl
+    #- redshift-gtk
+#    - vlc
+    #- wmctrl
 
-    - lightdm
-    - lightdm-gtk-greeter
-    - lightdm-gtk-greeter-settings
-    - i3
-    - ubuntu-drivers-common
-    - mesa-utils
-    - mesa-utils-extra
-    - compton
-    - xorg
-    - xserver-xorg
-    - thunar
-    - volumeicon-alsa
-
-    - playonlinux
+#    - lightdm
+#    - lightdm-gtk-greeter
+#    - lightdm-gtk-greeter-settings
+#    - i3
+#    - ubuntu-drivers-common
+#    - mesa-utils
+#    - mesa-utils-extra
+#    - compton
+#    - xorg
+#    - xserver-xorg
+#    - thunar
+#    - volumeicon-alsa
+#
+#    - playonlinux
     #- simplescreenrecorder
     #- simplescreenrecorder-lib
 
+- name: for termite
+  apt: name={{item}}
+  with_items:
+    - g++
+    - libgtk-3-dev
+    - gtk-doc-tools
+    - gnutls-bin
+    - valac
+    - intltool
+    - libpcre2-dev
+    - libglib3.0-cil-dev
+    - libgnutls28-dev
+    - libgirepository1.0-dev
+    - libxml2-utils
+    - gperf
 - git:
-    repo: https://github.com/Corwind/termite-install.git
-    dest: ~/termite-install
+    repo: https://github.com/thestinger/vte-ng.git
+    dest: /home/{{ ubuntu_user }}/.cache/vte-ng
+- git:
+    repo: https://github.com/thestinger/termite.git
+    dest: /home/{{ ubuntu_user }}/.cache/termite
 - name: user
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: |
-    ~/termite-install/termite-install.sh
+    echo export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
+    cd vte-ng && ./autogen.sh && make && sudo make install
+    cd ../termite && make && sudo make install
+- name: user
+  become: yes
+  become_user: root
+  shell: |
+    ldconfig
+    mkdir -p /lib/terminfo/x; sudo ln -s
+- name: user
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    /usr/local/share/terminfo/x/xterm-termite
+    /lib/terminfo/x/xterm-termite
 
 - file:
     src: ~/.dotfiles/desktop/20-natural-scrolling.conf
