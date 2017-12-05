@@ -3,7 +3,7 @@
 - name: upgrade a server
   apt: upgrade=full
 
-- name: prepare installing docker 
+- name: prepare installing docker (not ansible-apt)
   shell: apt-get -y install linux-image-extra-$(uname -r)
 
 - name: install for docker 

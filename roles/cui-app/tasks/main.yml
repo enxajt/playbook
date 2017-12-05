@@ -1,10 +1,11 @@
+- apt_repository:
+    repo: 'ppa:linrunner/tlp'
 - name: updates a server
   apt: update_cache=yes
 - name: install aptitude
   apt: name=aptitude
 - name: upgrade a server
   apt: upgrade=full
-
 - name: install tools
   apt: name={{item}}
   become: yes
@@ -28,13 +29,18 @@
     - p7zip-rar
     - sysstat
 
+    - powertop 
+    - tlp 
+    - tlp-rdw
+
     - clamav
     - chkrootkit
 
+    # for local machine : hard ware
+    - xbacklight
     # for local machine : drive
     - exfat-fuse
     - exfat-utils
-
     # for local machine : network
     - connect-proxy
     - lshw
@@ -48,7 +54,16 @@
     #- fonts-ricty-diminished 
     #- fonts-ipafont-gothic
     #- fonts-ipafont-mincho
-
+- shell: |
+    cp /etc/default/sysstat /etc/default/sysstat.bak
+    sed -ie 's/^ENABLED="false"$/ENABLED="true"/' /etc/default/sysstat
+    /etc/init.d/sysstat start
+    wget https://sourceforge.net/projects/ksar/files/latest/download -O /usr/local/src/ksar.zip
+    unzip /usr/local/src/ksar.zip -d /usr/local/src
+- shell: |
+    powertop --calibrate
+    powertop --auto-tune
+    tlp start
 - git:
     repo: git://github.com/enxajt/init.git
     dest: /home/{{ ubuntu_user }}/init

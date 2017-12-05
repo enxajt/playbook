@@ -1,58 +1,74 @@
-#  - name: prepare for installing Canon MG7101 series driver
-#    apt: name={{item}}
-#    become: yes
-#    become_user: root
-#    with_items:
-#      # canon scanner
-#      - sane
-#      - xsane
-#      - xsane-common
-#      - sane-utils
-#      - libsane
-#      - libsane-common
-#      - libsane-dbg
-#      - libsane-dev
-#      - libsane-extras
-#      - libsane-extras-common
-#      - libsane-extras-dbg
-#      - libsane-extras-dev
-#      - simple-scan
-#      - gimp
-#      - printer-driver-gutenprint
-#  
-#  - apt_repository:
-#      repo: 'ppa:otto-kesselgulasch/gimp'
-#  #- apt_repository:
-#  #    repo: 'maarten-baert/simplescreenrecorder'
+- name: prepare for installing Canon MG7101 series driver
+  apt: name={{item}}
+  become: yes
+  become_user: root
+  with_items:
+    # canon scanner
+    - sane
+    - xsane
+    - xsane-common
+    - sane-utils
+    - libsane
+    - libsane-common
+    - libsane-dbg
+    - libsane-dev
+    - libsane-extras
+    - libsane-extras-common
+    - libsane-extras-dbg
+    - libsane-extras-dev
+    - simple-scan
+    - gimp
+    - printer-driver-gutenprint
+
+- apt_repository:
+    repo: 'ppa:otto-kesselgulasch/gimp'
+- apt_repository:
+    repo: 'ppa:font-manager/staging'
+- name: updates a server
+  apt: update_cache=yes
+- name: upgrade a server
+  apt: upgrade=full
 - name: install gui app
   apt: name={{item}}
   with_items:
     - firefox
-#    - gimp
-#    - gimp-gmic
-#    - goldendict
+    - goldendict
     - redshift
-    #- redshift-gtk
-#    - vlc
-    #- wmctrl
 
-#    - lightdm
-#    - lightdm-gtk-greeter
-#    - lightdm-gtk-greeter-settings
-#    - i3
-#    - ubuntu-drivers-common
-#    - mesa-utils
-#    - mesa-utils-extra
-#    - compton
-#    - xorg
-#    - xserver-xorg
-#    - thunar
-#    - volumeicon-alsa
-#
-#    - playonlinux
-    #- simplescreenrecorder
-    #- simplescreenrecorder-lib
+    - gimp
+    - gimp-gmic
+    - shutter
+    - vlc
+    - freeplane
 
+    - playonlinux
+    - font-manager
+
+    - lightdm
+    - lightdm-gtk-greeter
+    - lightdm-gtk-greeter-settings
+    - i3
+    - ubuntu-drivers-common
+    - mesa-utils
+    - mesa-utils-extra
+    - compton
+    - xorg
+    - xserver-xorg
+    - thunar
+    - volumeicon-alsa
+
+#- apt_repository:
+#    repo: 'maarten-baert/simplescreenrecorder'
+#- name: install gui app
+#  apt: name={{item}}
+#  with_items:
+#    - simplescreenrecorder
+#    - simplescreenrecorder-lib
+
+- name: which termite 
+  shell: which termite
+  register: which_termite
+  #failed_when: false
 - name: for termite
   apt: name={{item}}
   with_items:
@@ -68,12 +84,31 @@
     - libgirepository1.0-dev
     - libxml2-utils
     - gperf
+  when: which_termite.stdout == ""
 - git:
     repo: https://github.com/thestinger/vte-ng.git
     dest: /home/{{ ubuntu_user }}/.cache/vte-ng
+    force: yes
+  when: which_termite.stdout == ""
+- file:
+    path: /home/{{ ubuntu_user }}/.cache/vte-ng
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    mode: 0777
+    recurse: yes
+  when: which_termite.stdout == ""
 - git:
     repo: https://github.com/thestinger/termite.git
     dest: /home/{{ ubuntu_user }}/.cache/termite
+    force: yes
+  when: which_termite.stdout == ""
+- file:
+    path: /home/{{ ubuntu_user }}/.cache/termite
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    mode: 0777
+    recurse: yes
+  when: which_termite.stdout == ""
 - name: user
   become: yes
   become_user: "{{ ubuntu_user }}"
@@ -81,22 +116,12 @@
     echo export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
     cd /home/{{ ubuntu_user }}/.cache/vte-ng && ./autogen.sh && make && sudo make install
     cd /home/{{ ubuntu_user }}/.cache/termite && make && sudo make install
+  when: which_termite.stdout == ""
 - name: user
   become: yes
   become_user: root
   shell: |
     ldconfig
-    mkdir -p /lib/terminfo/x; sudo ln -s
-- name: user
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  shell: |
-    /usr/local/share/terminfo/x/xterm-termite
-    /lib/terminfo/x/xterm-termite
-
-- file:
-    src: ~/.dotfiles/desktop/20-natural-scrolling.conf
-    dest: /usr/share/X11/xorg.conf.d/20-natural-scrolling.conf
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    state: link
+    mkdir -p /lib/terminfo/x
+    ln -s /usr/local/share/terminfo/x/xterm-termite /lib/terminfo/x/xterm-termite
+  when: which_termite.stdout == ""

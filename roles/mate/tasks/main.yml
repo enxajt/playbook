@@ -7,6 +7,16 @@
     #- ubuntu-mate-desktop
     - ubuntu-mate-core
 
+    - wmctrl
+
+- name: natural scrolling
+  file:
+    src: /home/{{ ubuntu_user }}/.dotfiles/desktop/20-natural-scrolling.conf
+    dest: /usr/share/X11/xorg.conf.d/20-natural-scrolling.conf
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: link
+
 # for mate. not working in minimal ubuntu install
 - name: autostart
   become: yes

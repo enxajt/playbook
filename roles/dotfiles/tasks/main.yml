@@ -93,43 +93,50 @@
     group: "{{ ubuntu_user }}"
     state: link
 
-- name: clone .vim
+- name: .vim  clone
   git:
     repo: git://github.com/enxajt/.vim.git
     dest: /home/{{ ubuntu_user }}/.vim
     accept_hostkey: yes
-- shell: |
+- name: .vim  git set-url
+  shell: |
     cd /home/{{ ubuntu_user }}/.vim && git remote set-url origin git@github.com:enxajt/.vim.git
-- file:
+- name: .vim  chmod && chown
+  file:
     path: /home/{{ ubuntu_user }}/.vim 
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     mode: 0777
     recurse: yes
-- file:
+- name: .vim  mkdir .config/nvim
+  file:
     path: /home/{{ ubuntu_user }}/.config/nvim
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: directory
-- file:
+- name: .vim  ln init.vim
+  file:
     src: /home/{{ ubuntu_user }}/.vim/vimrc
     dest: /home/{{ ubuntu_user }}/.config/nvim/init.vim
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: link
-- file:
+- name: .vim  ln dein.toml
+  file:
     src: /home/{{ ubuntu_user }}/.vim/dein.toml
     dest: /home/{{ ubuntu_user }}/.config/nvim/dein.toml
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: link
 
-- file:
+- name: i3  mkdir .config/i3
+  file:
     path: /home/{{ ubuntu_user }}/.config/i3
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: directory
-- file:
+- name: i3  ln .config/i3/config
+  file:
     src: /home/{{ ubuntu_user }}/.dotfiles/i3-config
     dest: /home/{{ ubuntu_user }}/.config/i3/config
     owner: "{{ ubuntu_user }}"
@@ -137,10 +144,13 @@
     state: link
     force: yes
 
-#- file:
-#    src: /etc/systemd/logind.conf
-#    dest: /etc/systemd/logind.conf.bak
-#    force: yes
-#- shell: |
-#    echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
-#    service systemd-logind restart
+- file:
+    src: /home/{{ ubuntu_user }}/.dotfiles/.xbindkeysrc
+    dest: /home/{{ ubuntu_user }}/.xbindkeysrc
+    state: link
+
+- name: bak logind.conf
+  shell: cp /etc/systemd/logind.conf /etc/systemd/logind.conf.bak
+- shell: |
+    echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
+    service systemd-logind restart
