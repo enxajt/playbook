@@ -33,6 +33,9 @@
     - tlp 
     - tlp-rdw
 
+    - w3m
+    - w3m-img
+
     - clamav
     - chkrootkit
 
