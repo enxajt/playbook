@@ -116,7 +116,7 @@
     state: directory
 - name: .vim  ln init.vim
   file:
-    src: /home/{{ ubuntu_user }}/.vim/vimrc
+    src: /home/{{ ubuntu_user }}/.vim/init.vim
     dest: /home/{{ ubuntu_user }}/.config/nvim/init.vim
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"

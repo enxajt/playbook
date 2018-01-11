@@ -34,6 +34,7 @@
   apt: name={{item}}
   with_items:
     - firefox
+    - chromium-browser
     - goldendict
     - redshift
 
@@ -51,11 +52,13 @@
     - lightdm
     - lightdm-gtk-greeter
     - lightdm-gtk-greeter-settings
+
     - i3
+    - compton
+    i3barはデフォルトのi3statusではなくi3blocksに置き換えています．
     - ubuntu-drivers-common
     - mesa-utils
     - mesa-utils-extra
-    - compton
     - xorg
     - xserver-xorg
     - thunar
@@ -68,6 +71,13 @@
 #  with_items:
 #    - simplescreenrecorder
 #    - simplescreenrecorder-lib
+
+- lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%ADMIN ALL='
+    line: '%ADMIN ALL=(ALL) NOPASSWD: ALL'
+    validate: '/usr/sbin/visudo -cf %s'
 
 - name: which termite 
   shell: which termite
