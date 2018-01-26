@@ -55,7 +55,9 @@
 
     - i3
     - compton
-    i3barはデフォルトのi3statusではなくi3blocksに置き換えています．
+    - i3blocks
+    - rofi
+
     - ubuntu-drivers-common
     - mesa-utils
     - mesa-utils-extra

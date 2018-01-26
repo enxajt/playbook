@@ -114,7 +114,7 @@
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: directory
-- name: .vim  ln init.vim
+- name: .vim  ln -s /home/enxajt/.vim/init.vim /home/enxajt/.config/init.vim
   file:
     src: /home/{{ ubuntu_user }}/.vim/init.vim
     dest: /home/{{ ubuntu_user }}/.config/nvim/init.vim
@@ -139,6 +139,14 @@
   file:
     src: /home/{{ ubuntu_user }}/.dotfiles/i3-config
     dest: /home/{{ ubuntu_user }}/.config/i3/config
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
+    state: link
+    force: yes
+- name: i3  ln .i3blocks.conf
+  file:
+    src: /home/{{ ubuntu_user }}/.dotfiles/i3blocks.conf
+    dest: /home/{{ ubuntu_user }}/.i3blocks.conf
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: link
