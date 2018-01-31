@@ -29,6 +29,7 @@
     - p7zip-rar
     - sysstat
     - vim
+    - duc
 
     - powertop 
     - tlp 
@@ -86,3 +87,14 @@
     sh ~/init/install-vagrant.sh
     sh ~/init/install-tmux.sh
     sh ~/init/install-neovim.sh
+    rm ~/.local/share/recently-used.xbel
+
+- git: git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    repo: git://github.com/junegunn/fzf.git
+    dest: /home/{{ ubuntu_user }}/fzf
+    depth: 1
+- name: ~/.fzf/install
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    sh ~/fzf/install
