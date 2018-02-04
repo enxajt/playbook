@@ -4,7 +4,10 @@
     sed -ie 's/^#no_log = False/no_log = False/' /etc/ansible/ansible.cfg
 
 - apt_repository:
-    repo: 'ppa:linrunner/tlp'
+    repo: "{{ item }}"
+  with_items: 
+    - ppa:hluk/copyq
+    - ppa:linrunner/tlp
 - name: apt install
   apt:
     update_cache: true
@@ -14,20 +17,25 @@
     autoremove: true
   with_items:
     #- aptitude
+    - xbindkeys
+
     - git
     - zsh
-    - xbindkeys
-    - colordiff
     - tree
-    - nkf
-    - xsel
-    - pandoc
     - unar
+
+    - sysstat
+    - duc
+
     - p7zip-full #7z
     - p7zip-rar
-    - sysstat
+
+    - nkf
+    - colordiff
     - vim
-    - duc
+    - pandoc
+    - xsel
+    - copyq
 
     - x11-xserver-utils
     - powertop 
