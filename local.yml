@@ -1,13 +1,11 @@
 ---
 - name: local ubuntu desktop
   hosts: localhost
-  remote-user: root
   become: true
   vars:
     ubuntu_user: enxajt
     ubuntu_pass: enxajt
   roles:
-    - go
     - cui-app      
     - dotfiles
     - docker-inst

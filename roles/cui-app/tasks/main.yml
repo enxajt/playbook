@@ -1,22 +1,20 @@
+- name: sed -ie 's/^#log_path/log_path/' /etc/ansible/ansible.cfg
+  shell: |
+    sed -ie 's/^#log_path/log_path/' /etc/ansible/ansible.cfg
+    sed -ie 's/^#no_log = False/no_log = False/' /etc/ansible/ansible.cfg
+
 - apt_repository:
     repo: 'ppa:linrunner/tlp'
-- name: updates a server
-  apt: update_cache=yes
-- name: install aptitude
-  apt: name=aptitude
-- name: upgrade a server
-  apt: upgrade=full
-- name: install tools
-  apt: name={{item}}
-  become: yes
+- name: apt install
+  apt:
+    update_cache: yes
+    name: "{{ item }}"
+    state: latest
+    autoclean: yes
+    autoremove: yes
   with_items:
-    # wifi
-    - linux-generic-hwe-16.04
-    #- linux-generic-hwe-16.04-edge
-    #-r8168-dkms
-    
+    #- aptitude
     - git
-
     - zsh
     - xbindkeys
     - colordiff
@@ -31,6 +29,7 @@
     - vim
     - duc
 
+    - x11-xserver-utils
     - powertop 
     - tlp 
     - tlp-rdw
@@ -47,11 +46,11 @@
     - exfat-fuse
     - exfat-utils
     # for local machine : network
+    - linux-generic-hwe-16.04
     - connect-proxy
     - lshw
     - wicd
     - intel-microcode
-
     # not for virtualmachine
     - vagrant
     - virtualbox
@@ -59,42 +58,68 @@
     #- fonts-ricty-diminished 
     #- fonts-ipafont-gothic
     #- fonts-ipafont-mincho
-- shell: |
-    cp /etc/default/sysstat /etc/default/sysstat.bak
-    sed -ie 's/^ENABLED="false"$/ENABLED="true"/' /etc/default/sysstat
-    /etc/init.d/sysstat start
-    wget https://sourceforge.net/projects/ksar/files/latest/download -O /usr/local/src/ksar.zip
-    unzip /usr/local/src/ksar.zip -d /usr/local/src
-- shell: |
-    powertop --calibrate
-    powertop --auto-tune
-    tlp start
-- git:
+#- shell: |
+#    sudo powertop --calibrate
+#    sudo powertop --auto-tune
+#    sudo tlp start
+
+# sar grapher
+#- shell: |
+#    cp /etc/default/sysstat /etc/default/sysstat.bak
+#    sed -ie 's/^ENABLED="false"$/ENABLED="true"/' /etc/default/sysstat
+#    /etc/init.d/sysstat start
+#    wget https://sourceforge.net/projects/ksar/files/latest/download -O /usr/local/src/ksar.zip
+#    unzip /usr/local/src/ksar.zip -d /usr/local/src
+
+- file:
+    state: directory
+    path: '{ item }'
+    owner: "{{ ubuntu_user }}" 
+    group: "{{ ubuntu_user }}" 
+    mode: 0777 
+    recurse: yes
+  with_items:
+    - /home/{{ ubuntu_user }}/.cache
+    - /home/{{ ubuntu_user }}/go
+- name: install go, get ghq
+  shell: |
+    wget https://dl.google.com/go/go1.9.3.linux-amd64.tar.gz -O /home/{{ ubuntu_user }}/.cache/go.tar.gz
+    sudo tar -C /usr/local -xzf /home/{{ ubuntu_user }}/.cache/go.tar.gz
+    export PATH=$PATH:/usr/local/go/bin
+    export GOPATH=$HOME/go
+    go get github.com/motemen/ghq
+
+- name: init sh 
+  become: yes
+  become_user: "{{ ubuntu_user }}" 
+  git:
     repo: git://github.com/enxajt/init.git
     dest: /home/{{ ubuntu_user }}/init
-- shell: |
-    cd /home/{{ ubuntu_user }}/init && git remote set-url origin git@github.com:enxajt/init.git
-- file:
-    path: /home/{{ ubuntu_user }}/init
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    mode: 0777
-    recurse: yes
-- name: init sh
-  become: yes
-  become_user: "{{ ubuntu_user }}"
+- name: git remote set-url origin git@github.com:enxajt/init.git
   shell: |
-    sh ~/init/install-vagrant.sh
-    sh ~/init/install-tmux.sh
-    sh ~/init/install-neovim.sh
-    rm ~/.local/share/recently-used.xbel
+    cd /home/{{ ubuntu_user }}/init && git remote set-url origin git@github.com:enxajt/init.git
+#- file: 
+#    path: /home/{{ ubuntu_user }}/init
+#    owner: "{{ ubuntu_user }}" 
+#    group: "{{ ubuntu_user }}" 
+#    mode: 0777 
+#    recurse: yes
+- name: init sh 
+  become: yes
+  become_user: "{{ ubuntu_user }}" 
+  shell: | 
+    sh /home/{{ ubuntu_user }}/init/install-tmux.sh
+    sh ~/init/install-neovim.sh 
 
-- git: git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+# mv to start-up.sh
+#rm $home/.local/share/recently-used.xbel
+
+- git:
     repo: git://github.com/junegunn/fzf.git
     dest: /home/{{ ubuntu_user }}/fzf
     depth: 1
-- name: ~/.fzf/install
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  shell: |
-    sh ~/fzf/install
+#- name: ~/.fzf/install
+#  become: yes
+#  become_user: "{{ ubuntu_user }}"
+#  shell: |
+#    sh ~/fzf/install

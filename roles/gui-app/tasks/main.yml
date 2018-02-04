@@ -84,7 +84,7 @@
 - name: which termite 
   shell: which termite
   register: which_termite
-  #failed_when: false
+  failed_when: which_termite.rc not in [0, 1]
 - name: for termite
   apt: name={{item}}
   with_items:
