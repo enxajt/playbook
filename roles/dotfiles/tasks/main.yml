@@ -1,4 +1,3 @@
-# .config
 - name: clone .config
   become: true
   become_user: "{{ ubuntu_user }}" 
