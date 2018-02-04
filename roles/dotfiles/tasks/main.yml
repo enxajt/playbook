@@ -1,159 +1,57 @@
-- name: clone .dotfiles
+# .config
+- name: clone .config
+  become: true
+  become_user: "{{ ubuntu_user }}" 
   git:
-    repo: git://github.com/enxajt/.dotfiles.git
-    dest: /home/{{ ubuntu_user }}/.dotfiles 
+    repo: git://github.com/enxajt/.config.git
+    dest: /home/{{ ubuntu_user }}/.config 
     accept_hostkey: yes
 - shell: |
-    cd /home/{{ ubuntu_user }}/.dotfiles && git remote set-url origin git@github.com:enxajt/.dotfiles.git
-- file:
-    path: /home/{{ ubuntu_user }}/.dotfiles 
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    mode: 0777
-    recurse: yes
+    cd /home/{{ ubuntu_user }}/.config && git remote set-url origin git@github.com:enxajt/.config.git
 
+- user:
+    name: "{{ ubuntu_user }}"
+    shell: /bin/zsh
 - file:
-    path: /home/{{ ubuntu_user }}/.tmux/plugins  
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    state: directory
-- file:
-    src: /home/{{ ubuntu_user }}/.dotfiles/.tmux.conf
-    dest: /home/{{ ubuntu_user }}/.tmux.conf
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    state: link
-- file:
-    src: /home/{{ ubuntu_user }}/.dotfiles/.tmux-bin
-    dest: /home/{{ ubuntu_user }}/.tmux/bin
+    src: /home/{{ ubuntu_user }}/.config/zsh/zshrc
+    dest: /home/{{ ubuntu_user }}/.zshrc
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: link
-- name: clone tmux-plubins
+
+- name: clone zsh-git-prompt
+  become: true
+  become_user: "{{ ubuntu_user }}" 
+  git:
+    repo: git://github.com/olivierverdier/zsh-git-prompt.git
+    dest: /home/{{ ubuntu_user }}/.config/zsh-git-prompt
+    accept_hostkey: yes
+
+- name: clone tmux-plugins
   git:
     repo: git://github.com/tmux-plugins/tpm.git
-    dest: /home/{{ ubuntu_user }}/.tmux/plugins/tpm 
+    dest: /home/{{ ubuntu_user }}/.config/tmux/plugins/tpm 
     accept_hostkey: yes
 
 - file:
     path: /usr/share/lightdm/lightdm.conf.d
     state: directory
 - file:
-    src: /home/{{ ubuntu_user }}/.dotfiles/desktop/60-lightdm-gtk-greeter.conf
+    src: /home/{{ ubuntu_user }}/.config/desktop/60-lightdm-gtk-greeter.conf
     dest: /usr/share/lightdm/lightdm.conf.d/60-lightdm-gtk-greeter.conf
     state: link
     force: yes
 - file:
     path: /etc/lightdm/lightdm.conf.d
     state: directory
-- file:
-    src: /home/{{ ubuntu_user }}/.dotfiles/.Xresources
+- name: Xresources
+  file:
+    src: /home/{{ ubuntu_user }}/.config/Xresources
     dest: /etc/lightdm/lightdm.conf.d/.Xresources
     state: link
 
-- user:
-    name: "{{ ubuntu_user }}"
-    shell: /bin/zsh
-- file:
-    src: /home/{{ ubuntu_user }}/.dotfiles/.zshrc
-    dest: /home/{{ ubuntu_user }}/.zshrc
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    state: link
-
-- file:
-    path: /home/{{ ubuntu_user }}/bin
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    state: directory
-- file:
-    src: /home/{{ ubuntu_user }}/.dotfiles/git-diff-normal-format
-    dest: /home/{{ ubuntu_user }}/bin/git-diff-normal-format
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    state: link
-    mode: 0777
-
-- name: clone zsh-git-prompt
-  git:
-    repo: git://github.com/olivierverdier/zsh-git-prompt.git
-    dest: /home/{{ ubuntu_user }}/.zsh-git-prompt
-    accept_hostkey: yes
-
-- file:
-    path: /home/{{ ubuntu_user }}/.config
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    state: directory
-- name: termite
+- name: xbindkeysrc
   file:
-    src: /home/{{ ubuntu_user }}/.dotfiles/termite
-    dest: /home/{{ ubuntu_user }}/.config/termite
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    state: link
-
-- name: .vim  clone
-  become: true
-  become_user: "{{ ubuntu_user }}" 
-  git:
-    repo: git://github.com/enxajt/.vim.git
-    dest: /home/{{ ubuntu_user }}/.vim
-    accept_hostkey: yes
-- name: .vim  git set-url
-  shell: |
-    cd /home/{{ ubuntu_user }}/.vim && git remote set-url origin git@github.com:enxajt/.vim.git
-- name: .vim  mkdir .config/nvim
-  file:
-    path: /home/{{ ubuntu_user }}/.config/nvim
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    state: directory
-- name: .vim  ln -s /home/enxajt/.vim/init.vim /home/enxajt/.config/init.vim
-  file:
-    src: /home/{{ ubuntu_user }}/.vim/init.vim
-    dest: /home/{{ ubuntu_user }}/.config/nvim/init.vim
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    state: link
-- name: .vim  ln dein.toml
-  file:
-    src: /home/{{ ubuntu_user }}/.vim/dein.toml
-    dest: /home/{{ ubuntu_user }}/.config/nvim/dein.toml
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    state: link
-
-- name: i3  mkdir .config/i3
-  file:
-    path: /home/{{ ubuntu_user }}/.config/i3
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    state: directory
-- name: i3  ln .config/i3/config
-  file:
-    src: /home/{{ ubuntu_user }}/.dotfiles/i3-config
-    dest: /home/{{ ubuntu_user }}/.config/i3/config
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    state: link
-    force: yes
-- name: i3  ln .i3blocks.conf
-  file:
-    src: /home/{{ ubuntu_user }}/.dotfiles/i3blocks.conf
-    dest: /home/{{ ubuntu_user }}/.i3blocks.conf
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    state: link
-    force: yes
-
-- file:
-    src: /home/{{ ubuntu_user }}/.dotfiles/.xbindkeysrc
+    src: /home/{{ ubuntu_user }}/.config/xbindkeysrc
     dest: /home/{{ ubuntu_user }}/.xbindkeysrc
     state: link
-
-- name: bak logind.conf
-  shell: cp /etc/systemd/logind.conf /etc/systemd/logind.conf.bak
-- shell: |
-    echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
-    service systemd-logind restart

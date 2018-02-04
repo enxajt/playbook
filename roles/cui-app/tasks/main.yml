@@ -105,15 +105,15 @@
     sh /home/{{ ubuntu_user }}/init/install-tmux.sh
     sh ~/init/install-neovim.sh 
 
-# mv to start-up.sh
-#rm $home/.local/share/recently-used.xbel
+- name: fzf
+  become: true
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    ghq get https://github.com/junegunn/fzf.git
+    sh .ghq/github.com/junegunn/fzf/install
 
-- git:
-    repo: git://github.com/junegunn/fzf.git
-    dest: /home/{{ ubuntu_user }}/fzf
-    depth: 1
-#- name: ~/.fzf/install
-#  become: true
-#  become_user: "{{ ubuntu_user }}"
-#  shell: |
-#    sh ~/fzf/install
+- name: HandleLidSwitch=ignore
+- shell: |
+    cp /etc/systemd/logind.conf /etc/systemd/logind.conf.bak
+    echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
+    service systemd-logind restart
