@@ -94,6 +94,8 @@
     state: link
 
 - name: .vim  clone
+  become: true
+  become_user: "{{ ubuntu_user }}" 
   git:
     repo: git://github.com/enxajt/.vim.git
     dest: /home/{{ ubuntu_user }}/.vim
@@ -101,13 +103,6 @@
 - name: .vim  git set-url
   shell: |
     cd /home/{{ ubuntu_user }}/.vim && git remote set-url origin git@github.com:enxajt/.vim.git
-- name: .vim  chmod && chown
-  file:
-    path: /home/{{ ubuntu_user }}/.vim 
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    mode: 0777
-    recurse: yes
 - name: .vim  mkdir .config/nvim
   file:
     path: /home/{{ ubuntu_user }}/.config/nvim
