@@ -7,11 +7,11 @@
     repo: 'ppa:linrunner/tlp'
 - name: apt install
   apt:
-    update_cache: yes
+    update_cache: true
     name: "{{ item }}"
     state: latest
-    autoclean: yes
-    autoremove: yes
+    autoclean: true
+    autoremove: true
   with_items:
     #- aptitude
     - git
@@ -55,9 +55,9 @@
     - vagrant
     - virtualbox
 
-    #- fonts-ricty-diminished 
-    #- fonts-ipafont-gothic
-    #- fonts-ipafont-mincho
+    - fonts-ricty-diminished 
+    - fonts-ipafont-gothic
+    - fonts-ipafont-mincho
 #- shell: |
 #    sudo powertop --calibrate
 #    sudo powertop --auto-tune
@@ -77,7 +77,7 @@
     owner: "{{ ubuntu_user }}" 
     group: "{{ ubuntu_user }}" 
     mode: 0777 
-    recurse: yes
+    recurse: true
   with_items:
     - /home/{{ ubuntu_user }}/.cache
     - /home/{{ ubuntu_user }}/go
@@ -90,7 +90,7 @@
     go get github.com/motemen/ghq
 
 - name: init sh 
-  become: yes
+  become: true
   become_user: "{{ ubuntu_user }}" 
   git:
     repo: git://github.com/enxajt/init.git
@@ -98,14 +98,8 @@
 - name: git remote set-url origin git@github.com:enxajt/init.git
   shell: |
     cd /home/{{ ubuntu_user }}/init && git remote set-url origin git@github.com:enxajt/init.git
-#- file: 
-#    path: /home/{{ ubuntu_user }}/init
-#    owner: "{{ ubuntu_user }}" 
-#    group: "{{ ubuntu_user }}" 
-#    mode: 0777 
-#    recurse: yes
 - name: init sh 
-  become: yes
+  become: true
   become_user: "{{ ubuntu_user }}" 
   shell: | 
     sh /home/{{ ubuntu_user }}/init/install-tmux.sh
@@ -119,7 +113,7 @@
     dest: /home/{{ ubuntu_user }}/fzf
     depth: 1
 #- name: ~/.fzf/install
-#  become: yes
+#  become: true
 #  become_user: "{{ ubuntu_user }}"
 #  shell: |
 #    sh ~/fzf/install
