@@ -4,14 +4,31 @@
   shell: |
     export PATH=$HOME/go/bin:$PATH
     ghq get https://github.com/junegunn/fzf.git
-    sh .ghq/github.com/junegunn/fzf/install
+    $HOME/.ghq/github.com/junegunn/fzf/install
 
+- name: apt install
+  apt:
+    update_cache: true
+    name: "{{ item }}"
+    state: latest
+    autoclean: true
+    autoremove: true
+  with_items:
+    - libdbus-1-dev
+    - libx11-dev
+    - libxinerama-dev
+    - libxrandr-dev
+    - libxss-dev
+    - libglib2.0-dev
+    - libpango1.0-dev
+    - libgtk-3-dev
+    - libxdg-basedir-dev
 - name: dunst (notification)
   become: true
   become_user: "{{ ubuntu_user }}"
   shell: |
     export PATH=$HOME/go/bin:$PATH
     ghq get https://github.com/dunst-project/dunst.git
-    cd .ghq/github.com/dunst-project/dunst
+    cd $HOME/.ghq/github.com/dunst-project/dunst
     #sudo make
     sudo make install
