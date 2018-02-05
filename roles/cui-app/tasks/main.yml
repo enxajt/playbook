@@ -79,24 +79,6 @@
 #    wget https://sourceforge.net/projects/ksar/files/latest/download -O /usr/local/src/ksar.zip
 #    unzip /usr/local/src/ksar.zip -d /usr/local/src
 
-- file:
-    state: directory
-    path: '{ item }'
-    owner: "{{ ubuntu_user }}" 
-    group: "{{ ubuntu_user }}" 
-    mode: 0777 
-    recurse: true
-  with_items:
-    - /home/{{ ubuntu_user }}/.cache
-    - /home/{{ ubuntu_user }}/go
-- name: install go, get ghq
-  shell: |
-    wget https://dl.google.com/go/go1.9.3.linux-amd64.tar.gz -O /home/{{ ubuntu_user }}/.cache/go.tar.gz
-    sudo tar -C /usr/local -xzf /home/{{ ubuntu_user }}/.cache/go.tar.gz
-    export PATH=$PATH:/usr/local/go/bin
-    export GOPATH=$HOME/go
-    go get github.com/motemen/ghq
-
 - name: init sh 
   become: true
   become_user: "{{ ubuntu_user }}" 
@@ -113,15 +95,33 @@
     sh /home/{{ ubuntu_user }}/init/install-tmux.sh
     sh ~/init/install-neovim.sh 
 
-- name: fzf
-  become: true
-  become_user: "{{ ubuntu_user }}"
-  shell: |
-    ghq get https://github.com/junegunn/fzf.git
-    sh .ghq/github.com/junegunn/fzf/install
-
 - name: HandleLidSwitch=ignore
-- shell: |
+  shell: |
     cp /etc/systemd/logind.conf /etc/systemd/logind.conf.bak
     echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
     service systemd-logind restart
+
+#- name: after zshrc : prepare to install go
+#  file:
+#    state: directory
+#    path: '{ item }'
+#    owner: "{{ ubuntu_user }}" 
+#    group: "{{ ubuntu_user }}" 
+#    mode: 0777 
+#    recurse: true
+#  with_items:
+#    - /home/{{ ubuntu_user }}/.cache
+#    - /home/{{ ubuntu_user }}/go
+#- name: install go, get ghq
+#  become: true
+#  become_user: "{{ ubuntu_user }}"
+#  shell: |
+#    wget https://dl.google.com/go/go1.9.3.linux-amd64.tar.gz -O /home/{{ ubuntu_user }}/.cache/go.tar.gz
+#    sudo tar -C /usr/local -xzf /home/{{ ubuntu_user }}/.cache/go.tar.gz
+#    go get github.com/motemen/ghq
+#- name: fzf
+#  become: true
+#  become_user: "{{ ubuntu_user }}"
+#  shell: |
+#    ghq get https://github.com/junegunn/fzf.git
+#    sh .ghq/github.com/junegunn/fzf/install
