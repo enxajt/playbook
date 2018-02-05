@@ -1,0 +1,5 @@
+- name: HandleLidSwitch=ignore
+  shell: |
+    cp /etc/systemd/logind.conf /etc/systemd/logind.conf.bak
+    echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
+    service systemd-logind restart

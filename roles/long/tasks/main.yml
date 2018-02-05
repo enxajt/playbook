@@ -1,0 +1,18 @@
+- shell: |
+    sudo powertop --calibrate
+    sudo powertop --auto-tune
+    sudo tlp start
+
+- name: sar grapher
+  become: true
+  shell: |
+    cp /etc/default/sysstat /etc/default/sysstat.bak
+    sed -ie 's/^ENABLED="false"$/ENABLED="true"/' /etc/default/sysstat
+    /etc/init.d/sysstat start
+    wget https://sourceforge.net/projects/ksar/files/latest/download -O /usr/local/src/ksar.zip
+    yes | unzip /usr/local/src/ksar.zip -d /usr/local/src
+# how to use ksar : visualize sar file
+#LANG=C   #文字化け対策
+#cd /var/log/sa
+#sar -A -f saXX > saXX.txt
+#java -jar kSar-4.0.12.jar &

@@ -1,0 +1,19 @@
+- name: after zshrc : prepare to install go
+  file:
+    state: directory
+    path: '{ item }'
+    owner: "{{ ubuntu_user }}" 
+    group: "{{ ubuntu_user }}" 
+    mode: 0777 
+    recurse: true
+  with_items:
+    - /home/{{ ubuntu_user }}/.cache
+    - /home/{{ ubuntu_user }}/go
+
+- name: install go, get ghq
+  become: true
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    wget https://dl.google.com/go/go1.9.3.linux-amd64.tar.gz -O /home/{{ ubuntu_user }}/.cache/go.tar.gz
+    sudo tar -C /usr/local -xzf /home/{{ ubuntu_user }}/.cache/go.tar.gz
+    go get github.com/motemen/ghq
