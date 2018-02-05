@@ -1,4 +1,4 @@
-- name: after zshrc : prepare to install go
+- name: after zshrc, prepare to install go
   file:
     state: directory
     path: '{{ item }}'

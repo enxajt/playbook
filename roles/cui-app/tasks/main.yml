@@ -70,7 +70,9 @@
   become: true
   shell: | 
     sed -i -e "s/^NotifyClamd/#NotifyClamd/g" /etc/clamav/freshclam.conf
-    freshclam 
+    systemctl stop clamav-freshclam
+    freshclam
+    systemctl start clamav-freshclam
 
 - name: init sh 
   become: true
