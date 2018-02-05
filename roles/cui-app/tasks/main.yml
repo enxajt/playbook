@@ -90,10 +90,4 @@
     sh /home/{{ ubuntu_user }}/init/install-tmux.sh
     sh /home/{{ ubuntu_user }}/init/install-neovim.sh 
     sh /home/{{ ubuntu_user }}/init/init-xdg.sh
-    sh /home/{{ ubuntu_user }}/init/install-npm.sh 
-- name: diff 3.4 for color
-  become: true
-  #become_user: "{{ ubuntu_user }}" 
-  shell: | 
-    wget -O - http://ftp.jaist.ac.jp/pub/GNU/diffutils/diffutils-3.4.tar.xz | tar xf -C /usr/src
-    cd /usr/src/diffutils-3.4 && ./configure && sudo make install
+    #sh /home/{{ ubuntu_user }}/init/install-npm.sh 

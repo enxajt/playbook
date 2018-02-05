@@ -12,8 +12,12 @@
 
 - name: install go, get ghq
   become: true
+  shell: |
+    wget -O - https://dl.google.com/go/go1.9.3.linux-amd64.tar.gz | tar -xzf - -C /usr/local
+- name: go get ghq
+  become: true
   become_user: "{{ ubuntu_user }}"
   shell: |
-    wget https://dl.google.com/go/go1.9.3.linux-amd64.tar.gz -O /home/{{ ubuntu_user }}/.cache/go.tar.gz
-    sudo tar -C /usr/local -xzf /home/{{ ubuntu_user }}/.cache/go.tar.gz
+    export PATH=$PATH:/usr/local/go/bin
+    export PATH=$HOME/go/bin:$PATH
     go get github.com/motemen/ghq
