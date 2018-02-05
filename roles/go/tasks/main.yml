@@ -19,5 +19,4 @@
   become_user: "{{ ubuntu_user }}"
   shell: |
     export PATH=$PATH:/usr/local/go/bin
-    export PATH=$HOME/go/bin:$PATH
     go get github.com/motemen/ghq

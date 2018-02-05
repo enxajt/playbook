@@ -2,6 +2,7 @@
   become: true
   become_user: "{{ ubuntu_user }}"
   shell: |
+    export PATH=$HOME/go/bin:$PATH
     ghq get https://github.com/junegunn/fzf.git
     sh .ghq/github.com/junegunn/fzf/install
 
@@ -9,6 +10,7 @@
   become: true
   become_user: "{{ ubuntu_user }}"
   shell: |
+    export PATH=$HOME/go/bin:$PATH
     ghq get https://github.com/dunst-project/dunst.git
     cd .ghq/github.com/dunst-project/dunst
     #sudo make
