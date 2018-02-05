@@ -1,7 +1,7 @@
 - name: after zshrc : prepare to install go
   file:
     state: directory
-    path: '{ item }'
+    path: '{{ item }}'
     owner: "{{ ubuntu_user }}" 
     group: "{{ ubuntu_user }}" 
     mode: 0777 
