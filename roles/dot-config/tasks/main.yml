@@ -3,7 +3,7 @@
   become_user: "{{ ubuntu_user }}" 
   git:
     repo: git://github.com/enxajt/.config.git
-    dest: /home/{{ ubuntu_user }}/config 
+    dest: /home/{{ ubuntu_user }}/.config 
     accept_hostkey: yes
 - shell: |
     cd /home/{{ ubuntu_user }}/.config && git remote set-url origin git@github.com:enxajt/.config.git
