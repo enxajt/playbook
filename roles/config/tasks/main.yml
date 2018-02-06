@@ -12,3 +12,9 @@
     cp /etc/systemd/logind.conf /etc/systemd/logind.conf.bak
     echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
     service systemd-logind restart
+
+- name: mkdir -p /home/enxajt/.local/share/Trash/files
+  become: yes
+  become_user: "{{ ubuntu_user }}" 
+  shell: |
+    mkdir -p /home/enxajt/.local/share/Trash/files
