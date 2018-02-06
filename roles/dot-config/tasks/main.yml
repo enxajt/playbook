@@ -3,10 +3,12 @@
   become_user: "{{ ubuntu_user }}" 
   git:
     repo: git://github.com/enxajt/.config.git
-    dest: /home/{{ ubuntu_user }}/.config 
+    dest: /home/{{ ubuntu_user }}/config 
     accept_hostkey: yes
 - shell: |
     cd /home/{{ ubuntu_user }}/.config && git remote set-url origin git@github.com:enxajt/.config.git
+    cp -R $HOME/config/* $HOME/.config/
+    cp -R $HOME/config/.* $HOME/.config/
 
 - user:
     name: "{{ ubuntu_user }}"
@@ -54,3 +56,7 @@
     src: /home/{{ ubuntu_user }}/.config/xbindkeysrc
     dest: /home/{{ ubuntu_user }}/.xbindkeysrc
     state: link
+
+- name: init-xdg after clone .config
+  shell: |
+    sh /home/{{ ubuntu_user }}/init/init-xdg.sh

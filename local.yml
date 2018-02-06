@@ -6,9 +6,11 @@
     ubuntu_user: enxajt
     ubuntu_pass: enxajt
   roles:
+    - apt-in-Japan
+    
     - cui-app
     - gui-app
-    - dotfiles
+    - dot-config
     - config
 
     - go
@@ -17,4 +19,4 @@
     - docker-inst
     - japanese
     - long
-    - reboot
+    - end

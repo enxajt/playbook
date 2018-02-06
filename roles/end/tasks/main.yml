@@ -1,4 +1,4 @@
-- name: cp
+- name: apt autoremove, purge
   become: yes
   become_user: root
   shell: |
@@ -18,9 +18,8 @@
       unity-scope-video-remote \
       btrfs-tools
     dpkg -l 'linux-*' | sed '/^ii/!d;/'"$(uname -r | sed "s/\(.*\)-\([^0-9]\+\)/\1/")"'/d;s/^[^ ]* [^ ]* \([^ ]*\).*/\1/;/[0-9]/!d' | xargs sudo apt-get -y purge
-    mkdir -p /vagrant/shared/bak/apt
-    [ -e /vagrant/shared/bak/apt/archives ] && mv /vagrant/shared/bak/apt/archives /vagrant/shared/bak/apt/archives.bak
-    cp -r /var/cache/apt/archives/ /vagrant/shared/bak/apt/
-    mv /vagrant/shared/bak/apt/pkgcache /vagrant/shared/bak/apt/pkgcache.bak
-    cp -r /var/cache/apt/pkgcache.bin /vagrant/shared/bak/apt/
-    apt-get clean
+
+- name: reboot
+  become: yes
+  become_user: root
+  command: shutdown -r now
