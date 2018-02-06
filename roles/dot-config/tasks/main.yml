@@ -7,8 +7,6 @@
     accept_hostkey: yes
 - shell: |
     cd /home/{{ ubuntu_user }}/.config && git remote set-url origin git@github.com:enxajt/.config.git
-    cp -R $HOME/config/* $HOME/.config/
-    cp -R $HOME/config/.* $HOME/.config/
 
 - user:
     name: "{{ ubuntu_user }}"
