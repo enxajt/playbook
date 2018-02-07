@@ -18,3 +18,9 @@
   become_user: "{{ ubuntu_user }}" 
   shell: |
     mkdir -p /home/enxajt/.local/share/Trash/files
+
+- name: GRUB
+  become: yes
+  become_user: root 
+  shell: |
+    sed -ie 's/^GRUB_CMDLINE_LINUX_DEFAULT=\"splash quiet\"$/GRUB_CMDLINE_LINUX_DEFAULT=\"\"/' /etc/default/grub
