@@ -40,6 +40,7 @@
     dest: /usr/share/lightdm/lightdm.conf.d/60-lightdm-gtk-greeter.conf
     state: link
     force: yes
+
 - file:
     path: /etc/lightdm/lightdm.conf.d
     state: directory
