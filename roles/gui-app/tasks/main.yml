@@ -88,6 +88,7 @@
   register: which_termite
   failed_when: which_termite.rc not in [0, 1]
 - name: for termite
+  when: which_termite.stdout == ""
   apt: name={{item}}
   with_items:
     - g++
@@ -102,31 +103,37 @@
     - libgirepository1.0-dev
     - libxml2-utils
     - gperf
+- name: vte-ng
   when: which_termite.stdout == ""
-- git:
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  git:
     repo: https://github.com/thestinger/vte-ng.git
     dest: /home/{{ ubuntu_user }}/.cache/vte-ng
     force: yes
+#- name: 
+#  when: which_termite.stdout == ""
+#  file:
+#    path: /home/{{ ubuntu_user }}/.cache/vte-ng
+#    owner: "{{ ubuntu_user }}"
+#    group: "{{ ubuntu_user }}"
+#    mode: 0777
+#    recurse: yes
+- name: vte-ng
   when: which_termite.stdout == ""
-- file:
-    path: /home/{{ ubuntu_user }}/.cache/vte-ng
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    mode: 0777
-    recurse: yes
-  when: which_termite.stdout == ""
-- git:
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  git:
     repo: https://github.com/thestinger/termite.git
     dest: /home/{{ ubuntu_user }}/.cache/termite
     force: yes
-  when: which_termite.stdout == ""
-- file:
-    path: /home/{{ ubuntu_user }}/.cache/termite
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
-    mode: 0777
-    recurse: yes
-  when: which_termite.stdout == ""
+#- file:
+#    path: /home/{{ ubuntu_user }}/.cache/termite
+#    owner: "{{ ubuntu_user }}"
+#    group: "{{ ubuntu_user }}"
+#    mode: 0777
+#    recurse: yes
+#  when: which_termite.stdout == ""
 - name: user
   become: yes
   become_user: "{{ ubuntu_user }}"
