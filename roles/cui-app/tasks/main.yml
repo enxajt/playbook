@@ -50,6 +50,8 @@
 
     # for local machine : hard ware
     - xbacklight
+    - pulseaudio
+    - pavucontrol
     # for local machine : drive
     - exfat-fuse
     - exfat-utils
@@ -62,6 +64,8 @@
     # not for virtualmachine
     - vagrant
     - virtualbox
+
+    - pdftk
 
     - fonts-ricty-diminished 
     - fonts-ipafont-gothic
