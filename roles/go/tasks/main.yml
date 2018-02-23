@@ -10,7 +10,7 @@
     - /home/{{ ubuntu_user }}/.cache
     - /home/{{ ubuntu_user }}/go
 
-- name: install go, get ghq
+- name: install go
   become: true
   shell: |
     wget -O - https://dl.google.com/go/go1.9.3.linux-amd64.tar.gz | tar -xzf - -C /usr/local

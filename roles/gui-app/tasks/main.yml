@@ -20,6 +20,20 @@
     - gimp
     - printer-driver-gutenprint
     - libpango1.0-0
+- name: git clone script
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  git:
+    repo: https://github.com/enxajt/script.git
+    dest: /home/{{ ubuntu_user }}/script
+    #force: yes
+- name: sudo ln -s ~/script/scan.sh /usr/bin/scan
+  file:
+    src: /home/{{ ubuntu_user }}/script/scan.sh
+    dest: /usr/bin/scan
+    owner: root
+    group: root
+    state: link
 
 - apt_repository:
     repo: "{{ item }}"
@@ -37,6 +51,7 @@
   apt: name={{item}}
   with_items:
     - firefox
+    - flashplugin-installer
     - chromium-browser
     - goldendict
     - redshift
