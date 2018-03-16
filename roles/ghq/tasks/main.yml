@@ -6,7 +6,7 @@
     ghq get https://github.com/junegunn/fzf.git
     $HOME/.ghq/github.com/junegunn/fzf/install
 
-- name: apt install
+- name: dependencies for Dunst
   apt:
     update_cache: true
     name: "{{ item }}"
@@ -32,3 +32,5 @@
     cd $HOME/.ghq/github.com/dunst-project/dunst
     #sudo make
     sudo make install
+    mvt /usr/local/share/dunst
+    sudo ln -s /home/enxajt/.config/dunst /usr/local/share/dunst
