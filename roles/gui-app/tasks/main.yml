@@ -189,3 +189,11 @@
   become_user: root
   with_items:
     yacreader
+
+- name: for 'PINE64 Installer' or 'resin-io/etcher'(Flash OS images to SD cards & USB drives)
+  apt: name={{item}}
+  become: yes
+  become_user: root
+  with_items:
+    policykit-1-gnome
+    mate-polkit-bin
