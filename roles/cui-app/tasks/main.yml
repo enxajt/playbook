@@ -39,11 +39,6 @@
     - vim
     - jq
 
-    - x11-xserver-utils
-    - powertop 
-    - tlp 
-    - tlp-rdw
-
     - w3m
     - w3m-img
 
@@ -54,6 +49,10 @@
     - xbacklight
     - pulseaudio
     - pavucontrol
+    - x11-xserver-utils
+    - powertop 
+    - tlp 
+    - tlp-rdw
     # for local machine : drive
     - exfat-fuse
     - exfat-utils
@@ -120,8 +119,8 @@
   become: yes
   become_user: "{{ ubuntu_user }}" 
   shell: |
-  git config --global user.email "{{ ubuntu_user }}@gmail.com"
-  git config --global user.name "{{ ubuntu_user }}"
+    git config --global user.email "{{ ubuntu_user }}@gmail.com"
+    git config --global user.name "{{ ubuntu_user }}"
 
 - name: Bluetooth
   become: yes

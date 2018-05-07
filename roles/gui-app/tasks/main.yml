@@ -127,14 +127,6 @@
     repo: https://github.com/thestinger/vte-ng.git
     dest: /home/{{ ubuntu_user }}/.cache/vte-ng
     force: yes
-#- name: 
-#  when: which_termite.stdout == ""
-#  file:
-#    path: /home/{{ ubuntu_user }}/.cache/vte-ng
-#    owner: "{{ ubuntu_user }}"
-#    group: "{{ ubuntu_user }}"
-#    mode: 0777
-#    recurse: yes
 - name: vte-ng
   when: which_termite.stdout == ""
   become: yes
@@ -143,13 +135,6 @@
     repo: https://github.com/thestinger/termite.git
     dest: /home/{{ ubuntu_user }}/.cache/termite
     force: yes
-#- file:
-#    path: /home/{{ ubuntu_user }}/.cache/termite
-#    owner: "{{ ubuntu_user }}"
-#    group: "{{ ubuntu_user }}"
-#    mode: 0777
-#    recurse: yes
-#  when: which_termite.stdout == ""
 - name: user
   become: yes
   become_user: "{{ ubuntu_user }}"
