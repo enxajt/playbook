@@ -121,6 +121,7 @@
   shell: |
     git config --global user.email "{{ ubuntu_user }}@gmail.com"
     git config --global user.name "{{ ubuntu_user }}"
+    git config --global core.editor "vim"
 
 - name: Bluetooth
   become: yes
