@@ -1,0 +1,44 @@
+- name: prepare for installing Canon MG7101 series driver
+  apt: name={{item}}
+  become: yes
+  become_user: root
+  with_items:
+    # canon scanner
+    - sane
+    - xsane
+    - xsane-common
+    - sane-utils
+    - libsane
+    - libsane-common
+    - libsane-dbg
+    - libsane-dev
+    - libsane-extras
+    - libsane-extras-common
+    - libsane-extras-dbg
+    - libsane-extras-dev
+    - simple-scan
+    - gimp
+    - printer-driver-gutenprint
+    - libpango1.0-0
+- name: git clone script
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  git:
+    repo: https://github.com/enxajt/script.git
+    dest: /home/{{ ubuntu_user }}/script
+    #force: yes
+- name: sudo ln -s ~/script/scan.sh /usr/bin/scan
+  file:
+    src: /home/{{ ubuntu_user }}/script/scan.sh
+    dest: /usr/bin/scan
+    owner: root
+    group: root
+    state: link
+
+- name: for 'PINE64 Installer' or 'resin-io/etcher'(Flash OS images to SD cards & USB drives)
+  apt: name={{item}}
+  become: yes
+  become_user: root
+  with_items:
+    policykit-1-gnome
+    mate-polkit-bin
