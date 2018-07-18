@@ -33,4 +33,4 @@
     #sudo make
     sudo make install
     mvt /usr/local/share/dunst
-    sudo ln -s /home/enxajt/.config/dunst /usr/local/share/dunst
+    sudo ln -s /home/{{ ubuntu_user }}/.config/dunst /usr/local/share/dunst
