@@ -119,15 +119,6 @@
   become: yes
   become_user: "{{ ubuntu_user }}" 
   shell: |
-    git config --global user.email "{{ ubuntu_user }}@gmail.com"
+    git config --global user.email "{{ mail }}"
     git config --global user.name "{{ ubuntu_user }}"
     git config --global core.editor "vim"
-
-- name: Bluetooth
-  become: yes
-  become_user: root
-  shell: |
-    #sed -ie 's/#AutoEnable=false/AutoEnable=true/g' /etc/bluetooth/main.conf
-    apt-get install bluez-tools
-    systemctl start bluetooth
-    systemctl enable bluetooth
