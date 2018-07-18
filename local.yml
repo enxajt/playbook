@@ -3,12 +3,14 @@
   hosts: localhost
   become: true
   vars:
-    ubuntu_user: enxajt
-    ubuntu_pass: enxajt
+    ubuntu_user: hinako
+    ubuntu_pass: hinako
+    mail: baihinato@gmail.com
   roles:
     - apt-in-Japan
     
     - cui-app
+    # - bluetooth
     - gui-app
     - printer_pine64
     - dot-config
