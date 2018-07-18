@@ -10,6 +10,7 @@
     
     - cui-app
     - gui-app
+    - printer_pine64
     - dot-config
     - config
 
