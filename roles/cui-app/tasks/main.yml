@@ -98,6 +98,6 @@
   become: yes
   become_user: "{{ ubuntu_user }}" 
   shell: |
-    git config --global user.email "{{ mail }}"
+    git config --global user.email "{{ email }}"
     git config --global user.name "{{ ubuntu_user }}"
     git config --global core.editor "vim"
