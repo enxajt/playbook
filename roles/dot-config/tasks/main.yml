@@ -81,6 +81,23 @@
   with_items:
     - /home/{{ ubuntu_user }}/init
 
+- name: npm install apt-get
+  apt: name={{item}}
+  with_items:
+    - build-essential
+    - nodejs
+    - npm
+- name: npm install
+  shell: |
+    - # if npm -v doesn't work, restart shell
+    - sudo npm install n -g
+    - sudo n stable
+    - sudo ln -sf /usr/local/bin/node /usr/bin/node
+    - sudo apt-get -y purge nodejs npm
+    - npm update
+    - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+    - sudo apt-get install -y nodejs
+
 - name: tmux install apt-get
   apt: name={{item}}
   with_items:
