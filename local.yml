@@ -3,21 +3,21 @@
   hosts: localhost
   become: true
   vars:
-    ubuntu_user: hinako
-    ubuntu_pass: hinako
-    mail: baihinato@gmail.com
+    ubuntu_user: enxajt
+    ubuntu_pass: enxajt
+    mail: enxajt@gmail.com
   roles:
     - apt-in-Japan
     
     - cui-app
     # - bluetooth
     - gui-app
-    - printer_pine64
+    # - printer_pine64
     - dot-config
     - config
 
-    - go
-    - ghq
+    #- go
+    #- ghq
 
     - docker-inst
     - japanese
