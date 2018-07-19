@@ -25,11 +25,11 @@
   become_user: "{{ SUDO_USER }}"
   git:
     repo: https://github.com/enxajt/script.git
-    dest: {{ HOME }/script
+    dest: {{ HOME }}/script
     #force: yes
 - name: sudo ln -s ~/script/scan.sh /usr/bin/scan
   file:
-    src: {{ HOME }/script/scan.sh
+    src: {{ HOME }}/script/scan.sh
     dest: /usr/bin/scan
     owner: root
     group: root

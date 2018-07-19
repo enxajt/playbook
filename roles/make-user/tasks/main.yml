@@ -30,6 +30,6 @@
   become: yes
   become_user: root
   file:
-    path: {{ HOME }
+    path: {{ HOME }}
     owner: "{{ SUDO_USER }}"
     group: "{{ SUDO_USER }}"

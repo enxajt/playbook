@@ -33,4 +33,4 @@
     #sudo make
     sudo make install
     mvt /usr/local/share/dunst
-    sudo ln -s {{ HOME }/.config/dunst /usr/local/share/dunst
+    sudo ln -s {{ HOME }}/.config/dunst /usr/local/share/dunst

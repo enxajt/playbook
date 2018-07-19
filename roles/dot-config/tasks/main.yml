@@ -3,18 +3,18 @@
   become_user: "{{ SUDO_USER }}" 
   git:
     repo: git://github.com/enxajt/.config.git
-    dest: {{ HOME }/.config 
+    dest: {{ HOME }}/.config 
     accept_hostkey: yes
     force: yes
 - shell: |
-    cd {{ HOME }/.config && git remote set-url origin git@github.com:enxajt/.config.git
+    cd {{ HOME }}/.config && git remote set-url origin git@github.com:enxajt/.config.git
 
 - user:
     name: "{{ SUDO_USER }}"
     shell: /bin/zsh
 - file:
-    src: {{ HOME }/.config/zsh/zshrc
-    dest: {{ HOME }/.zshrc
+    src: {{ HOME }}/.config/zsh/zshrc
+    dest: {{ HOME }}/.zshrc
     owner: "{{ SUDO_USER }}"
     group: "{{ SUDO_USER }}"
     state: link
@@ -24,20 +24,20 @@
   become_user: "{{ SUDO_USER }}" 
   git:
     repo: git://github.com/olivierverdier/zsh-git-prompt.git
-    dest: {{ HOME }/.config/zsh-git-prompt
+    dest: {{ HOME }}/.config/zsh-git-prompt
     accept_hostkey: yes
 
 - name: clone tmux-plugins
   git:
     repo: git://github.com/tmux-plugins/tpm.git
-    dest: {{ HOME }/.config/tmux/plugins/tpm 
+    dest: {{ HOME }}/.config/tmux/plugins/tpm 
     accept_hostkey: yes
 
 - file:
     path: /usr/share/lightdm/lightdm.conf.d
     state: directory
 - file:
-    src: {{ HOME }/.config/desktop/60-lightdm-gtk-greeter.conf
+    src: {{ HOME }}/.config/desktop/60-lightdm-gtk-greeter.conf
     dest: /usr/share/lightdm/lightdm.conf.d/60-lightdm-gtk-greeter.conf
     state: link
     force: yes
@@ -47,14 +47,14 @@
     state: directory
 - name: Xresources
   file:
-    src: {{ HOME }/.config/Xresources
+    src: {{ HOME }}/.config/Xresources
     dest: /etc/lightdm/lightdm.conf.d/.Xresources
     state: link
 
 - name: xbindkeysrc
   file:
-    src: {{ HOME }/.config/xbindkeysrc
-    dest: {{ HOME }/.xbindkeysrc
+    src: {{ HOME }}/.config/xbindkeysrc
+    dest: {{ HOME }}/.xbindkeysrc
     state: link
 
 - name: git clone init 
@@ -62,24 +62,24 @@
   become_user: "{{ SUDO_USER }}" 
   git:
     repo: git://github.com/enxajt/init.git
-    dest: {{ HOME }/init
+    dest: {{ HOME }}/init
 - name: git remote set-url origin git@github.com:enxajt/init.git
   shell: |
-    cd {{ HOME }/init && git remote set-url origin git@github.com:enxajt/init.git
+    cd {{ HOME }}/init && git remote set-url origin git@github.com:enxajt/init.git
 - name: init sh 
   become: true
   become_user: "{{ SUDO_USER }}" 
   shell: | 
-    #sh {{ HOME }/init/install-neovim.sh
+    #sh {{ HOME }}/init/install-neovim.sh
 - name: init-xdg after clone .config
   shell: |
-    sh {{ HOME }/init/init-xdg.sh
+    sh {{ HOME }}/init/init-xdg.sh
 - name: Removing
   file:
     path: "{{ item }}"
     state: absent
   with_items:
-    - {{ HOME }/init
+    - {{ HOME }}/init
 
 - name: npm install apt-get
   apt: name={{item}}
@@ -118,13 +118,13 @@
   become_user: "{{ SUDO_USER }}" 
   git:
     repo: git://github.com/tmux/tmux
-    dest: {{ HOME }/.cache/tmux
+    dest: {{ HOME }}/.cache/tmux
     accept_hostkey: yes
     update: yes
     force: yes
 - name: tmux install
   vars:
-    path_tmux: {{ HOME }/.cache/tmux
+    path_tmux: {{ HOME }}/.cache/tmux
   shell: |
     sh {{ path_tmux }}/autogen.sh
     {{ path_tmux }}/configure

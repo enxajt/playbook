@@ -7,8 +7,8 @@
     mode: 0777 
     recurse: true
   with_items:
-    - {{ HOME }/.cache
-    - {{ HOME }/go
+    - {{ HOME }}/.cache
+    - {{ HOME }}/go
 
 - name: install go
   become: true
