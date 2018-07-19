@@ -9,12 +9,12 @@
   roles:
     - apt-in-Japan
     
+    - dot-config
     - cui-app
     #- bluetooth
     - gui-app
     #- printer_pine64
     #- ebook
-    - dot-config
     - config
 
     #- go

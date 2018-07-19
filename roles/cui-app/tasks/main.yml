@@ -93,8 +93,8 @@
   become_user: "{{ ubuntu_user }}" 
   shell: | 
     sh /home/{{ ubuntu_user }}/init/install-tmux.sh
-    sh /home/{{ ubuntu_user }}/init/install-neovim.sh 
-    #sh /home/{{ ubuntu_user }}/init/install-npm.sh 
+    sh /home/{{ ubuntu_user }}/init/install-neovim.sh
+    sh /home/{{ ubuntu_user }}/init/install-npm.sh 
 - name: Removing
   file:
     path: "{{ item }}"
