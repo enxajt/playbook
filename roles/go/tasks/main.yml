@@ -1,14 +1,14 @@
 - name: after zshrc, prepare to install go
   file:
     state: directory
-    path: '{{ item }}'
+    path:  "{{ item }}"
     owner: "{{ SUDO_USER }}" 
     group: "{{ SUDO_USER }}" 
     mode: 0777 
     recurse: true
   with_items:
-    - {{ HOME }}/.cache
-    - {{ HOME }}/go
+    - "{{ HOME }}".cache
+    - "{{ HOME }}"go
 
 - name: install go
   become: true
