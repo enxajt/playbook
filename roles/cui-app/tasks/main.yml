@@ -19,6 +19,8 @@
     #- aptitude
     - xbindkeys
 
+    - wget
+    - curl
     - git
     - zsh
     - tree

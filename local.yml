@@ -2,10 +2,21 @@
 - name: local ubuntu desktop
   hosts: localhost
   become: true
-  vars:
-    ubuntu_user: enxajt
-    ubuntu_pass: enxajt
-    mail: enxajt@gmail.com
+  # vars:
+  #   ubuntu_user: enxajt
+  #   ubuntu_pass: enxajt
+  #   email: enxajt@gmail.com
+  vars_prompt:
+    - name: ubuntu_user
+      prompt: "input ubuntu_user."
+      private: no
+    - name: ubuntu_pass
+      prompt: "input ubuntu_pass."
+      private: no
+    - name: email
+      prompt: "input email."
+      private: no
+
   roles:
     - apt-in-Japan
     
