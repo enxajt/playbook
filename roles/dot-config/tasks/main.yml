@@ -121,7 +121,7 @@
     dest: /home/{{ ubuntu_user }}/.cache/tmux
     accept_hostkey: yes
     update: yes
-    force: no
+    force: yes
 - name: tmux install
   vars:
     path_tmux: /home/{{ ubuntu_user }}/.cache/tmux
