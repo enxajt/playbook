@@ -69,8 +69,7 @@
   become: true
   become_user: "{{ ubuntu_user }}" 
   shell: | 
-    sh /home/{{ ubuntu_user }}/init/install-tmux.sh
-    sh /home/{{ ubuntu_user }}/init/install-neovim.sh
+    #sh /home/{{ ubuntu_user }}/init/install-neovim.sh
     sh /home/{{ ubuntu_user }}/init/install-npm.sh 
 - name: init-xdg after clone .config
   shell: |
@@ -81,3 +80,28 @@
     state: absent
   with_items:
     - /home/{{ ubuntu_user }}/init
+
+- name: tmux install apt-get
+  apt: name={{item}}
+  with_items:
+    - automake 
+    - libevent-dev 
+    - libncurses5-dev
+    - xsel
+- name: tmux install clone
+  become: true
+  become_user: "{{ ubuntu_user }}" 
+  git:
+    repo: git://github.com/tmux/tmux
+    dest: /home/{{ ubuntu_user }}/.cache/tmux
+    accept_hostkey: yes
+    update: yes
+    force: no
+- name: tmux install
+  vars:
+    path_tmux: /home/{{ ubuntu_user }}/.cache/tmux
+  shell: |
+    sh {{ path_tmux }}/autogen.sh
+    {{ path_tmux }}/configure
+    cd {{ path_tmux }} && make -j4
+    cd {{ path_tmux }} && sudo make install
