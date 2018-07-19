@@ -95,14 +95,20 @@
   with_items:
     - n
 - name: npm install
+  become: true
+  become_user: root
   shell: |
-    - sudo n stable
+    - n stable
 - name: npm install 2
+  become: true
+  become_user: root
   shell: |
-    - sudo ln -sf /usr/local/bin/node /usr/bin/node
+    - ln -sf /usr/local/bin/node /usr/bin/node
 - name: npm install 3
+  become: true
+  become_user: root
   shell: |
-    - sudo apt-get -y purge nodejs npm
+    - apt-get -y purge nodejs npm
 - name: npm install 4
   shell: |
     - npm update
