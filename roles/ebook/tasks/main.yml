@@ -1,0 +1,22 @@
+- name: Calibre ebook reader
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
+    mkdir -p $HOME/.config/calibre/DeDRM_tools
+    wget https://github.com/apprenticeharper/DeDRM_tools/releases/download/v6.5.5/DeDRM_tools_6.5.5.zip -O DeDRM_tools.temp
+    unzip DeDRM_tools.temp -d $HOME/.config/calibre/DeDRM_tools/
+    mvt DeDRM_tools.temp
+    # Preferences -> Advanced -> Plugins -> "Load plugin from file" button. 
+
+- name: yac reader
+  become: yes
+  become_user: root
+  shell: |
+    sh -c "echo 'deb http://download.opensuse.org/repositories/home:/selmf/xUbuntu_16.04/ /' > /etc/apt/sources.list.d/yacreader.list"
+- name: yac reader
+  apt: name={{item}}
+  become: yes
+  become_user: root
+  with_items:
+    yacreader

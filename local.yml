@@ -10,9 +10,10 @@
     - apt-in-Japan
     
     - cui-app
-    # - bluetooth
+    #- bluetooth
     - gui-app
-    # - printer_pine64
+    #- printer_pine64
+    #- ebook
     - dot-config
     - config
 
