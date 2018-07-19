@@ -34,7 +34,7 @@
     #- go
     #- ghq
 
-    - docker-inst
+    #- docker-inst
     - japanese
     #- long
     - end
