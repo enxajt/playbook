@@ -90,7 +90,7 @@
 
 - name: npm install
   shell: |
-    - # if npm -v doesn't work, restart shell
+    # if npm -v doesn't work, restart shell
     - sudo npm install n -g
     - sudo n stable
     - sudo ln -sf /usr/local/bin/node /usr/bin/node
