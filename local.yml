@@ -13,8 +13,11 @@
     - name: ubuntu_pass
       prompt: "input ubuntu_pass."
       private: no
-    - name: email
-      prompt: "input email."
+    - name: git_user
+      prompt: "input git_user."
+      private: no
+    - name: git_email
+      prompt: "input git_email."
       private: no
 
   roles:

@@ -1,6 +1,6 @@
 - name: Calibre ebook reader
   become: yes
-  become_user: "{{ ubuntu_user }}"
+  become_user: "{{ SUDO_USER }}"
   shell: |
     sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
     mkdir -p $HOME/.config/calibre/DeDRM_tools

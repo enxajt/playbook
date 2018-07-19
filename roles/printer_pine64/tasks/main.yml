@@ -22,14 +22,14 @@
     - libpango1.0-0
 - name: git clone script
   become: yes
-  become_user: "{{ ubuntu_user }}"
+  become_user: "{{ SUDO_USER }}"
   git:
     repo: https://github.com/enxajt/script.git
-    dest: /home/{{ ubuntu_user }}/script
+    dest: {{ HOME }/script
     #force: yes
 - name: sudo ln -s ~/script/scan.sh /usr/bin/scan
   file:
-    src: /home/{{ ubuntu_user }}/script/scan.sh
+    src: {{ HOME }/script/scan.sh
     dest: /usr/bin/scan
     owner: root
     group: root

@@ -11,16 +11,16 @@
 
 - name: natural scrolling
   file:
-    src: /home/{{ ubuntu_user }}/.dotfiles/desktop/20-natural-scrolling.conf
+    src: {{ HOME }/.dotfiles/desktop/20-natural-scrolling.conf
     dest: /usr/share/X11/xorg.conf.d/20-natural-scrolling.conf
-    owner: "{{ ubuntu_user }}"
-    group: "{{ ubuntu_user }}"
+    owner: "{{ SUDO_USER }}"
+    group: "{{ SUDO_USER }}"
     state: link
 
 # for mate. not working in minimal ubuntu install
 - name: autostart
   become: yes
-  become_user: "{{ ubuntu_user }}"
+  become_user: "{{ SUDO_USER }}"
   shell: |
     mkdir -p ~/.config/autostart
     ln -sf ~/.dotfiles/desktop/after-login.desktop ~/.config/autostart/after-login.desktop

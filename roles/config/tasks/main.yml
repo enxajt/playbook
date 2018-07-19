@@ -15,7 +15,7 @@
 
 - name: mkdir -p /home/enxajt/.local/share/Trash/files
   become: yes
-  become_user: "{{ ubuntu_user }}" 
+  become_user: "{{ SUDO_USER }}" 
   shell: |
     mkdir -p /home/enxajt/.local/share/Trash/files
 

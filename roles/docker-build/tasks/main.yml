@@ -1,6 +1,6 @@
 - name: impress
   become: yes
-  become_user: "{{ ubuntu_user }}"
+  become_user: "{{ SUDO_USER }}"
   shell: |
     docker build -t impress https://github.com/enxajt/docker-impress.git
     docker build -t plantuml https://github.com/enxajt/docker-plantuml.git

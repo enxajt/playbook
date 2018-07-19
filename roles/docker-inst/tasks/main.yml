@@ -29,10 +29,10 @@
   with_items:
     - docker-engine
 
-- name: add {{ ubuntu_user }} to Docker group
+- name: add {{ SUDO_USER }} to Docker group
   become: yes
   become_user: root
-  shell: usermod -aG docker "{{ ubuntu_user }}"
+  shell: usermod -aG docker "{{ SUDO_USER }}"
 
 - name: docker-compose install
   become: yes

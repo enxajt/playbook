@@ -1,5 +1,5 @@
 - name: build plantuml container 
   become: yes
-  become_user: "{{ ubuntu_user }}" 
+  become_user: "{{ SUDO_USER }}" 
   shell: |
     docker build -t plantuml https://github.com/enxajt/docker-plantuml.git

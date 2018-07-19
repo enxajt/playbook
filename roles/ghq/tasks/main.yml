@@ -1,6 +1,6 @@
 - name: fzf
   become: true
-  become_user: "{{ ubuntu_user }}"
+  become_user: "{{ SUDO_USER }}"
   shell: |
     export PATH=$HOME/go/bin:$PATH
     ghq get https://github.com/junegunn/fzf.git
@@ -25,7 +25,7 @@
     - libxdg-basedir-dev
 - name: dunst (notification)
   become: true
-  become_user: "{{ ubuntu_user }}"
+  become_user: "{{ SUDO_USER }}"
   shell: |
     export PATH=$HOME/go/bin:$PATH
     ghq get https://github.com/dunst-project/dunst.git
@@ -33,4 +33,4 @@
     #sudo make
     sudo make install
     mvt /usr/local/share/dunst
-    sudo ln -s /home/{{ ubuntu_user }}/.config/dunst /usr/local/share/dunst
+    sudo ln -s {{ HOME }/.config/dunst /usr/local/share/dunst

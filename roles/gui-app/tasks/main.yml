@@ -84,26 +84,27 @@
 - name: vte-ng
   when: which_termite.stdout == ""
   become: yes
-  become_user: "{{ ubuntu_user }}"
+  become_user: "{{ SUDO_USER }}"
   git:
     repo: https://github.com/thestinger/vte-ng.git
-    dest: /home/{{ ubuntu_user }}/.cache/vte-ng
+    dest: {{ HOME }/.cache/vte-ng
     force: yes
+
 - name: vte-ng
   when: which_termite.stdout == ""
   become: yes
-  become_user: "{{ ubuntu_user }}"
+  become_user: "{{ SUDO_USER }}"
   git:
     repo: https://github.com/thestinger/termite.git
-    dest: /home/{{ ubuntu_user }}/.cache/termite
+    dest: {{ HOME }/.cache/termite
     force: yes
 - name: user
   become: yes
-  become_user: "{{ ubuntu_user }}"
+  become_user: "{{ SUDO_USER }}"
   shell: |
     echo export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
-    cd /home/{{ ubuntu_user }}/.cache/vte-ng && ./autogen.sh && make && sudo make install
-    cd /home/{{ ubuntu_user }}/.cache/termite && make && sudo make install
+    cd {{ HOME }/.cache/vte-ng && ./autogen.sh && make && sudo make install
+    cd {{ HOME }/.cache/termite && make && sudo make install
   when: which_termite.stdout == ""
 - name: user
   become: yes

@@ -83,7 +83,7 @@
 
 - name: install Dropbox
   become: yes
-  become_user: "{{ ubuntu_user }}"
+  become_user: "{{ SUDO_USER }}"
   shell: |
     cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
 - name: install Dropbox tool
@@ -96,8 +96,8 @@
 
 - name: git config
   become: yes
-  become_user: "{{ ubuntu_user }}" 
+  become_user: "{{ SUDO_USER }}" 
   shell: |
-    git config --global user.email "{{ email }}"
-    git config --global user.name "{{ ubuntu_user }}"
+    git config --global user.email "{{ git_email }}"
+    git config --global user.name "{{ git_user }}"
     git config --global core.editor "vim"
