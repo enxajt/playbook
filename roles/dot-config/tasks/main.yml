@@ -56,6 +56,28 @@
     dest: /home/{{ ubuntu_user }}/.xbindkeysrc
     state: link
 
+- name: git clone init 
+  become: true
+  become_user: "{{ ubuntu_user }}" 
+  git:
+    repo: git://github.com/enxajt/init.git
+    dest: /home/{{ ubuntu_user }}/init
+- name: git remote set-url origin git@github.com:enxajt/init.git
+  shell: |
+    cd /home/{{ ubuntu_user }}/init && git remote set-url origin git@github.com:enxajt/init.git
+- name: init sh 
+  become: true
+  become_user: "{{ ubuntu_user }}" 
+  shell: | 
+    sh /home/{{ ubuntu_user }}/init/install-tmux.sh
+    sh /home/{{ ubuntu_user }}/init/install-neovim.sh
+    sh /home/{{ ubuntu_user }}/init/install-npm.sh 
 - name: init-xdg after clone .config
   shell: |
     sh /home/{{ ubuntu_user }}/init/init-xdg.sh
+- name: Removing
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /home/{{ ubuntu_user }}/init
