@@ -70,7 +70,6 @@
   become_user: "{{ ubuntu_user }}" 
   shell: | 
     #sh /home/{{ ubuntu_user }}/init/install-neovim.sh
-    sh /home/{{ ubuntu_user }}/init/install-npm.sh 
 - name: init-xdg after clone .config
   shell: |
     sh /home/{{ ubuntu_user }}/init/init-xdg.sh
