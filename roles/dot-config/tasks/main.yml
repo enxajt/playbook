@@ -95,26 +95,12 @@
   with_items:
     - n
 - name: npm install
-  become: true
-  become_user: root
   shell: |
-    - n stable
-- name: npm install 2
-  become: true
-  become_user: root
-  shell: |
-    - ln -sf /usr/local/bin/node /usr/bin/node
-- name: npm install 3
-  become: true
-  become_user: root
-  shell: |
-    - apt-get -y purge nodejs npm
-- name: npm install 4
-  shell: |
-    - npm update
-- name: npm install 5
-  shell: |
-    - curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+    sudo n stable
+    sudo ln -sf /usr/local/bin/node /usr/bin/node
+    sudo apt-get -y purge nodejs npm
+    npm update
+    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 - name: npm install apt-get
   apt: name={{item}}
   with_items:
