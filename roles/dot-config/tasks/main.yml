@@ -87,6 +87,7 @@
     - build-essential
     - nodejs
     - npm
+
 - name: npm install
   shell: |
     - # if npm -v doesn't work, restart shell
