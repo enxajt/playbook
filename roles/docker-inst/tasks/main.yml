@@ -7,7 +7,7 @@
   shell: apt-get -y install linux-image-extra-$(uname -r)
 
 - name: install for docker 
-  apt: name "{{item}}
+  apt: name={{item}}
   become: yes
   become_user: root
   with_items:
@@ -23,16 +23,16 @@
 - name: updates a server
   apt: update_cache=yes
 - name: install docker-engine
-  apt: name "{{item}}
+  apt: name={{item}}
   become: yes
   become_user: root
   with_items:
     - docker-engine
 
-- name: add "{{ SUDO_USER }}"to Docker group
+- name: add {{ SUDO_USER }} to Docker group
   become: yes
   become_user: root
-  shell: usermod -aG docker "{{ SUDO_USER }}"
+  shell: "usermod -aG docker {{ SUDO_USER }}"
 
 - name: docker-compose install
   become: yes

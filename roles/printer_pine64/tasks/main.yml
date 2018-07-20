@@ -1,5 +1,5 @@
 - name: prepare for installing Canon MG7101 series driver
-  apt: name "{{item}}
+  apt: name={{item}}
   become: yes
   become_user: root
   with_items:
@@ -25,18 +25,18 @@
   become_user: "{{ SUDO_USER }}"
   git:
     repo: https://github.com/enxajt/script.git
-    dest: "{{ HOME }}"script
+    dest: "{{ HOME }}/script"
     #force: yes
 - name: sudo ln -s ~/script/scan.sh /usr/bin/scan
   file:
-    src: "{{ HOME }}"script/scan.sh
+    src: "{{ HOME }}/script/scan.sh"
     dest: /usr/bin/scan
     owner: root
     group: root
     state: link
 
 - name: for 'PINE64 Installer' or 'resin-io/etcher'(Flash OS images to SD cards & USB drives)
-  apt: name "{{item}}
+  apt: name={{item}}
   become: yes
   become_user: root
   with_items:

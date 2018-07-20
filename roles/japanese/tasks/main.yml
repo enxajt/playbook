@@ -4,7 +4,7 @@
   apt: update_cache=yes
 
 - name: install japanese
-  apt: name "{{item}}
+  apt: name={{item}}
   become: yes
   with_items:
    - language-pack-ja-base
