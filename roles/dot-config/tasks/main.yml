@@ -57,16 +57,16 @@
     dest: "/home/{{ ubuntu_user }}/.xbindkeysrc"
     state: link
 
-- name: git clone init 
+- name: neovim,xdg clone init 
   become: true
   become_user: "{{ ubuntu_user }}" 
   git:
     repo: git://github.com/enxajt/init.git
     dest: "/home/{{ ubuntu_user }}/init"
-- name: git remote set-url origin git@github.com:enxajt/init.git
+- name: neovim,xdg git remote set-url origin git@github.com:enxajt/init.git
   shell: |
     cd /home/{{ ubuntu_user }}/init && git remote set-url origin git@github.com:enxajt/init.git
-- name: init sh 
+- name: install-neovim.sh
   become: true
   become_user: "{{ ubuntu_user }}" 
   shell: | 
@@ -80,6 +80,29 @@
     state: absent
   with_items:
     - "/home/{{ ubuntu_user }}/init"
+
+- name: neovim apt-get
+  apt: name={{item}}
+  with_items:
+    - python-dev
+    - python-pip
+    - python3-dev
+    - python3-pip
+- name: neovim apt-get
+  apt: name={{item}}
+  with_items:
+    - software-properties-common
+- apt_repository:
+  repo: "{{ item }}"
+  with_items: 
+    - 'ppa:neovim-ppa/stable'
+- name: apt update
+  apt: update_cache=yes
+  when: apt_mirror|changed
+- name: neovim apt-get
+  apt: name={{item}}
+  with_items:
+    - neovim
 
 - name: npm install apt-get
   apt: name={{item}}

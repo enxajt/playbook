@@ -1,5 +1,7 @@
-- name: add-apt-repository ppa:japanese-testers/mozc
-  shell: add-apt-repository ppa:japanese-testers/mozc
+- apt_repository:
+  repo: "{{ item }}"
+  with_items: 
+    - 'ppa:japanese-testers/mozc'
 - name: updates a server
   apt: update_cache=yes
 
