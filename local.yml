@@ -3,7 +3,7 @@
   hosts: localhost
   become: true
   vars:
-    - log_path: /home/{{ubuntu_user}}/playbook/
+    - log_path: /home/{{ubuntu_user}}/playbook/log
   vars_prompt:
     - name: ubuntu_user
       prompt: "input ubuntu_user."
