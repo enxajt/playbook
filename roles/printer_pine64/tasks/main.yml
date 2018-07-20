@@ -22,7 +22,7 @@
     - libpango1.0-0
 - name: git clone script
   become: yes
-  become_user: "{{ SUDO_USER }}"
+  become_user: "{{ ubuntu_user }}"
   git:
     repo: https://github.com/enxajt/script.git
     dest: "{{ HOME }}/script"

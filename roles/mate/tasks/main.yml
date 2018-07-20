@@ -13,14 +13,14 @@
   file:
     src: "{{ HOME }}".dotfiles/desktop/20-natural-scrolling.conf
     dest: /usr/share/X11/xorg.conf.d/20-natural-scrolling.conf
-    owner: "{{ SUDO_USER }}"
-    group: "{{ SUDO_USER }}"
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
     state: link
 
 # for mate. not working in minimal ubuntu install
 - name: autostart
   become: yes
-  become_user: "{{ SUDO_USER }}"
+  become_user: "{{ ubuntu_user }}"
   shell: |
     mkdir -p ~/.config/autostart
     ln -sf ~/.dotfiles/desktop/after-login.desktop ~/.config/autostart/after-login.desktop

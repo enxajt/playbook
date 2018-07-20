@@ -19,7 +19,7 @@
   become: yes
   become_user: root
   user:
-    name: "{{ SUDO_USER }}"
+    name: "{{ ubuntu_user }}"
     password: "{{ ubuntu_pass |password_hash('sha512') }}"
     shell: /bin/zsh
     state: present
@@ -31,5 +31,5 @@
   become_user: root
   file:
     path: "{{ HOME }}
-    owner: "{{ SUDO_USER }}"
-    group: "{{ SUDO_USER }}"
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"

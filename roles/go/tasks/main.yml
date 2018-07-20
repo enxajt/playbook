@@ -2,8 +2,8 @@
   file:
     state: directory
     path:  "{{ item }}"
-    owner: "{{ SUDO_USER }}" 
-    group: "{{ SUDO_USER }}" 
+    owner: "{{ ubuntu_user }}" 
+    group: "{{ ubuntu_user }}" 
     mode: 0777 
     recurse: true
   with_items:
@@ -16,7 +16,7 @@
     wget -O - https://dl.google.com/go/go1.9.3.linux-amd64.tar.gz | tar -xzf - -C /usr/local
 - name: go get ghq
   become: true
-  become_user: "{{ SUDO_USER }}"
+  become_user: "{{ ubuntu_user }}"
   shell: |
     export PATH=$PATH:/usr/local/go/bin
     go get github.com/motemen/ghq

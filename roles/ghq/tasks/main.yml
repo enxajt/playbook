@@ -1,6 +1,6 @@
 - name: fzf
   become: true
-  become_user: "{{ SUDO_USER }}"
+  become_user: "{{ ubuntu_user }}"
   shell: |
     export PATH=$HOME/go/bin:$PATH
     ghq get https://github.com/junegunn/fzf.git
@@ -25,7 +25,7 @@
     - libxdg-basedir-dev
 - name: dunst (notification)
   become: true
-  become_user: "{{ SUDO_USER }}"
+  become_user: "{{ ubuntu_user }}"
   shell: |
     export PATH=$HOME/go/bin:$PATH
     ghq get https://github.com/dunst-project/dunst.git

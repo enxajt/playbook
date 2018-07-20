@@ -1,6 +1,6 @@
 - name: clone .config
   become: true
-  become_user: "{{ SUDO_USER }}" 
+  become_user: "{{ ubuntu_user }}" 
   git:
     repo: git://github.com/enxajt/.config.git
     dest: "{{ HOME }}/.config"
@@ -10,18 +10,18 @@
     cd "{{ HOME }}"/.config && git remote set-url origin git@github.com:enxajt/.config.git
 
 - user:
-    name: "{{ SUDO_USER }}"
+    name: "{{ ubuntu_user }}"
     shell: /bin/zsh
 - file:
     src: "{{ HOME }}/.config/zsh/zshrc"
     dest: "{{ HOME }}/.zshrc"
-    owner: "{{ SUDO_USER }}"
-    group: "{{ SUDO_USER }}"
+    owner: "{{ ubuntu_user }}"
+    group: "{{ ubuntu_user }}"
     state: link
 
 - name: clone zsh-git-prompt
   become: true
-  become_user: "{{ SUDO_USER }}" 
+  become_user: "{{ ubuntu_user }}" 
   git:
     repo: git://github.com/olivierverdier/zsh-git-prompt.git
     dest: "{{ HOME }}/.config/zsh-git-prompt"
@@ -59,7 +59,7 @@
 
 - name: git clone init 
   become: true
-  become_user: "{{ SUDO_USER }}" 
+  become_user: "{{ ubuntu_user }}" 
   git:
     repo: git://github.com/enxajt/init.git
     dest: "{{ HOME }}/init"
@@ -68,7 +68,7 @@
     cd "{{ HOME }}/init && git remote set-url origin git@github.com:enxajt/init.git"
 - name: init sh 
   become: true
-  become_user: "{{ SUDO_USER }}" 
+  become_user: "{{ ubuntu_user }}" 
   shell: | 
     #sh "{{ HOME }}/init/install-neovim.sh"
 - name: init-xdg after clone .config
@@ -115,7 +115,7 @@
     - xsel
 - name: tmux install clone
   become: true
-  become_user: "{{ SUDO_USER }}" 
+  become_user: "{{ ubuntu_user }}" 
   git:
     repo: git://github.com/tmux/tmux
     dest: "{{ HOME }}/.cache/tmux"
