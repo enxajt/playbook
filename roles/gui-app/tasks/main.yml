@@ -1,6 +1,6 @@
 - apt_repository:
-  repo: "{{ item }}"
-  with_items: 
+    repo: "{{ item }}"
+  with_items:
     - 'ppa:canonical-chromium-builds/stage'
     - 'ppa:otto-kesselgulasch/gimp'
     - 'ppa:font-manager/staging'
