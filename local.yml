@@ -2,8 +2,6 @@
 - name: local ubuntu desktop
   hosts: localhost
   become: true
-  vars:
-    - log_path: /home/{{ubuntu_user}}/playbook/log
   vars_prompt:
     - name: ubuntu_user
       prompt: "input ubuntu_user."
@@ -17,6 +15,8 @@
     - name: git_email
       prompt: "input git_email."
       private: no
+  vars:
+    - ANSIBLE_LOG_PATH: /home/{{ubuntu_user}}/playbook/log
 
   roles:
     - apt-in-Japan
