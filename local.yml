@@ -15,8 +15,6 @@
     - name: git_email
       prompt: "input git_email."
       private: no
-  environment:
-    ANSIBLE_LOG_PATH: /home/{{ubuntu_user}}/playbook/log
   roles:
     - apt-in-Japan
     
