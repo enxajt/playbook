@@ -1,5 +1,5 @@
 - apt_repository:
-    repo: "{{ item }}"
+  repo: "{{ item }}"
   with_items: 
     - 'ppa:canonical-chromium-builds/stage'
     - 'ppa:otto-kesselgulasch/gimp'
