@@ -95,7 +95,8 @@
 - apt_repository:
   repo: "{{ item }}"
   with_items: 
-    - 'ppa:neovim-ppa/stable'
+    - ppa:neovim-ppa/stable
+
 - name: apt update
   apt: update_cache=yes
   when: apt_mirror|changed
