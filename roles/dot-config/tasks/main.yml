@@ -126,7 +126,7 @@
   vars:
     path_tmux: "/home/{{ ubuntu_user }}/.cache/tmux"
   shell: |
-    sh "{{ path_tmux }}/autogen.sh"
-    "{{ path_tmux }}/configure"
-    cd "{{ path_tmux }} && make -j4"
-    cd "{{ path_tmux }} && sudo make install"
+    sh {{ path_tmux }}/autogen.sh
+    {{ path_tmux }}/configure
+    cd {{ path_tmux }} && make -j4
+    cd {{ path_tmux }} && sudo make install
