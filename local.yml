@@ -12,7 +12,7 @@
       private: no
     - name: ubuntu_pass
       prompt: "input ubuntu_pass."
-      private: yes
+      private: no
     - name: git_user
       prompt: "input git_user."
       private: no
