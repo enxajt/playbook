@@ -128,6 +128,10 @@
     path_tmux: "/home/{{ ubuntu_user }}/.cache/tmux"
   shell: |
     sh {{ path_tmux }}/autogen.sh
+- name: tmux install 2
+  vars:
+    path_tmux: "/home/{{ ubuntu_user }}/.cache/tmux"
+  shell: |
     {{ path_tmux }}/configure
     #cd {{ path_tmux }} && make -j4
     cd {{ path_tmux }} && make
