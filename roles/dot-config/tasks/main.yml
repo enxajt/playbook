@@ -113,6 +113,7 @@
     - libevent-dev 
     - libncurses5-dev
     - xsel
+    - pkg-config
 - name: tmux install clone
   become: true
   become_user: "{{ ubuntu_user }}" 
@@ -126,7 +127,7 @@
   vars:
     path_tmux: "/home/{{ ubuntu_user }}/.cache/tmux"
   shell: |
-    #sh {{ path_tmux }}/autogen.sh
+    sh {{ path_tmux }}/autogen.sh
     {{ path_tmux }}/configure
     #cd {{ path_tmux }} && make -j4
     cd {{ path_tmux }} && make
