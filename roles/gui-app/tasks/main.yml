@@ -61,11 +61,11 @@
     line: '%ADMIN ALL=(ALL) NOPASSWD: ALL'
     validate: '/usr/sbin/visudo -cf %s'
 
-- name: which termite 
+- name: termite which termite 
   shell: which termite
   register: which_termite
   failed_when: which_termite.rc not in [0, 1]
-- name: for termite
+- name: termite apt-get
   when: which_termite.stdout == ""
   apt: name={{item}}
   with_items:
@@ -81,7 +81,7 @@
     - libgirepository1.0-dev
     - libxml2-utils
     - gperf
-- name: vte-ng
+- name: termite vte-ng clone
   when: which_termite.stdout == ""
   become: yes
   become_user: "{{ ubuntu_user }}"
@@ -89,28 +89,29 @@
     repo: https://github.com/thestinger/vte-ng.git
     dest: "/home/{{ ubuntu_user }}/.cache/vte-ng"
     force: yes
-
-- name: vte-ng
+- name: termite clone
   when: which_termite.stdout == ""
   become: yes
   become_user: "{{ ubuntu_user }}"
+  vars:
+    path_termtie: "/home/{{ ubuntu_user }}/.cache/termite"
   git:
     repo: https://github.com/thestinger/termite.git
-    dest: "/home/{{ ubuntu_user }}/.cache/termite"
+    dest: "{{ path_termite }}"
     force: yes
 - name: user
+  when: which_termite.stdout == ""
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: |
     echo export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
     cd /home/"{{ ubuntu_user }}"/.cache/vte-ng && ./autogen.sh && make && sudo make install
-    cd /home/"{{ ubuntu_user }}"/.cache/termite && make && sudo make install
-  when: which_termite.stdout == ""
+    cd {{ path_termite }} && make && sudo make install
 - name: user
+  when: which_termite.stdout == ""
   become: yes
   become_user: root
   shell: |
     ldconfig
     mkdir -p /lib/terminfo/x
     ln -s /usr/local/share/terminfo/x/xterm-termite /lib/terminfo/x/xterm-termite
-  when: which_termite.stdout == ""
