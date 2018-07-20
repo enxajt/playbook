@@ -87,7 +87,7 @@
   become_user: "{{ ubuntu_user }}"
   git:
     repo: https://github.com/thestinger/vte-ng.git
-    dest: "{{ HOME }}/.cache/vte-ng"
+    dest: "/home/{{ ubuntu_user }}/.cache/vte-ng"
     force: yes
 
 - name: vte-ng
@@ -96,15 +96,15 @@
   become_user: "{{ ubuntu_user }}"
   git:
     repo: https://github.com/thestinger/termite.git
-    dest: "{{ HOME }}/.cache/termite"
+    dest: "/home/{{ ubuntu_user }}/.cache/termite"
     force: yes
 - name: user
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: |
     echo export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
-    cd "{{ HOME }}"/.cache/vte-ng && ./autogen.sh && make && sudo make install
-    cd "{{ HOME }}"/.cache/termite && make && sudo make install
+    cd /home/"{{ ubuntu_user }}"/.cache/vte-ng && ./autogen.sh && make && sudo make install
+    cd /home/"{{ ubuntu_user }}"/.cache/termite && make && sudo make install
   when: which_termite.stdout == ""
 - name: user
   become: yes

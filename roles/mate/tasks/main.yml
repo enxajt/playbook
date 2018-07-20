@@ -11,7 +11,7 @@
 
 - name: natural scrolling
   file:
-    src: "{{ HOME }}".dotfiles/desktop/20-natural-scrolling.conf
+    src: /home/"{{ ubuntu_user }}".dotfiles/desktop/20-natural-scrolling.conf
     dest: /usr/share/X11/xorg.conf.d/20-natural-scrolling.conf
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"

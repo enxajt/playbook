@@ -30,6 +30,6 @@
   become: yes
   become_user: root
   file:
-    path: "{{ HOME }}
+    path: "/home/{{ ubuntu_user }}
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
