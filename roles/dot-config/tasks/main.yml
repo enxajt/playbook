@@ -93,9 +93,9 @@
   with_items:
     - software-properties-common
 - apt_repository:
-  repo: "{{ item }}"
+    repo: "{{ item }}"
   with_items: 
-    - ppa:neovim-ppa/stable
+    - 'ppa:neovim-ppa/stable'
 
 - name: apt update
   apt: update_cache=yes
