@@ -7,9 +7,9 @@
     - 'ppa:libreoffice/libreoffice-5-4'
 - name: install gui app
   apt:
-    name: "{{ packages }}"
     update_cache: yes
-    upgrade: safe
+    name: "{{ packages }}"
+    state: latest
   vars:
     packages:
     - chromium-browser
