@@ -16,20 +16,20 @@
       prompt: "input git_email."
       private: no
   roles:
-    - apt-in-Japan
+    #- apt-in-Japan
     
     - dot-config
     - cui-app
-    #- bluetooth
     - gui-app
-    #- printer_pine64
-    #- ebook
     - config
 
+    #- bluetooth
+    #- printer_pine64
+    #- ebook
     #- go
     #- ghq
-
     #- docker-inst
-    - japanese
+
+    #- japanese
     #- long
     - end
