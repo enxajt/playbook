@@ -7,10 +7,11 @@
     - 'ppa:libreoffice/libreoffice-5-4'
 - name: install gui app
   apt:
-    name: "{{ item }}"
+    name: "{{ packages }}"
     update_cache: yes
-    upgrade: full
-  with_items:
+    upgrade: safe
+  vars:
+    packages:
     - chromium-browser
     - gimp
     - gimp-gmic
