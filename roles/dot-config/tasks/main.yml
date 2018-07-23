@@ -96,10 +96,8 @@
     repo: "{{ item }}"
   with_items:
     - 'ppa:neovim-ppa/stable'
-
-- name: apt update
+- name: neovim apt update
   apt: update_cache=yes
-  when: apt_mirror|changed
 - name: neovim apt-get
   apt: name={{item}}
   with_items:
