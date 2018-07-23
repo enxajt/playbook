@@ -90,17 +90,19 @@
     repo: https://github.com/thestinger/termite.git
     dest: "/home/{{ ubuntu_user }}/.cache/termite"
     force: yes
-- name: user
+- name: termite vte-ng & termite install prepare
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: |
     echo export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
-    cd /home/"{{ ubuntu_user }}"/.cache/vte-ng && ./autogen.sh && make && sudo make install
-    cd /home/{{ ubuntu_user }}/.cache/termite && make && sudo make install
-- name: user
+    cd /home/"{{ ubuntu_user }}"/.cache/vte-ng && ./autogen.sh && make
+    cd /home/{{ ubuntu_user }}/.cache/termite && make
+- name: termite settings
   become: yes
   become_user: root
   shell: |
+    cd /home/"{{ ubuntu_user }}"/.cache/vte-ng && make install
+    cd /home/{{ ubuntu_user }}/.cache/termite && make install
     ldconfig
     mkdir -p /lib/terminfo/x
     ln -s /usr/local/share/terminfo/x/xterm-termite /lib/terminfo/x/xterm-termite
