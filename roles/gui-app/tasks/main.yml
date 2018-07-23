@@ -5,12 +5,11 @@
     - 'ppa:otto-kesselgulasch/gimp'
     - 'ppa:font-manager/staging'
     - 'ppa:libreoffice/libreoffice-5-4'
-- name: updates a server
-  apt: update_cache=yes
-- name: upgrade a server
-  apt: upgrade=full
 - name: install gui app
-  apt: name={{item}}
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    upgrade: full
   with_items:
     - chromium-browser
     - gimp
@@ -62,7 +61,10 @@
     validate: '/usr/sbin/visudo -cf %s'
 
 - name: termite apt-get
-  apt: name={{item}}
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    upgrade: full
   with_items:
     - g++
     - libgtk-3-dev
