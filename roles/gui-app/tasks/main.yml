@@ -89,12 +89,12 @@
     repo: https://github.com/thestinger/vte-ng.git
     dest: "/home/{{ ubuntu_user }}/.cache/vte-ng"
     force: yes
+- vars:
+    path_termtie: "/home/{{ ubuntu_user }}/.cache/termite"
 - name: termite clone
   when: which_termite.stdout == ""
   become: yes
   become_user: "{{ ubuntu_user }}"
-  vars:
-    path_termtie: "/home/{{ ubuntu_user }}/.cache/termite"
   git:
     repo: https://github.com/thestinger/termite.git
     dest: "{{ path_termite }}"
