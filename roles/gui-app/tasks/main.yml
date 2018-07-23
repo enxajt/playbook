@@ -61,12 +61,7 @@
     line: '%ADMIN ALL=(ALL) NOPASSWD: ALL'
     validate: '/usr/sbin/visudo -cf %s'
 
-- name: termite which termite 
-  shell: which termite
-  register: which_termite
-  failed_when: which_termite.rc not in [0, 1]
 - name: termite apt-get
-  when: which_termite.stdout == ""
   apt: name={{item}}
   with_items:
     - g++
@@ -82,7 +77,6 @@
     - libxml2-utils
     - gperf
 - name: termite vte-ng clone
-  when: which_termite.stdout == ""
   become: yes
   become_user: "{{ ubuntu_user }}"
   git:
@@ -90,7 +84,6 @@
     dest: "/home/{{ ubuntu_user }}/.cache/vte-ng"
     force: yes
 - name: termite clone
-  when: which_termite.stdout == ""
   become: yes
   become_user: "{{ ubuntu_user }}"
   git:
@@ -98,7 +91,6 @@
     dest: "/home/{{ ubuntu_user }}/.cache/termite"
     force: yes
 - name: user
-  when: which_termite.stdout == ""
   become: yes
   become_user: "{{ ubuntu_user }}"
   shell: |
@@ -106,10 +98,10 @@
     cd /home/"{{ ubuntu_user }}"/.cache/vte-ng && ./autogen.sh && make && sudo make install
     cd /home/{{ ubuntu_user }}/.cache/termite && make && sudo make install
 - name: user
-  when: which_termite.stdout == ""
   become: yes
   become_user: root
   shell: |
     ldconfig
     mkdir -p /lib/terminfo/x
     ln -s /usr/local/share/terminfo/x/xterm-termite /lib/terminfo/x/xterm-termite
+    update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/termite 60
