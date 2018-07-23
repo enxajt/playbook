@@ -93,11 +93,9 @@
   when: which_termite.stdout == ""
   become: yes
   become_user: "{{ ubuntu_user }}"
-  vars:
-    path_termite: "/home/{{ ubuntu_user }}/.cache/termite"
   git:
     repo: https://github.com/thestinger/termite.git
-    dest: "{{ path_termite }}"
+    dest: "/home/{{ ubuntu_user }}/.cache/termite"
     force: yes
 - name: user
   when: which_termite.stdout == ""
@@ -106,7 +104,7 @@
   shell: |
     echo export LIBRARY_PATH="/usr/include/gtk-3.0:$LIBRARY_PATH"
     cd /home/"{{ ubuntu_user }}"/.cache/vte-ng && ./autogen.sh && make && sudo make install
-    cd {{ path_termite }} && make && sudo make install
+    cd /home/{{ ubuntu_user }}/.cache/termite && make && sudo make install
 - name: user
   when: which_termite.stdout == ""
   become: yes
