@@ -90,6 +90,7 @@
     repo: https://github.com/thestinger/termite.git
     dest: "/home/{{ ubuntu_user }}/.cache/termite"
     force: yes
+    recursive: yes
 - name: termite vte-ng & termite install prepare
   become: yes
   become_user: "{{ ubuntu_user }}"

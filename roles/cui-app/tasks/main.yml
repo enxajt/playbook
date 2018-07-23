@@ -19,6 +19,9 @@
     #- aptitude
     - xbindkeys
 
+    # for gui termite
+    - gtk-doc-tools
+
     - wget
     - curl
     - git
