@@ -30,6 +30,7 @@
     #- go
     #- ghq
     #- docker-inst
+    #- clamav
 
     - japanese
     #- long

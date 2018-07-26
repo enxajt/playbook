@@ -18,9 +18,6 @@
     #- aptitude
     - xbindkeys
 
-    # for gui termite
-    - gtk-doc-tools
-
     - wget
     - curl
     - git
@@ -45,9 +42,6 @@
 
     - w3m
     - w3m-img
-
-    - clamav
-    - chkrootkit
 
     # for local machine : hard ware
     - xbacklight
@@ -75,13 +69,6 @@
     - fonts-ricty-diminished 
     - fonts-ipafont-gothic
     - fonts-ipafont-mincho
-- name: init clamav 
-  become: true
-  shell: | 
-    sed -i -e "s/^NotifyClamd/#NotifyClamd/g" /etc/clamav/freshclam.conf
-    systemctl stop clamav-freshclam
-    freshclam
-    systemctl start clamav-freshclam
 
 - name: git config
   become: yes
