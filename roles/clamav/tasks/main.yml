@@ -1,0 +1,16 @@
+- name: clamav chkrootkit install 
+  apt:
+    update_cache: yes
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - clamav
+    - chkrootkit
+- name: init clamav 
+  become: true
+  shell: | 
+    sed -i -e "s/^NotifyClamd/#NotifyClamd/g" /etc/clamav/freshclam.conf
+    systemctl stop clamav-freshclam
+    freshclam
+    systemctl start clamav-freshclam
