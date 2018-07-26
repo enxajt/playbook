@@ -8,9 +8,11 @@
   with_items: 
     - 'ppa:hluk/copyq'
     - 'ppa:linrunner/tlp'
-- name: apt install
+- name: apt update
   apt:
     update_cache: true
+- name: apt install
+  apt:
     name: "{{ item }}"
     state: latest
     autoclean: yes
