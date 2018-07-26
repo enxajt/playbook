@@ -13,8 +13,8 @@
     update_cache: true
     name: "{{ item }}"
     state: latest
-    autoclean: true
-    autoremove: true
+    autoclean: yes
+    autoremove: yes
   with_items:
     #- aptitude
     - xbindkeys
