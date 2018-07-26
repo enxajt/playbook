@@ -8,16 +8,15 @@
   with_items: 
     - 'ppa:hluk/copyq'
     - 'ppa:linrunner/tlp'
-- name: apt update
-  apt:
-    update_cache: true
 - name: apt install
   apt:
-    name: "{{ item }}"
+    update_cache: yes
+    name: "{{ packages }}"
     state: latest
     autoclean: yes
     autoremove: yes
-  with_items:
+  vars:
+    packages:
     #- aptitude
     - xbindkeys
 
