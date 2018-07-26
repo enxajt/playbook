@@ -83,19 +83,6 @@
     freshclam
     systemctl start clamav-freshclam
 
-- name: install Dropbox
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  shell: |
-    cd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
-- name: install Dropbox tool
-  become: yes
-  become_user: root
-  shell: |
-    wget -O /usr/bin/dropbox "http://www.dropbox.com/download?dl=packages/dropbox.py"
-    chmod a+x /usr/bin/dropbox
-    wget http://repo1.maven.org/maven2/com/madgag/bfg/1.13.0/bfg-1.13.0.jar -O /usr/local/bin/BFG_git-repo-cleaner.jar
-
 - name: git config
   become: yes
   become_user: "{{ ubuntu_user }}" 
