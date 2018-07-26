@@ -23,6 +23,7 @@
     - gui-app
     - config
 
+    #- gui-app-2nd
     #- bluetooth
     #- printer_pine64
     #- ebook
