@@ -2,9 +2,7 @@
     repo: "{{ item }}"
   with_items:
     - 'ppa:canonical-chromium-builds/stage'
-    - 'ppa:otto-kesselgulasch/gimp'
     - 'ppa:font-manager/staging'
-    - 'ppa:libreoffice/libreoffice-5-4'
 - name: install gui app
   apt:
     update_cache: yes
@@ -13,21 +11,11 @@
   vars:
     packages:
     - chromium-browser
-    - gimp
-    - gimp-gmic
-    - libreoffice
     - font-manager
-
     - firefox
     - flashplugin-installer
-    - goldendict
     - redshift
-
     - shutter
-    - vlc
-    - freeplane
-
-    - playonlinux
 
     - lightdm
     - lightdm-gtk-greeter
@@ -45,14 +33,6 @@
     - xserver-xorg
     - thunar
     - volumeicon-alsa
-
-#- apt_repository:
-#    repo: 'maarten-baert/simplescreenrecorder'
-#- name: install gui app
-#  apt: name={{item}}
-#  with_items:
-#    - simplescreenrecorder
-#    - simplescreenrecorder-lib
 
 - lineinfile:
     path: /etc/sudoers
@@ -111,6 +91,7 @@
 #    mkdir -p /lib/terminfo/x
 #    ln -s /usr/local/share/terminfo/x/xterm-termite /lib/terminfo/x/xterm-termite
 #    update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/termite 60
+
 - name: xfce4-terminal download
   get_url:
     url: http://archive.xfce.org/src/apps/xfce4-terminal/0.8/xfce4-terminal-0.8.7.4.tar.bz2

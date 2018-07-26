@@ -1,0 +1,27 @@
+- apt_repository:
+    repo: "{{ item }}"
+  with_items:
+    - 'ppa:otto-kesselgulasch/gimp'
+    - 'ppa:libreoffice/libreoffice-5-4'
+- name: install gui app 2nd
+  apt:
+    update_cache: yes
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    - gimp
+    - gimp-gmic
+    - libreoffice
+    - goldendict
+    - vlc
+    - freeplane
+    - playonlinux
+
+#- apt_repository:
+#    repo: 'maarten-baert/simplescreenrecorder'
+#- name: install gui app
+#  apt: name={{item}}
+#  with_items:
+#    - simplescreenrecorder
+#    - simplescreenrecorder-lib
