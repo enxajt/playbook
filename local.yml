@@ -10,14 +10,13 @@
       prompt: "input ubuntu_pass."
       private: no
     - name: git_user
-      prompt: "input git_user."
+      prompt: "input git_user.   "
       private: no
     - name: git_email
-      prompt: "input git_email."
+      prompt: "input git_email.  "
       private: no
   roles:
     - apt-in-Japan
-    
     - dot-config
     - cui-app
     - gui-app
