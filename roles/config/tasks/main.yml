@@ -13,11 +13,11 @@
     echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
     service systemd-logind restart
 
-- name: mkdir -p /home/enxajt/.local/share/Trash/files
+- name: mkdir -p /home/{{ ubuntu_user }}/.local/share/Trash/files
   become: yes
   become_user: "{{ ubuntu_user }}" 
   shell: |
-    mkdir -p /home/enxajt/.local/share/Trash/files
+    mkdir -p /home/{{ ubuntu_user }}/.local/share/Trash/files
 
 - name: GRUB
   become: yes

@@ -7,7 +7,7 @@
     accept_hostkey: yes
     force: yes
 - shell: |
-    cd /home/"{{ ubuntu_user }}"/.config && git remote set-url origin git@github.com:enxajt/.config.git
+    cd /home/{{ ubuntu_user }}/.config && git remote set-url origin git@github.com:enxajt/.config.git
 
 - user:
     name: "{{ ubuntu_user }}"
