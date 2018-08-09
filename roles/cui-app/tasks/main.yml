@@ -15,7 +15,6 @@
     state: latest
   vars:
     packages:
-    #- aptitude
     - xbindkeys
 
     - wget
@@ -25,46 +24,47 @@
     - tree
     - unar
 
-    - sysstat
-    - duc
+    #- sysstat
+    #- duc
 
-    - p7zip-full #7z
-    - p7zip-rar
+    #- p7zip-full #7z
+    #- p7zip-rar
 
-    - nkf
+    #- nkf
     - colordiff
-    - pandoc
+    #- pandoc
     - xsel
-    - copyq
+    #- copyq
 
     - vim
-    - jq
+    #- jq
+    #- pdftk
 
-    - w3m
-    - w3m-img
+    #- w3m
+    #- w3m-img
 
-    # for local machine : hard ware
-    - xbacklight
-    - pulseaudio
-    - pavucontrol
-    - x11-xserver-utils
-    - powertop 
-    - tlp 
-    - tlp-rdw
-    # for local machine : drive
-    - exfat-fuse
-    - exfat-utils
+    # # for local machine : hard ware
+    # - xbacklight
+    # - pulseaudio
+    # - pavucontrol
+    # - x11-xserver-utils
+    # - powertop 
+    # - tlp 
+    # - tlp-rdw
+    # # for local machine : drive
+    # - exfat-fuse
+    # - exfat-utils
+
     # for local machine : network
     - linux-generic-hwe-16.04
     - connect-proxy
     - lshw
     - wicd
     - intel-microcode
-    # not for virtualmachine
-    - vagrant
-    - virtualbox
 
-    - pdftk
+    # # not for virtualmachine
+    # - vagrant
+    # - virtualbox
 
     - fonts-ricty-diminished 
     - fonts-ipafont-gothic

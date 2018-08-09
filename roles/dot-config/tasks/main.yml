@@ -103,31 +103,6 @@
   with_items:
     - neovim
 
-- name: npm install apt-get
-  apt: name={{item}}
-  with_items:
-    - build-essential
-    - nodejs
-    - npm
-# if npm -v doesn't work, restart shell
-- name: npm install n
-  npm:
-    name: "{{ item }}"
-    global: yes
-  with_items:
-    - n
-- name: npm install
-  shell: |
-    sudo n stable
-    sudo ln -sf /usr/local/bin/node /usr/bin/node
-    sudo apt-get -y purge nodejs npm
-    npm update
-    curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-- name: npm install apt-get
-  apt: name={{item}}
-  with_items:
-    - nodejs
-
 - name: tmux install apt-get
   apt: name={{item}}
   with_items:

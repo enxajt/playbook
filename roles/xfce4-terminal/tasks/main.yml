@@ -1,0 +1,16 @@
+- name: xfce4-terminal download
+  get_url:
+    url: http://archive.xfce.org/src/apps/xfce4-terminal/0.8/xfce4-terminal-0.8.7.4.tar.bz2
+    dest: /home/{{ ubuntu_user }}/.cache/xfce4-terminal-0.8.7.4.tar.bz2
+    mode: 0755
+- name: xfce4-terminal configure & make
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    cd /home/{{ ubuntu_user }}/.cache/ && unar xfce4-terminal-0.8.7.4.tar.bz2
+    cd /home/{{ ubuntu_user }}/.cache/xfce4-terminal-0.8.7.4 && ./configure --prefix=/usr && make
+- name: xfce4-terminal install
+  become: yes
+  become_user: root
+  shell: |
+    make install

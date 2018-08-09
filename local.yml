@@ -21,6 +21,8 @@
     - cui-app
     - gui-app
     - config
+    #- npm
+    #- xfce4-terminal
 
     #- gui-app-2nd
     #- bluetooth
