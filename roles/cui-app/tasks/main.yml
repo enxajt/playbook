@@ -31,7 +31,8 @@
     - git
     - zsh
     - tree
-    - unar
+
+    - unar # or atool
 
     #- sysstat
     #- duc
