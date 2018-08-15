@@ -31,8 +31,10 @@
     - mesa-utils-extra
     - xorg
     - xserver-xorg
-    - thunar
     - volumeicon-alsa
+
+    # filer
+    - thunar # or Nemo, ranger, vim, spacefm,
 
 - lineinfile:
     path: /etc/sudoers
