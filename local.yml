@@ -2,19 +2,24 @@
 - name: local ubuntu desktop
   hosts: localhost
   become: true
-  vars_prompt:
-    - name: ubuntu_user
-      prompt: "input ubuntu_user."
-      private: no
-    - name: ubuntuo_pass
-      prompt: "input ubuntu_pass."
-      private: no
-    - name: git_user
-      prompt: "input git_user.   "
-      private: no
-    - name: git_email
-      prompt: "input git_email.  "
-      private: no
+  vars:
+    ubuntu_user: 
+    ubuntu_pass: 
+    git_user: 
+    git_email:
+  #vars_prompt:
+  #  - name: ubuntu_user
+  #    prompt: "input ubuntu_user."
+  #    private: no
+  #  - name: ubuntuo_pass
+  #    prompt: "input ubuntu_pass."
+  #    private: no
+  #  - name: git_user
+  #    prompt: "input git_user.   "
+  #    private: no
+  #  - name: git_email
+  #    prompt: "input git_email.  "
+  #    private: no
   roles:
     - apt-in-Japan
     - dot-config
