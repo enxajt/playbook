@@ -10,21 +10,24 @@
     state: latest
   vars:
     packages:
-    - chromium-browser
+    - thunar # or Nemo, ranger, vim, spacefm,
     - font-manager
-    - firefox
-    - flashplugin-installer
     - redshift
     - shutter
-
-    - lightdm
-    - lightdm-gtk-greeter
-    - lightdm-gtk-greeter-settings
 
     - i3
     - compton
     - i3blocks
     - rofi
+
+    - chromium-browser
+    - firefox
+    - flashplugin-installer
+    - zathura
+
+    - lightdm
+    - lightdm-gtk-greeter
+    - lightdm-gtk-greeter-settings
 
     - ubuntu-drivers-common
     - mesa-utils
@@ -32,9 +35,6 @@
     - xorg
     - xserver-xorg
     - volumeicon-alsa
-
-    # filer
-    - thunar # or Nemo, ranger, vim, spacefm,
 
 - lineinfile:
     path: /etc/sudoers
