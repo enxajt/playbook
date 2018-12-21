@@ -6,16 +6,9 @@
   apt: update_cache=yes
 
 - name: install japanese
-  apt: name={{item}}
-  become: yes
-  with_items:
-   - language-pack-ja-base
-   - language-pack-ja
-   - fcitx
-   - fcitx-mozc
-   - fcitx-libs-qt5
-   - fcitx-frontend-qt5
-   - mozc-utils-gui
+  apt: 
+    name: ['language-pack-ja-base', 'language-pack-ja', 'fcitx', 'fcitx-mozc', 'libfcitx-qt5-1', 'fcitx-frontend-qt5', 'mozc-utils-gui']
+  become: yes', 
 
 - name: im-config -n fcitx
   shell: im-config -n fcitx
