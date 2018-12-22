@@ -42,3 +42,7 @@
     regexp: '^%ADMIN ALL='
     line: '%ADMIN ALL=(ALL) NOPASSWD: ALL'
     validate: '/usr/sbin/visudo -cf %s'
+
+- name: sed wlp
+  shell: |
+    WLP=`ip addr show | grep wlp | awk '/inet.*brd/{print $NF}'`; sed -i "s/test/$WLP/g" /home/{{ ubuntu_user }}/.config/i3blocks/config
