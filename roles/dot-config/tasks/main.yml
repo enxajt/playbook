@@ -129,3 +129,8 @@
     #cd {{ path_tmux }} && make -j4
     cd {{ path_tmux }} && make
     cd {{ path_tmux }} && sudo make install
+
+- name: reduce waiting time for "A start job is running for raise network interfaces"
+  shell: |
+    systemctl disable systemd-networkd-wait-online.service
+    systemctl mask systemd-networkd-wait-online.service
