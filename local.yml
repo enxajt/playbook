@@ -19,14 +19,14 @@
     - dot-config
     - cui-app
     #- cui-app-2nd
-    # - dropbox
+    - dropbox
     - config
 
     - gui-app
     # - gui-app-2nd
     # - ebook
-    #- hardware
-    #- hardware-2nd
+    # - hardware
+    # - hardware-2nd
     # - bluetooth
 
     # XPS13
@@ -40,5 +40,4 @@
     # - clamav
 
     - japanese
-    # - long
     - end
