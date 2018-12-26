@@ -1,5 +1,9 @@
-
 - name: reduce waiting time for "A start job is running for raise network interfaces"
   shell: |
     systemctl disable systemd-networkd-wait-online.service
     systemctl mask systemd-networkd-wait-online.service
+
+- name: HandleLidSwitch=ignore
+  shell: | cp /etc/systemd/logind.conf /etc/systemd/logind.conf.bak
+    echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
+    service systemd-logind restart

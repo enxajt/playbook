@@ -18,6 +18,11 @@
     owner: "{{ ubuntu_user }}"
     group: "{{ ubuntu_user }}"
     state: link
+- name: mkdir -p /home/{{ ubuntu_user }}/.local/share/Trash/files
+  become: yes
+  become_user: "{{ ubuntu_user }}" 
+  shell: |
+    mkdir -p /home/{{ ubuntu_user }}/.local/share/Trash/files
 
 - name: clone zsh-git-prompt
   become: true

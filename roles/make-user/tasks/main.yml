@@ -20,7 +20,7 @@
   become_user: root
   user:
     name: "{{ ubuntu_user }}"
-    password: "{{ ubuntu_pass |password_hash('sha512') }}"
+    password: "{{ ubuntu_password |password_hash('sha512') }}"
     shell: /bin/zsh
     state: present
     append: yes

@@ -1,0 +1,4 @@
+- shell: |
+    sudo powertop --calibrate
+    sudo powertop --auto-tune
+    sudo tlp start

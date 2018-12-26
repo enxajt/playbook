@@ -3,44 +3,42 @@
   hosts: localhost
   become: true
   vars:
-    ubuntu_user: 
-    ubuntu_pass: 
-    git_user: 
-    git_email:
+    ubuntu_user: enxajt
+    git_user: enxajt
   #vars_prompt:
-  #  - name: ubuntu_user
-  #    prompt: "input ubuntu_user."
-  #    private: no
-  #  - name: ubuntuo_pass
-  #    prompt: "input ubuntu_pass."
-  #    private: no
-  #  - name: git_user
-  #    prompt: "input git_user.   "
-  #    private: no
-  #  - name: git_email
-  #    prompt: "input git_email.  "
-  #    private: no
+    # # for make_user
+    # - name: ubuntu_password
+    #   prompt: "input ubuntu_password."
+    #   private: no
+    - name: git_email
+      prompt: "input git_email.  "
+      private: no
   roles:
+    # - make-user
     - apt-in-Japan
     - dot-config
     - cui-app
-    - gui-app
+    #- cui-app-2nd
+    # - dropbox
     - config
 
+    - gui-app
+    # - gui-app-2nd
+    # - ebook
     #- hardware
+    #- hardware-2nd
+    # - bluetooth
 
-    #- npm
-    #- xfce4-terminal
-    #- gui-app-2nd
-    #- bluetooth
-    #- printer_pine64
-    #- ebook
-    #- dropbox
-    #- go
-    #- ghq
-    #- docker-inst
-    #- clamav
+    # XPS13
+    # - docker-inst
+    # - npm
+
+    # - xfce4-terminal
+    # - go
+    # - ghq
+    # - printer_pine64
+    # - clamav
 
     - japanese
-    #- long
+    # - long
     - end
