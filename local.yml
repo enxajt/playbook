@@ -26,9 +26,11 @@
     - cui-app
     - gui-app
     - config
+
+    #- hardware
+
     #- npm
     #- xfce4-terminal
-
     #- gui-app-2nd
     #- bluetooth
     #- printer_pine64
