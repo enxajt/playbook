@@ -5,7 +5,7 @@
   vars:
     ubuntu_user: enxajt
     git_user: enxajt
-  #vars_prompt:
+  vars_prompt:
     # # for make_user
     # - name: ubuntu_password
     #   prompt: "input ubuntu_password."
