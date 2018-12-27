@@ -2,7 +2,7 @@
 - name: local ubuntu desktop
   hosts: localhost
   become: true
-  # vars:
+  vars:
      git_user: enxajt
   vars_prompt:
     - name: ubuntu_user
