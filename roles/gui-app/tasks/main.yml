@@ -58,4 +58,4 @@
   become: yes
   become_user: root
   shell: |
-    sh ./home/"{{ ubuntu_user }}"/.cache/termite-install/termite-install.sh
+    sh /home/"{{ ubuntu_user }}"/.cache/termite-install/termite-install.sh
