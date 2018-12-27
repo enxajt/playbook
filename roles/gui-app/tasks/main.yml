@@ -43,6 +43,19 @@
     line: '%ADMIN ALL=(ALL) NOPASSWD: ALL'
     validate: '/usr/sbin/visudo -cf %s'
 
-- name: sed wlp
+- name: sed wlp for i3 statusbar
   shell: |
     WLP=`ip addr show | grep wlp | awk '/inet.*brd/{print $NF}'`; sed -i "s/test/$WLP/g" /home/{{ ubuntu_user }}/.config/i3blocks/config
+
+- name: Clone termite-install.git
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  git:
+    repo: https://github.com/Corwind/termite-install.git
+    dest: "/home/{{ ubuntu_user }}/.cache/termite-install"
+    force: yes
+- name: Install Termite
+  become: yes
+  become_user: root
+  shell: |
+    sh ./home/"{{ ubuntu_user }}"/.cache/termite-install/termite-install.sh
