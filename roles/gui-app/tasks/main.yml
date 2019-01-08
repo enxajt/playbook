@@ -20,6 +20,8 @@
     - i3blocks
     - rofi
 
+    - terminator
+    - rxvt-unicode
     - chromium-browser
     - firefox
     - flashplugin-installer
