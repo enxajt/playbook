@@ -4,8 +4,3 @@
   shell: |
     sed -ie 's/^GRUB_CMDLINE_LINUX_DEFAULT=\"splash quiet\"$/GRUB_CMDLINE_LINUX_DEFAULT=\"\"/' /etc/default/grub
     update-grub && sudo update-grub2
-
-- shell: |
-    sudo powertop --calibrate
-    sudo powertop --auto-tune
-    sudo tlp start

@@ -29,6 +29,8 @@
 
     # - hardware
     # - hardware-2nd
+    # - splash-quiet
+    # - powertop  #long
 
     # - ebook
     # - npm
