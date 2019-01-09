@@ -21,6 +21,7 @@
     - rofi
 
     - terminator
+    - terminology
     - rxvt-unicode
     - chromium-browser
     - firefox

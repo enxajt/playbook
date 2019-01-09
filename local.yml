@@ -31,9 +31,10 @@
     # # - splash-quiet
     # # - powertop  #long
 
-    - ebook
-    - npm
-    - docker-inst
+    # - ebook
+
+    # out of maintaining
+    #- docker-inst
     # - docker-build
 
     # - xfce4-terminal
@@ -43,7 +44,7 @@
     # - plantuml
     # - gitlab
     # - printer_pine64
-    - av
+    # - bluetooth
     # - clamav
 
     - japanese
