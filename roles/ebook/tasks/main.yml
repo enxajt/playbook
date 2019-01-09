@@ -6,8 +6,13 @@
     mkdir -p $HOME/.config/calibre/DeDRM_tools
     wget https://github.com/apprenticeharper/DeDRM_tools/releases/download/v6.5.5/DeDRM_tools_6.5.5.zip -O DeDRM_tools.temp
     unzip DeDRM_tools.temp -d $HOME/.config/calibre/DeDRM_tools/
-    mvt DeDRM_tools.temp
+    #mvt DeDRM_tools.temp
     # Preferences -> Advanced -> Plugins -> "Load plugin from file" button. 
+
+- name: Calibre ebook reader
+  file:
+    state: absent
+    path: DeDRM_tools.temp
 
 - name: yac reader
   become: yes
