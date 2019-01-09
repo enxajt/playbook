@@ -18,7 +18,9 @@
   become: yes
   become_user: root
   shell: |
-    sh -c "echo 'deb http://download.opensuse.org/repositories/home:/selmf/xUbuntu_16.04/ /' > /etc/apt/sources.list.d/yacreader.list"
+    sh -c "echo 'deb http://download.opensuse.org/repositories/home:/selmf/xUbuntu_18.04/ /' > /etc/apt/sources.list.d/home:selmf.list"
+    wget -nv https://download.opensuse.org/repositories/home:selmf/xUbuntu_18.04/Release.key -O Release.key
+    apt-key add - < Release.key
 - name: yac reader
   apt: name={{item}}
   become: yes
