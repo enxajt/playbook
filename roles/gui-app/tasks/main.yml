@@ -1,3 +1,10 @@
+- name: yac reader
+  become: yes
+  become_user: root
+  shell: |
+    sh -c "echo 'deb http://download.opensuse.org/repositories/home:/selmf/xUbuntu_18.04/ /' > /etc/apt/sources.list.d/home:selmf.list"
+    wget -nv https://download.opensuse.org/repositories/home:selmf/xUbuntu_18.04/Release.key -O Release.key
+    apt-key add - < Release.key
 - apt_repository:
     repo: "{{ item }}"
   with_items:
@@ -26,7 +33,10 @@
     - chromium-browser
     - firefox
     - flashplugin-installer
+
+    - pdftk
     - zathura
+    - yacreader
 
     - lightdm
     - lightdm-gtk-greeter

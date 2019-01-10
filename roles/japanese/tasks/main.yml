@@ -1,14 +1,27 @@
 - apt_repository:
-    repo: "{{ item }}"
-  with_items: 
+    repo: "{{ repos }}"
+  vars:
+    repos:
     - 'ppa:japanese-testers/mozc'
-- name: updates a server
-  apt: update_cache=yes
-
 - name: install japanese
-  apt: 
-    name: ['language-pack-ja-base', 'language-pack-ja', 'fcitx', 'fcitx-mozc', 'libfcitx-qt5-1', 'fcitx-frontend-qt5', 'mozc-utils-gui']
   become: yes', 
+  apt: 
+    update_cache: yes
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - language-pack-ja-base
+    - language-pack-ja
+    - fcitx
+    - fcitx-mozc
+    - libfcitx-qt5-1
+    - fcitx-frontend-qt5
+    - mozc-utils-gui
+
+    - fonts-ricty-diminished 
+    - fonts-takao-*
+    - fonts-ipafont-gothic
+    - fonts-ipafont-mincho
 
 - name: im-config -n fcitx
   shell: im-config -n fcitx

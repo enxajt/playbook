@@ -1,13 +1,7 @@
-- name: sed -ie 's/^#log_path/log_path/' /etc/ansible/ansible.cfg
+- name: ansible log on
   shell: |
     sed -ie 's/^#log_path/log_path/' /etc/ansible/ansible.cfg
     sed -ie 's/^#no_log = False/no_log = False/' /etc/ansible/ansible.cfg
-
-- apt_repository:
-    repo: "{{ item }}"
-  with_items: 
-    - 'ppa:hluk/copyq'
-    - 'ppa:linrunner/tlp'
 
 - name: apt install
   apt:
@@ -16,62 +10,26 @@
     state: latest
   vars:
     packages:
+    - zsh
     - xbindkeys
 
     - wget
     - curl
     - git
-    - zsh
     - tree
+    - vim
 
     - unar # or atool
-
-    #- sysstat
-    #- duc
-
     #- p7zip-full #7z
     #- p7zip-rar
 
-    #- nkf
-    #- pandoc
+    - nkf
     - colordiff
     - xsel
-    #- copyq
-    - vim
-    #- jq
-    #- pdftk
+    - jq
+    - duc #disk usege visualize
     #- w3m
     #- w3m-img
-
-    # for local machine : hard ware
-    - xbacklight
-    - pulseaudio
-    - pavucontrol
-    - x11-xserver-utils
-
-    # for local machine : battery
-    - powertop 
-    - tlp 
-    - tlp-rdw
-
-    # for local machine : drive
-    - exfat-fuse
-    - exfat-utils
-
-    # for local machine : network
-    - linux-generic-hwe-16.04
-    - connect-proxy
-    - lshw
-    - wicd
-    - intel-microcode
-
-    # # not for virtualmachine
-    # - vagrant
-    # - virtualbox
-
-    - fonts-ricty-diminished 
-    - fonts-ipafont-gothic
-    - fonts-ipafont-mincho
 
 - name: git config
   become: yes

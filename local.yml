@@ -4,17 +4,19 @@
   become: true
   vars:
      git_user: enxajt
+     git_email: enxajt@gmail.com
+     ubuntu_user: enxajt
   vars_prompt:
-    - name: ubuntu_user
-      prompt: "input ubuntu_user"
-      private: no
+    #- name: ubuntu_user
+    #  prompt: "input ubuntu_user"
+    #  private: no
     # # for make_user
     # - name: ubuntu_password
     #   prompt: "input ubuntu_password"
     #   private: no
-    - name: git_email
-      prompt: "input git_email"
-      private: no
+    #- name: git_email
+    #  prompt: "input git_email"
+    #  private: no
   roles:
     # - localize
 
@@ -25,7 +27,7 @@
     # - dropbox
 
     # #- gui-app
-    # # - gui-app-2nd
+    - gui-app-2nd
 
     # # - hardware
     # # - splash-quiet
@@ -47,5 +49,5 @@
     # - bluetooth
     # - clamav
 
-    - japanese
-    - end
+    #- japanese
+    #- end

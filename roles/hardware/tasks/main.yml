@@ -8,3 +8,38 @@
     cp /etc/systemd/logind.conf /etc/systemd/logind.conf.bak
     echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
     service systemd-logind restart
+
+- apt_repository:
+    repo: "{{ repos }}"
+  vars:
+    repos:
+    - 'ppa:linrunner/tlp'
+- name: apt install
+  apt:
+    update_cache: yes
+    name: "{{ packages }}"
+    state: latest
+  vars:
+    packages:
+    # for local machine : hard ware
+    - xbacklight
+    - pulseaudio
+    - pavucontrol
+    - x11-xserver-utils
+
+    # for local machine : battery
+    - powertop 
+    - tlp 
+    - tlp-rdw
+
+    # for local machine : drive
+    - exfat-fuse
+    - exfat-utils
+
+    # for local machine : network
+    - linux-generic-hwe-16.04
+    - connect-proxy
+    - lshw
+    - wicd
+    - intel-microcode
+

@@ -39,23 +39,20 @@
     accept_hostkey: yes
 
 - file:
-    path: /usr/share/lightdm/lightdm.conf.d
-    state: directory
-- file:
-    src: "/home/{{ ubuntu_user }}/.config/desktop/60-lightdm-gtk-greeter.conf"
-    dest: /usr/share/lightdm/lightdm.conf.d/60-lightdm-gtk-greeter.conf
-    state: link
-    force: yes
-
-- file:
     path: /etc/lightdm/lightdm.conf.d
     state: directory
+- file:
+    src: "/home/{{ ubuntu_user }}/.config/desktop/50-myconfig.conf"
+    dest: /etc/lightdm/lightdm.conf.d/50-myconfig.conf
+    state: link
+    force: yes
 - name: Xresources
   file:
     src: "/home/{{ ubuntu_user }}/.config/Xresources"
     dest: /etc/lightdm/lightdm.conf.d/.Xresources
     state: link
 
+# for pavucontrol (Audio Volume)
 - name: xbindkeysrc
   file:
     src: "/home/{{ ubuntu_user }}/.config/xbindkeysrc"
@@ -116,21 +113,22 @@
     - libncurses5-dev
     - xsel
     - pkg-config
-- name: tmux install clone
-  become: true
-  become_user: "{{ ubuntu_user }}" 
-  git:
-    repo: git://github.com/tmux/tmux
-    dest: "/home/{{ ubuntu_user }}/.cache/tmux"
-    accept_hostkey: yes
-    update: yes
-    force: yes
-- name: tmux install
-  vars:
-    path_tmux: "/home/{{ ubuntu_user }}/.cache/tmux"
-  shell: |
-    cd {{ path_tmux }} && sh autogen.sh
-    cd {{ path_tmux }} && ./configure
-    #cd {{ path_tmux }} && make -j4
-    cd {{ path_tmux }} && make
-    cd {{ path_tmux }} && sudo make install
+    - tmux
+# - name: tmux install clone
+#   become: true
+#   become_user: "{{ ubuntu_user }}" 
+#   git:
+#     repo: git://github.com/tmux/tmux
+#     dest: "/home/{{ ubuntu_user }}/.cache/tmux"
+#     accept_hostkey: yes
+#     update: yes
+#     force: yes
+# - name: tmux install
+#   vars:
+#     path_tmux: "/home/{{ ubuntu_user }}/.cache/tmux"
+#   shell: |
+#     cd {{ path_tmux }} && sh autogen.sh
+#     cd {{ path_tmux }} && ./configure
+#     #cd {{ path_tmux }} && make -j4
+#     cd {{ path_tmux }} && make
+#     cd {{ path_tmux }} && sudo make install

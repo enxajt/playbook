@@ -2,7 +2,6 @@
     repo: "{{ item }}"
   with_items:
     - 'ppa:otto-kesselgulasch/gimp'
-    - 'ppa:libreoffice/libreoffice-5-4'
 - name: install gui app 2nd
   apt:
     update_cache: yes
@@ -13,10 +12,25 @@
     - gimp
     - gimp-gmic
     - libreoffice
-    - goldendict
     - vlc
-    - freeplane
     - playonlinux
+    #- goldendict
+    #- freeplane
+
+- name: Calibre ebook reader
+  become: yes
+  become_user: "{{ ubuntu_user }}"
+  shell: |
+    sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"
+    mkdir -p $HOME/.config/calibre/DeDRM_tools
+    wget https://github.com/apprenticeharper/DeDRM_tools/releases/download/v6.5.5/DeDRM_tools_6.5.5.zip -O DeDRM_tools.temp
+    unzip DeDRM_tools.temp -d $HOME/.config/calibre/DeDRM_tools/
+    #mvt DeDRM_tools.temp
+    # Preferences -> Advanced -> Plugins -> "Load plugin from file" button. 
+- name: Calibre ebook reader
+  file:
+    state: absent
+    path: DeDRM_tools.temp
 
 # 2018.09.11.install_Synergy
 #sudo apt-get install libxtst-dev qtbase5-dev libavahi-compat-libdnssd-dev cmake
