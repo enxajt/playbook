@@ -9,6 +9,13 @@
 - shell: |
     cd /home/{{ ubuntu_user }}/.config && git remote set-url origin git@github.com:enxajt/.config.git
 
+
+- name: gtkrc-2.0.mine
+  become: true
+  become_user: "{{ ubuntu_user }}" 
+  shell: |
+    ln -s /home/{{ ubuntu_user }}/.config/desktop/.gtkrc-2.0.mine ./
+
 - user:
     name: "{{ ubuntu_user }}"
     shell: /bin/zsh
