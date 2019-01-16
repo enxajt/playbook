@@ -1,8 +1,8 @@
-- apt_repository:
-    repo: "{{ repos }}"
-  vars:
-    repos:
-    - 'ppa:japanese-testers/mozc'
+# - apt_repository:
+#     repo: "{{ repos }}"
+#   vars:
+#     repos:
+#     - 'ppa:japanese-testers/mozc'
 - name: install japanese
   become: yes', 
   apt: 
