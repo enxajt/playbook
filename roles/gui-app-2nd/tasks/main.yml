@@ -9,6 +9,7 @@
     state: latest
   vars:
     packages:
+    - usb-creator-gtk
     - gimp
     - gimp-gmic
     - libreoffice

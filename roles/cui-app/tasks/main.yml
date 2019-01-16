@@ -19,6 +19,10 @@
     - tree
     - vim
 
+    - ranger
+    - w3m
+    - w3m-img
+
     - unar # or atool
     #- p7zip-full #7z
     #- p7zip-rar
@@ -28,8 +32,6 @@
     - xsel
     - jq
     - duc #disk usege visualize
-    #- w3m
-    #- w3m-img
 
 - name: git config
   become: yes

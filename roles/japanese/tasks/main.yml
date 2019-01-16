@@ -19,7 +19,7 @@
     - mozc-utils-gui
 
     - fonts-ricty-diminished 
-    - fonts-takao-*
+    - fonts-takao*
     - fonts-ipafont-gothic
     - fonts-ipafont-mincho
 

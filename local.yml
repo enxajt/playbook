@@ -30,7 +30,7 @@
     - gui-app-2nd
 
     # # - hardware
-    # # - splash-quiet
+    # # - splash-quiet # no need in 18.04 ?
     # # - powertop  #long
 
     # - ebook
