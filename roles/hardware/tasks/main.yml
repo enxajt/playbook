@@ -9,11 +9,11 @@
     echo HandleLidSwitch=ignore >> /etc/systemd/logind.conf
     service systemd-logind restart
 
-- apt_repository:
-    repo: "{{ repos }}"
-  vars:
-    repos:
-    - 'ppa:linrunner/tlp'
+# - apt_repository:
+#     repo: "{{ repos }}"
+#   vars:
+#     repos:
+#     - 'ppa:linrunner/tlp'
 - name: apt install
   apt:
     update_cache: yes
