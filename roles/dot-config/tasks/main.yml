@@ -14,7 +14,7 @@
   become: true
   become_user: "{{ ubuntu_user }}" 
   shell: |
-    ln -s /home/{{ ubuntu_user }}/.config/desktop/.gtkrc-2.0.mine ./
+    ln -s /home/{{ ubuntu_user }}/.config/desktop/.gtkrc-2.0.mine ~/
 
 - user:
     name: "{{ ubuntu_user }}"
