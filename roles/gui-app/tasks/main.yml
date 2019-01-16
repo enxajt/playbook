@@ -34,7 +34,7 @@
     - firefox
     - flashplugin-installer
 
-    - pdftk
+    #- pdftk
     - zathura
     - yacreader
 
