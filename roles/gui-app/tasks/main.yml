@@ -17,7 +17,9 @@
     state: latest
   vars:
     packages:
-    - thunar # or Nemo, ranger, vim, spacefm,
+    - thunar # or Nemo, spacefm,
+    - ranger 
+    - eog # Image viewer
     - font-manager
     - redshift
     - shutter
