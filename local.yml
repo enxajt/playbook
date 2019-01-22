@@ -4,7 +4,7 @@
   become: true
   vars:
      git_user: enxajt
-     git_email: enxajt@gmail.com
+     git_email: 
      ubuntu_user: enxajt
   vars_prompt:
     #- name: ubuntu_user
