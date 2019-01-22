@@ -1,0 +1,9 @@
+- name: git config
+  become: yes
+  become_user: "{{ ubuntu_user }}" 
+  shell: |
+    git config --global user.email "{{ git_email }}"
+    git config --global user.name "{{ git_user }}"
+    git config --global core.editor "vim"
+    git config --global merge.tool vimdiff
+    git config --global push.default simple
