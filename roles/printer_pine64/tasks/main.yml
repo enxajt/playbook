@@ -10,11 +10,11 @@
     - sane-utils
     - libsane
     - libsane-common
-    - libsane-dbg
+    #- libsane-dbg
     - libsane-dev
     - libsane-extras
     - libsane-extras-common
-    - libsane-extras-dbg
+    #- libsane-extras-dbg
     - libsane-extras-dev
     - simple-scan
     - gimp
