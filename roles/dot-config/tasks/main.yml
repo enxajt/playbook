@@ -91,16 +91,13 @@
     - "/home/{{ ubuntu_user }}/init"
 
 - name: neovim apt-get
-  apt: name={{item}}
-  with_items:
-    - python-dev
-    - python-pip
-    - python3-dev
-    - python3-pip
-- name: neovim apt-get
-  apt: name={{item}}
-  with_items:
-    - software-properties-common
+  apt:
+    name:
+      - python-dev
+      - python-pip
+      - python3-dev
+      - python3-pip
+      - software-properties-common
 - apt_repository:
     repo: "{{ item }}"
   with_items:
