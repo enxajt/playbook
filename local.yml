@@ -18,11 +18,11 @@
     #  prompt: "input git_email"
     #  private: no
   roles:
-    # - localize
+    - localize
 
     # # - make-user
-    # - dot-config
-    # - cui-app
+    - dot-config
+    - cui-app
     # # - cui-app-2nd
     # - dropbox
 
@@ -45,9 +45,8 @@
     # - mate
     # - plantuml
     # - gitlab
-    - printer_pine64
+    #- printer_pine64
     # - bluetooth
-    # - clamav
 
-    #- japanese
-    #- end
+    - japanese
+    - end
