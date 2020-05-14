@@ -71,7 +71,6 @@
     force: yes
 - name: Install Termite
   become: yes
-become_user: root
-me:selmf@build.opensuse.org>"
+  become_user: root
   shell: |
     sh /home/"{{ ubuntu_user }}"/.cache/termite-install/termite-install.sh
