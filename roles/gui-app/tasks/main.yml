@@ -50,6 +50,7 @@
     - xorg
     - xserver-xorg
     - volumeicon-alsa
+    - snapd # for termite
 
 - lineinfile:
     path: /etc/sudoers
@@ -62,15 +63,20 @@
   shell: |
     WLP=`ip addr show | grep wlp | awk '/inet.*brd/{print $NF}'`; sed -i "s/test/$WLP/g" /home/{{ ubuntu_user }}/.config/i3blocks/config
 
-- name: Clone install-termite.git
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  git:
-    repo: https://github.com/ls4154/termite-ubuntu.git
-    dest: "/home/{{ ubuntu_user }}/.cache/install-termite"
-    force: yes
-- name: Install Termite
+- name: install termite via snap
   become: yes
   become_user: root
   shell: |
-    sh /home/"{{ ubuntu_user }}"/.cache/install-termite/build.sh
+    sudo snap install termite --candidate
+#- name: Clone install-termite.git
+#  become: yes
+#  become_user: "{{ ubuntu_user }}"
+#  git:
+#    repo: https://github.com/ls4154/termite-ubuntu.git
+#    dest: "/home/{{ ubuntu_user }}/.cache/install-termite"
+#    force: yes
+#- name: Install Termite
+#  become: yes
+#  become_user: root
+#  shell: |
+#    sh /home/"{{ ubuntu_user }}"/.cache/install-termite/build.sh
