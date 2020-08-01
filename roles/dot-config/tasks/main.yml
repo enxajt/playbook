@@ -35,7 +35,7 @@
   become: true
   become_user: "{{ ubuntu_user }}" 
   git:
-    repo: git://github.com/olivierverdier/zsh-git-prompt.git
+    repo: git://github.com/zsh-git-prompt/zsh-git-prompt.git
     dest: "/home/{{ ubuntu_user }}/.config/zsh-git-prompt"
     accept_hostkey: yes
 
@@ -85,14 +85,12 @@
   with_items:
     - "/home/{{ ubuntu_user }}/init"
 
-- name: neovim apt-get
+- name: install neovim, tmux
   apt: name={{item}}
   with_items:
     - neovim
 
-- name: tmux install apt-get
-  apt: name={{item}}
-  with_items:
+    # tmux
     - automake 
     - libevent-dev 
     - libncurses5-dev

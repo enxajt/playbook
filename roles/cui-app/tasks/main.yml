@@ -3,6 +3,10 @@
     sed -ie 's/^#log_path/log_path/' /etc/ansible/ansible.cfg
     sed -ie 's/^#no_log = False/no_log = False/' /etc/ansible/ansible.cfg
 
+- name: configure the repository to install yarn
+  shell: |
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
 
 - apt_repository:
     repo: "{{ item }}"
@@ -23,6 +27,7 @@
     - git
     - tree
     - vim
+    - yarn
 
     - ranger
     - w3m
