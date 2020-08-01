@@ -3,6 +3,11 @@
     sed -ie 's/^#log_path/log_path/' /etc/ansible/ansible.cfg
     sed -ie 's/^#no_log = False/no_log = False/' /etc/ansible/ansible.cfg
 
+
+- apt_repository:
+    repo: "{{ item }}"
+  with_items:
+    - 'ppa:git-core/ppa'
 - name: apt install
   apt:
     update_cache: yes
