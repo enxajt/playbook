@@ -75,11 +75,6 @@
 - name: neovim,xdg git remote set-url origin git@github.com:enxajt/init.git
   shell: |
     cd /home/{{ ubuntu_user }}/init && git remote set-url origin git@github.com:enxajt/init.git
-- name: install-neovim.sh
-  become: true
-  become_user: "{{ ubuntu_user }}" 
-  shell: | 
-    #sh "/home/{{ ubuntu_user }}/init/install-neovim.sh"
 - name: init-xdg after clone .config
   shell: |
     sh "/home/{{ ubuntu_user }}/init/init-xdg.sh"
@@ -90,20 +85,6 @@
   with_items:
     - "/home/{{ ubuntu_user }}/init"
 
-- name: neovim apt-get
-  apt:
-    name:
-      - python-dev
-      - python-pip
-      - python3-dev
-      - python3-pip
-      - software-properties-common
-- apt_repository:
-    repo: "{{ item }}"
-  with_items:
-    - 'ppa:neovim-ppa/stable'
-- name: neovim apt update
-  apt: update_cache=yes
 - name: neovim apt-get
   apt: name={{item}}
   with_items:
@@ -118,21 +99,3 @@
     - xsel
     - pkg-config
     - tmux
-# - name: tmux install clone
-#   become: true
-#   become_user: "{{ ubuntu_user }}" 
-#   git:
-#     repo: git://github.com/tmux/tmux
-#     dest: "/home/{{ ubuntu_user }}/.cache/tmux"
-#     accept_hostkey: yes
-#     update: yes
-#     force: yes
-# - name: tmux install
-#   vars:
-#     path_tmux: "/home/{{ ubuntu_user }}/.cache/tmux"
-#   shell: |
-#     cd {{ path_tmux }} && sh autogen.sh
-#     cd {{ path_tmux }} && ./configure
-#     #cd {{ path_tmux }} && make -j4
-#     cd {{ path_tmux }} && make
-#     cd {{ path_tmux }} && sudo make install

@@ -8,8 +8,8 @@
 - apt_repository:
     repo: "{{ item }}"
   with_items:
-    - 'ppa:canonical-chromium-builds/stage'
     - 'ppa:font-manager/staging'
+    - 'ppa:linuxuprising/shutter'
 - name: install gui app
   apt:
     update_cache: yes
@@ -62,15 +62,15 @@
   shell: |
     WLP=`ip addr show | grep wlp | awk '/inet.*brd/{print $NF}'`; sed -i "s/test/$WLP/g" /home/{{ ubuntu_user }}/.config/i3blocks/config
 
-- name: Clone termite-install.git
+- name: Clone install-termite.git
   become: yes
   become_user: "{{ ubuntu_user }}"
   git:
-    repo: https://github.com/Corwind/termite-install.git
-    dest: "/home/{{ ubuntu_user }}/.cache/termite-install"
+    repo: https://github.com/ls4154/termite-ubuntu.git
+    dest: "/home/{{ ubuntu_user }}/.cache/install-termite"
     force: yes
 - name: Install Termite
   become: yes
   become_user: root
   shell: |
-    sh /home/"{{ ubuntu_user }}"/.cache/termite-install/termite-install.sh
+    sh /home/"{{ ubuntu_user }}"/.cache/install-termite/build.sh
