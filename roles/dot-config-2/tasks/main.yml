@@ -1,0 +1,42 @@
+- name: gtkrc-2.0.mine
+  become: true
+  become_user: "{{ ubuntu_user }}" 
+  shell: |
+    ln -sf /home/{{ ubuntu_user }}/.config/desktop/.gtkrc-2.0.mine ~/
+
+- file:
+    path: /etc/lightdm/lightdm.conf.d
+    state: directory
+- file:
+    src: "/home/{{ ubuntu_user }}/.config/desktop/50-myconfig.conf"
+    dest: /etc/lightdm/lightdm.conf.d/50-myconfig.conf
+    state: link
+    force: yes
+- name: Xresources
+  file:
+    src: "/home/{{ ubuntu_user }}/.config/Xresources"
+    dest: /etc/lightdm/lightdm.conf.d/.Xresources
+    state: link
+
+# for pavucontrol (Audio Volume)
+- name: xbindkeysrc
+  file:
+    src: "/home/{{ ubuntu_user }}/.config/xbindkeysrc"
+    dest: "/home/{{ ubuntu_user }}/.xbindkeysrc"
+    state: link
+
+- name: neovim,xdg clone init 
+  become: true
+  become_user: "{{ ubuntu_user }}" 
+  git:
+    repo: git://github.com/enxajt/init.git
+    dest: "/home/{{ ubuntu_user }}/init"
+- name: init-xdg after clone .config
+  shell: |
+    sh "/home/{{ ubuntu_user }}/init/init-xdg.sh"
+- name: Removing
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "/home/{{ ubuntu_user }}/init"

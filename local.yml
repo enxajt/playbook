@@ -3,9 +3,9 @@
   hosts: localhost
   become: true
   vars:
-     git_user: enxajt
-  #   git_email: 
-     ubuntu_user: kotani
+    # git_user:
+    # git_email:
+    ubuntu_user:
   vars_prompt:
     #- name: ubuntu_user
     #  prompt: "input ubuntu_user"
@@ -20,7 +20,11 @@
   roles:
     #- localize
     #- make-user
+    #- git
+    #- git-set-url-ssh
+
     - dot-config
+    #- dot-config-2
     - cui-app
     #- cui-app-2nd
     #- dropbox

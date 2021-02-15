@@ -6,15 +6,6 @@
     dest: "/home/{{ ubuntu_user }}/.config"
     accept_hostkey: yes
     force: yes
-- shell: |
-    cd /home/{{ ubuntu_user }}/.config && git remote set-url origin git@github.com:enxajt/.config.git
-
-
-- name: gtkrc-2.0.mine
-  become: true
-  become_user: "{{ ubuntu_user }}" 
-  shell: |
-    ln -sf /home/{{ ubuntu_user }}/.config/desktop/.gtkrc-2.0.mine ~/
 
 - user:
     name: "{{ ubuntu_user }}"
@@ -44,56 +35,3 @@
     repo: git://github.com/tmux-plugins/tpm.git
     dest: "/home/{{ ubuntu_user }}/.config/tmux/plugins/tpm"
     accept_hostkey: yes
-
-- file:
-    path: /etc/lightdm/lightdm.conf.d
-    state: directory
-- file:
-    src: "/home/{{ ubuntu_user }}/.config/desktop/50-myconfig.conf"
-    dest: /etc/lightdm/lightdm.conf.d/50-myconfig.conf
-    state: link
-    force: yes
-- name: Xresources
-  file:
-    src: "/home/{{ ubuntu_user }}/.config/Xresources"
-    dest: /etc/lightdm/lightdm.conf.d/.Xresources
-    state: link
-
-# for pavucontrol (Audio Volume)
-- name: xbindkeysrc
-  file:
-    src: "/home/{{ ubuntu_user }}/.config/xbindkeysrc"
-    dest: "/home/{{ ubuntu_user }}/.xbindkeysrc"
-    state: link
-
-- name: neovim,xdg clone init 
-  become: true
-  become_user: "{{ ubuntu_user }}" 
-  git:
-    repo: git://github.com/enxajt/init.git
-    dest: "/home/{{ ubuntu_user }}/init"
-- name: neovim,xdg git remote set-url origin git@github.com:enxajt/init.git
-  shell: |
-    cd /home/{{ ubuntu_user }}/init && git remote set-url origin git@github.com:enxajt/init.git
-- name: init-xdg after clone .config
-  shell: |
-    sh "/home/{{ ubuntu_user }}/init/init-xdg.sh"
-- name: Removing
-  file:
-    path: "{{ item }}"
-    state: absent
-  with_items:
-    - "/home/{{ ubuntu_user }}/init"
-
-- name: install neovim, tmux
-  apt: name={{item}}
-  with_items:
-    - neovim
-
-    # tmux
-    - automake 
-    - libevent-dev 
-    - libncurses5-dev
-    - xsel
-    - pkg-config
-    - tmux
