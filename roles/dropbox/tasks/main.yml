@@ -9,5 +9,5 @@
   shell: |
     wget -O /usr/bin/dropbox "http://www.dropbox.com/download?dl=packages/dropbox.py"
     chmod a+x /usr/bin/dropbox
-    wget http://repo1.maven.org/maven2/com/madgag/bfg/1.13.0/bfg-1.13.0.jar -O /usr/local/bin/BFG_git-repo-cleaner.jar
+    #wget http://repo1.maven.org/maven2/com/madgag/bfg/1.13.0/bfg-1.13.0.jar -O /usr/local/bin/BFG_git-repo-cleaner.jar
 
