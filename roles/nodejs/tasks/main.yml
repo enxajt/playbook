@@ -1,13 +1,23 @@
-- name: yarn_  configure the repository
-  shell: |
-    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-
-- name: yarn_  apt install
+- name: install nodejs, npm to install n
   apt:
     update_cache: yes
     name: "{{ packages }}"
     state: latest
   vars:
     packages:
-    - yarn
+    - nodejs
+    - npm
+
+- name: install n
+  shell: |
+    sudo npm install n -g
+    sudo n stable
+    sudo apt purge -y nodejs npm
+- name: confirm n installed
+  shell: |
+    exec $SHELL -l
+    node -v
+
+- name: install yarn
+  shell: |
+    sudo npm install --global yarn

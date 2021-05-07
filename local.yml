@@ -28,6 +28,7 @@
     - cui-app
     #- cui-app-2nd
     #- dropbox
+    - nodejs
 
     - gui-app
     #- gui-app-2nd
