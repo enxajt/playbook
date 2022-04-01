@@ -2,7 +2,7 @@
   become: true
   become_user: "{{ ubuntu_user }}" 
   git:
-    repo: git://github.com/enxajt/.config.git
+    repo: https://github.com/enxajt/.config.git
     dest: "/home/{{ ubuntu_user }}/.config"
     accept_hostkey: yes
     force: yes
@@ -26,12 +26,12 @@
   become: true
   become_user: "{{ ubuntu_user }}" 
   git:
-    repo: git://github.com/zsh-git-prompt/zsh-git-prompt.git
+    repo: https://github.com/zsh-git-prompt/zsh-git-prompt.git
     dest: "/home/{{ ubuntu_user }}/.config/zsh-git-prompt"
     accept_hostkey: yes
 
 - name: clone tmux-plugins
   git:
-    repo: git://github.com/tmux-plugins/tpm.git
+    repo: https://github.com/tmux-plugins/tpm.git
     dest: "/home/{{ ubuntu_user }}/.config/tmux/plugins/tpm"
     accept_hostkey: yes

@@ -6,7 +6,7 @@
 - git:
     become: yes
     become_user: root
-    #repo: git://github.com/enxajt/docker-gitlab.git
+    #repo: https://github.com/enxajt/docker-gitlab.git
     repo: ssh://git@github.com/enxajt/docker-gitlab.git
     dest: ~/.dotfiles 
     accept_hostkey: yes

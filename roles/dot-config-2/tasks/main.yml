@@ -29,7 +29,7 @@
   become: true
   become_user: "{{ ubuntu_user }}" 
   git:
-    repo: git://github.com/enxajt/init.git
+    repo: https://github.com/enxajt/init.git
     dest: "/home/{{ ubuntu_user }}/init"
 - name: init-xdg after clone .config
   shell: |
