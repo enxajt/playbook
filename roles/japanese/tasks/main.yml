@@ -4,7 +4,7 @@
 #     repos:
 #     - 'ppa:japanese-testers/mozc'
 - name: install japanese
-  become: yes', 
+  become: yes
   apt: 
     update_cache: yes
     name: "{{ packages }}"
