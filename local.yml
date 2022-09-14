@@ -23,34 +23,34 @@
     #- git
     #- git-set-url-ssh
 
-    # - dot-config
-    # #- dot-config-2
-    # - cui-app
-    # #- cui-app-2nd
-    # #- dropbox
-    # - nodejs
+    - dot-config
+    #- dot-config-2
+    - cui-app
+    #- cui-app-2nd
+    #- dropbox
+    - nodejs
 
-    # - gui-app
-    # #- gui-app-2nd
+    - gui-app
+    #- gui-app-2nd
 
-    # #- hardware
-    # #- splash-quiet # no need in 18.04 ?
-    # #- powertop  #long
+    #- hardware
+    #- splash-quiet # no need in 18.04 ?
+    #- powertop  #long
 
-    # #- ebook
+    #- ebook
 
-    # # out of maintaining
-    # #- docker-inst
-    # #- docker-build
+    # out of maintaining
+    #- docker-inst
+    #- docker-build
 
-    # #- xfce4-terminal
-    # #- go
-    # #- ghq
-    # #- mate
-    # #- plantuml
-    # #- gitlab
-    # #- printer_pine64
-    # #- bluetooth
+    #- xfce4-terminal
+    #- go
+    #- ghq
+    #- mate
+    #- plantuml
+    #- gitlab
+    #- printer_pine64
+    #- bluetooth
 
     - japanese
-      #- end
+    - end
