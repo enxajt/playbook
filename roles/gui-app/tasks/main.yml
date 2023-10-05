@@ -4,6 +4,7 @@
   shell: |
     echo 'deb http://download.opensuse.org/repositories/home:/selmf/xUbuntu_22.04/ /' | sudo tee /etc/apt/sources.list.d/home:selmf.list
     curl -fsSL https://download.opensuse.org/repositories/home:selmf/xUbuntu_22.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_selmf.gpg > /dev/null
+
 - name: install gui app
   apt:
     update_cache: yes
@@ -12,8 +13,6 @@
   vars:
     packages:
     - thunar # or Nemo, spacefm,
-    - ranger 
-    - eog # Image viewer
     - redshift
 
     - i3
@@ -26,9 +25,8 @@
     - rxvt-unicode
     - chromium-browser
     - firefox
-    - flashplugin-installer
 
-    #- pdftk
+    - pdftk
     - zathura
     - yacreader
 
@@ -42,33 +40,14 @@
     - xorg
     - xserver-xorg
     - volumeicon-alsa
-    #- snapd # for termite
 
-- lineinfile:
-    path: /etc/sudoers
-    state: present
-    regexp: '^%ADMIN ALL='
-    line: '%ADMIN ALL=(ALL) NOPASSWD: ALL'
-    validate: '/usr/sbin/visudo -cf %s'
+#- lineinfile:
+#    path: /etc/sudoers
+#    state: present
+#    regexp: '^%ADMIN ALL='
+#    line: '%ADMIN ALL=(ALL) NOPASSWD: ALL'
+#    validate: '/usr/sbin/visudo -cf %s'
 
 - name: sed wlp for i3 statusbar
   shell: |
     WLP=`ip addr show | grep wlp | awk '/inet.*brd/{print $NF}'`; sed -i "s/test/$WLP/g" /home/{{ ubuntu_user }}/.config/i3blocks/config
-
-#- name: install termite via snap
-#  become: yes
-#  become_user: root
-#  shell: |
-#    sudo snap install termite --candidate
-- name: Clone install-termite.git
-  become: yes
-  become_user: "{{ ubuntu_user }}"
-  git:
-    repo: https://github.com/ls4154/termite-ubuntu.git
-    dest: "/home/{{ ubuntu_user }}/.cache/install-termite"
-    force: yes
-- name: Install Termite
-  become: yes
-  become_user: root
-  shell: |
-    sh /home/"{{ ubuntu_user }}"/.cache/install-termite/build.sh

@@ -31,10 +31,6 @@
     - yarn
     - tmux
 
-    - ranger
-    - w3m
-    - w3m-img
-
     - unar # or atool
     #- p7zip-full #7z
     #- p7zip-rar

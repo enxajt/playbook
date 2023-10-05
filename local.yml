@@ -5,7 +5,7 @@
   vars:
     # git_user:
     # git_email:
-    ubuntu_user: enxajt
+    ubuntu_user: enx
   vars_prompt:
     #- name: ubuntu_user
     #  prompt: "input ubuntu_user"
@@ -20,7 +20,7 @@
   roles:
     #- localize
     #- make-user
-    #- git
+    - git
     #- git-set-url-ssh
 
     - dot-config
@@ -28,7 +28,7 @@
     - cui-app
     #- cui-app-2nd
     #- dropbox
-    - nodejs
+    #- nodejs
 
     - gui-app
     #- gui-app-2nd
@@ -37,20 +37,8 @@
     #- splash-quiet # no need in 18.04 ?
     #- powertop  #long
 
-    #- ebook
-
-    # out of maintaining
-    #- docker-inst
-    #- docker-build
-
-    #- xfce4-terminal
-    #- go
-    #- ghq
-    #- mate
-    #- plantuml
-    #- gitlab
     #- printer_pine64
-    #- bluetooth
+    - bluetooth
 
     - japanese
     - end
