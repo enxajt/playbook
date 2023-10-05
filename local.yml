@@ -3,8 +3,8 @@
   hosts: localhost
   become: true
   vars:
-    # git_user:
-    # git_email:
+    git_user: enxajt
+    git_email: enxajt@gmail.com
     ubuntu_user: enx
   vars_prompt:
     #- name: ubuntu_user
@@ -21,7 +21,6 @@
     #- localize
     #- make-user
     - git
-    #- git-set-url-ssh
 
     - dot-config
     #- dot-config-2
@@ -40,5 +39,6 @@
     #- printer_pine64
     - bluetooth
 
+    #- git-set-url-ssh
     - japanese
     - end
