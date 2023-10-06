@@ -2,7 +2,7 @@
   become: yes
   become_user: root
   shell: |
-    #sed -ie 's/#AutoEnable=false/AutoEnable=true/g' /etc/bluetooth/main.conf
+    sed -ie 's/#AutoEnable=false/AutoEnable=true/g' /etc/bluetooth/main.conf
     apt-get install -y bluez-tools
     systemctl start bluetooth
     systemctl enable bluetooth
