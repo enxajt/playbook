@@ -28,7 +28,7 @@
 
     - pdftk
     - zathura
-    - yacreader
+    #- yacreader
 
     - lightdm
     - lightdm-gtk-greeter
